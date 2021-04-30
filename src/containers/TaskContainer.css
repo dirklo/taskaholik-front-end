@@ -1,0 +1,37 @@
+.task-container {
+    flex: 1;
+    background-color: whitesmoke;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.task-container .task-fields {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.task-container .task-fields section {
+    padding-top: 10px;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.task-container .task-fields .tasks-select {
+    background-color: rgba(255, 0, 0, 0.161);
+    flex: 1
+}
+
+.task-container .task-fields .task-open {
+    background-color: rgba(255, 255, 0, 0.209);
+    flex: 2
+}

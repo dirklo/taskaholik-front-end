@@ -1,0 +1,14 @@
+.task-card {
+    width: 90%;
+    border: 2px solid black;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.task-card h2 {
+    pointer-events: none;
+}
+
+.task-card.selected {
+    background: lightblue
+}
