@@ -33,5 +33,7 @@
 
 .task-container .task-fields .task-open {
     background-color: rgba(255, 255, 0, 0.209);
-    flex: 2
+    flex: 2;
+    overflow: auto;
+    padding-bottom: 100px;
 }

@@ -21,7 +21,8 @@ class TaskContainer extends Component {
                 <div className='task-fields'>
                     <section className='tasks-select'>
                         {this.props.tasks.map(task => 
-                            <TaskCard 
+                            <TaskCard
+                                key={task.id}
                                 currentTask={this.props.currentTask} 
                                 task={task} 
                                 loadTask={this.loadTask}

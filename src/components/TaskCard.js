@@ -4,7 +4,6 @@ import './TaskCard.css'
 export default function TaskCard(props) {
     return (
         <div
-            key={props.task.id} 
             id={props.task.id} 
             className={props.currentTask === props.task.id
                 ? 
