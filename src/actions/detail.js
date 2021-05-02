@@ -22,7 +22,17 @@ export const setCurrentDetail = (detailId) => {
 
 export const completeDetail = (detail) => {
     return (dispatch) => {
-        dispatch({type:'COMPLETE_DETAIL', payload: detail.id})
-        dispatch({type: "SET_CURRENT_DETAIL", payload: detail})
+        fetch(`http://localhost:3001/details/${detail.id}/complete`, {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({complete: true})
+        })
+        .then(res => res.json())
+        .then((json) => {
+            dispatch({type:'COMPLETE_DETAIL', payload: detail.id})
+        })
     }
 } 
