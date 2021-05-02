@@ -1,5 +1,3 @@
-import { AUTHENTICATED, NOT_AUTHENTICATED } from "../actions";
-
 const initialState = {
   authChecked: false,
   loggedIn: false,
@@ -8,13 +6,13 @@ const initialState = {
 
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
-    case AUTHENTICATED:
+    case 'AUTHENTICATED':
       return {
         authChecked: true,
         loggedIn: true,
         currentUser: action.payload
       };
-    case NOT_AUTHENTICATED:
+    case 'NOT_AUTHENTICATED':
       return {
         authChecked: true,
         loggedIn: false,

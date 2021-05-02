@@ -4,12 +4,8 @@ import './TaskCard.css'
 export default function TaskCard(props) {
     return (
         <div
+            className={props.task.selected ? 'task-card selected' : 'task-card'}
             id={props.task.id} 
-            className={props.currentTask === props.task.id
-                ? 
-                'task-card selected' 
-                : 
-                'task-card'}
             onClick={(event) => {
                 props.loadTask(event);
             }}>

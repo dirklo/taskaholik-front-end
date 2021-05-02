@@ -1,27 +1,33 @@
 const initialState = {
-    currentTask: '',
+    tasks: [],
     taskComments: [],
-    details: []
   };
   
   export default function taskReducer(state = initialState, action) {
     let index;
 
     switch (action.type) {
-        case "SET_CURRENT_TASK":
+        case "POPULATE_TASKS":
             return {
                 ...state,
-                currentTask: Number(action.payload)
+                tasks: [...action.payload]
             }
         case "POPULATE_TASK_COMMENTS":
             return {
                 ...state,
                 taskComments: [...action.payload]
             }
-        case "POPULATE_DETAILS":
+        case "SET_CURRENT_TASK":
+            let newTasks = state.tasks.map(task => {
+                if (task.id === action.payload) {
+                    return {...task, selected: true}
+                } else {
+                    return {...task, selected: false}
+                }
+            })
             return {
                 ...state,
-                details: [...action.payload]
+                tasks: newTasks
             }
         case "ADD_TASK_COMMENT":
             return {

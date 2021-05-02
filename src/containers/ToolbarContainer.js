@@ -19,7 +19,7 @@ function ToolbarContainer({ teams, projects }) {
 
 export default connect((state) => {
     return {
-        teams: state.populate.teams,
-        projects: state.populate.projects
+        teams: state.team.teams,
+        projects: state.project.projects
     }
 })(ToolbarContainer)

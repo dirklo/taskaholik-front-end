@@ -16,9 +16,12 @@
     justify-content: flex-start;
     align-items: flex-start;
 }
+.task-container .tasks-select {
+    padding-top: 10px;
+    border: 3px solid black;
+}
 
 .task-container .task-fields section {
-    padding-top: 10px;
     align-self: stretch;
     display: flex;
     flex-direction: column;
@@ -29,11 +32,4 @@
 .task-container .task-fields .tasks-select {
     background-color: rgba(255, 0, 0, 0.161);
     flex: 1
-}
-
-.task-container .task-fields .task-open {
-    background-color: rgba(255, 255, 0, 0.209);
-    flex: 2;
-    overflow: auto;
-    padding-bottom: 100px;
 }

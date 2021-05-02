@@ -1,5 +1,3 @@
-import { AUTHENTICATED, NOT_AUTHENTICATED } from '.'
-
 const setToken = (token) => {
   localStorage.setItem("token", token);
   localStorage.setItem("lastLoginTime", new Date(Date.now()).getTime());
@@ -29,11 +27,11 @@ export const signupUser = (credentials) => {
           return res
             .json()
             .then((userJson) =>
-              dispatch({ type: AUTHENTICATED, payload: userJson })
+              dispatch({ type: 'AUTHENTICATED', payload: userJson })
             );
         } else {
           return res.json().then((errors) => {
-            dispatch({ type: NOT_AUTHENTICATED });
+            dispatch({ type: 'NOT AUTHENTICATED' });
             return Promise.reject(errors);
           });
         }
@@ -56,13 +54,13 @@ export const loginUser = (credentials) => {
             setToken(res.headers.get("Authorization"));
             return res.json()
             .then((userJson) => {
-              dispatch({ type: AUTHENTICATED, payload: userJson })
+              dispatch({ type: 'AUTHENTICATED', payload: userJson })
               return userJson
             })
           } else {
             return res.json()
             .then((errors) => {
-            dispatch({ type: NOT_AUTHENTICATED });
+            dispatch({ type: 'NOT AUTHENTICATED' });
             return Promise.reject(errors);
             });
           }
@@ -81,10 +79,10 @@ export const logoutUser = () => {
         },
         }).then((res) => {
         if (res.ok) {
-            return dispatch({ type: NOT_AUTHENTICATED });
+            return dispatch({ type: 'NOT AUTHENTICATED' });
         } else {
             return res.json().then((errors) => {
-            dispatch({ type: NOT_AUTHENTICATED });
+            dispatch({ type: 'NOT AUTHENTICATED' });
             return Promise.reject(errors);
             });
         }
@@ -102,9 +100,9 @@ export const checkAuth = () => {
         }
       }).then((res) => {
         if (res.ok) {
-          return res.json().then(user => dispatch({type: AUTHENTICATED, payload: user}))
+          return res.json().then(user => dispatch({type: 'AUTHENTICATED', payload: user}))
         } else {
-          return Promise.reject(dispatch({type: NOT_AUTHENTICATED}))
+          return Promise.reject(dispatch({type: 'NOT AUTHENTICATED'}))
         }
       });
     };

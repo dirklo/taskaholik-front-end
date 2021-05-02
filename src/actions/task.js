@@ -1,3 +1,14 @@
+export const populateTasks = (projectId) => {
+    return async (dispatch) => {
+        return await fetch(`http://127.0.0.1:3001/tasks?projectId=${projectId}`)
+        .then((res) => res.json())
+        .then((tasks) => {
+            tasks.map(task => task['selected'] = false)
+            dispatch({ type: "POPULATE_TASKS", payload: tasks})
+        });
+    }
+};         
+
 export const setCurrentTask = (taskId) => {
     return (dispatch) => {
         fetch(`http://localhost:3001/tasks/${taskId}`)
@@ -5,16 +16,6 @@ export const setCurrentTask = (taskId) => {
         .then(json => {
             dispatch({type: "POPULATE_TASK_COMMENTS", payload: json.comments})
             dispatch({type: "SET_CURRENT_TASK", payload: json.task.id})
-        })
-    }
-}
-
-export const populateDetails = (taskId) => {
-    return (dispatch) => {
-        fetch(`http://localhost:3001/details?taskId=${taskId}`)
-        .then(res => res.json())
-        .then(details => {
-            dispatch({type: "POPULATE_DETAILS", payload: details})
         })
     }
 }

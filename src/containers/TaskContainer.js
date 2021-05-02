@@ -4,7 +4,8 @@ import './TaskContainer.css'
 import TopBar from '../components/TopBar'
 import TaskCard from '../components/TaskCard'
 import TaskWorkspace from '../components/TaskWorkspace'
-import { setCurrentTask, populateDetails } from '../actions/task'
+import { setCurrentTask } from '../actions/task'
+import { populateDetails } from '../actions/detail'
 
 class TaskContainer extends Component {
     
@@ -20,18 +21,16 @@ class TaskContainer extends Component {
                 <TopBar />
                 <div className='task-fields'>
                     <section className='tasks-select'>
+                        <h1>Project Goals:</h1>
                         {this.props.tasks.map(task => 
                             <TaskCard
                                 key={task.id}
-                                currentTask={this.props.currentTask} 
-                                task={task} 
+                                task={task}
                                 loadTask={this.loadTask}
                             />
                         )}
                     </section>
-                    <section className='task-open'>
-                        <TaskWorkspace />
-                    </section>
+                    <TaskWorkspace />
                 </div>
             </div>
         )
@@ -41,10 +40,9 @@ class TaskContainer extends Component {
 
 export default connect((state) => {
     return {
-        tasks: state.populate.tasks,
-        currentTask: state.task.currentTask,
+        tasks: state.task.tasks,
         taskComments: state.task.taskComments,
-        details: state.task.details,
-        detailComments: state.task.detailComments
+        details: state.detail.details,
+        detailComments: state.detail.detailComments
     }
 }, { setCurrentTask, populateDetails })(TaskContainer)

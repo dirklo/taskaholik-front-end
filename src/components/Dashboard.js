@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import TaskContainer from '../containers/TaskContainer'
 import ToolbarContainer from '../containers/ToolbarContainer'
 import './Dashboard.css'
-import { populateTeams, populateProjects, populateTasks}  from '../actions/populate'
+import { populateTeams }  from '../actions/team'
+import { populateProjects }  from '../actions/project'
+import { populateTasks}  from '../actions/task'
 
 class Dashboard extends Component {
     componentDidMount() {
@@ -25,7 +27,7 @@ class Dashboard extends Component {
 export default connect((state) => {
     return {
         currentUser: state.auth.currentUser, 
-        teams: state.populate.teams,
-        projects: state.populate.projects
+        teams: state.team.teams,
+        projects: state.project.projects
     }
 }, { populateTeams, populateProjects, populateTasks })(Dashboard)

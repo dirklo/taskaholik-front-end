@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import NewCommentForm from './NewCommentForm'
 import { removeTaskComment } from '../actions/task'
+import DetailsContainer from '../containers/DetailsContainer'
+import './TaskWorkspace.css'
 
 class TaskWorkspace extends Component {
     deleteButton = (comment) => {
@@ -24,24 +26,8 @@ class TaskWorkspace extends Component {
     
     render() {
         return (
-            <div className='task-workspace'>
-                <h2>Details:</h2>
-                <ul>
-                    {this.props.details.map(detail => 
-                        <ul key={detail.detail.id}>
-                            <li>{detail.detail.content}</li>
-                            <ul>
-                            {detail.comments.map(comment =>
-                                <li key={comment.id}>
-                                    {comment.author} said: {comment.content}
-                                </li>
-                            )}
-                            </ul>
-                        </ul>  
-                    )}
-                </ul>
-                <br/>
-                <br/>
+            <section className='task-workspace'>
+                <DetailsContainer />
                 <h2>Comments:</h2>
                 <ul>
                     {this.props.comments.map(comment =>
@@ -54,15 +40,13 @@ class TaskWorkspace extends Component {
                     )}
                 </ul>
                 <NewCommentForm taskId={this.props.taskId} />
-            </div>
+            </section>
         )
     }
 }
 
 export default connect((state) => {
     return {
-        taskId: state.task.currentTask,
-        details: state.task.details,
         comments: state.task.taskComments,
         currentUser: state.auth.currentUser
     }
