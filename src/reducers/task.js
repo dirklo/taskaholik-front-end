@@ -29,6 +29,19 @@ const initialState = {
                 ...state,
                 tasks: newTasks
             }
+        case "ADD_TASK":
+            let newTask = action.payload.task
+            newTask.selected = true
+            return {
+                ...state,
+                tasks: [
+                    ...state.tasks.map(task => {
+                        task.selected = false
+                        return task
+                    }), 
+                    newTask
+                ]
+            }
         case "ADD_TASK_COMMENT":
             return {
                 ...state,

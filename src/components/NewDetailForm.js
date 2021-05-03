@@ -8,12 +8,17 @@ function NewDetailForm(props) {
     const [content, setContent] = useState('')
 
     return (
-        <div className={props.showAddForm ? "new-detail-form show" : "new-detail-form"}>
+        <div 
+            className={props.showAddForm ? 
+                "new-detail-form show" 
+                : 
+                "new-detail-form"
+        }>
             <form
                 onSubmit={(e) => {
                     let currentTask = props.tasks.find(task => task.selected === true)
                     e.preventDefault()
-                    props.addDetail(content, currentTask)
+                    props.addDetail(content, currentTask, props.currentUser)
                     setContent('')
                     props.setShowAddForm(false)
                 }}

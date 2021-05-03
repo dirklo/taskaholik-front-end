@@ -20,6 +20,27 @@ export const setCurrentTask = (taskId) => {
     }
 }
 
+export const addTask = (title, currentProject, creator) => {
+    return (dispatch) => {
+        fetch('http://localhost:3001/tasks', {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                title: title, 
+                project_id: currentProject.id, 
+                creator_id: creator.id
+            })
+        })
+        .then(res => res.json())
+        .then(json => {
+            dispatch({type: 'ADD_TASK', payload: json})
+        })
+    }
+}
+
 export const addTaskComment = (taskId, content, authorId, author) => {
     return (dispatch) => {
         fetch('http://localhost:3001/task_comments', {
@@ -42,7 +63,7 @@ export const addTaskComment = (taskId, content, authorId, author) => {
                 dispatch({type: "ADD_TASK_COMMENT", 
                     payload: {
                         ...json.comment,
-                        author: json.author,
+                        author: author,
                     }
                 })
             }

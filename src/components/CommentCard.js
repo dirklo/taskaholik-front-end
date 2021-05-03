@@ -1,39 +1,33 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
+import { removeTaskComment } from '../actions/task'
 
-class CommentCard extends Component {
-    deleteButton = (comment) => {
-        if (this.props.currentUser.id === comment.author_id) {
-            return <button 
+function CommentCard(props) {
+
+    return (
+        <fieldset key={props.comment.id}>
+        <h3>{props.comment.author} said:</h3>
+        <span>{props.comment.content}</span>
+        <p>at: {props.comment.created_at}</p>
+        {props.currentUser.id === props.comment.author_id ?
+            <button 
                 type='button'
-                data-id={comment.id}
-                onClick={this.handleDelete}
+                data-id={props.comment.id}
+                onClick={(e) => {
+                    props.removeTaskComment(e.target.dataset.id)
+                }}
             >
                 Delete Comment
             </button>
-        }else{
-            return null
+            :
+            null
         }
-    }
-
-    handleDelete = (e) => {
-        this.props.removeTaskComment(e.target.dataset.id)
-    }
-
-    render() {
-        return (
-            <fieldset key={this.props.comment.id}>
-            <h3>{this.props.comment.author} said:</h3>
-            <span>{this.props.comment.content}</span>
-            <p>at: {this.props.comment.created_at}</p>
-            {this.deleteButton(this.props.comment)}
-            </fieldset>
-        )
-    }
+        </fieldset>
+    )
 }
 
 export default connect((state) => {
     return {
         currentUser: state.auth.currentUser
     }
-})(CommentCard)
+}, { removeTaskComment })(CommentCard)

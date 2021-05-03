@@ -37,7 +37,7 @@ export const completeDetail = (detail, status) => {
     }
 }
 
-export const addDetail = (content, currentTask) => {
+export const addDetail = (content, currentTask, currentUser) => {
     return (dispatch) => {
         fetch('http://localhost:3001/details', {
             method: "POST",
@@ -45,7 +45,7 @@ export const addDetail = (content, currentTask) => {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({content: content, task_id: currentTask.id})
+            body: JSON.stringify({content: content, task_id: currentTask.id, creator_id: currentUser.id})
         })
         .then(res => res.json())
         .then(json => {

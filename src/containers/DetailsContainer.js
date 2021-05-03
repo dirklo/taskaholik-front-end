@@ -7,9 +7,7 @@ import NewDetailForm from '../components/NewDetailForm'
 
 function DetailsContainer(props) {
     const [showAddForm, setShowAddForm] = useState(false)
-
-    let currentDetail = props.details.find(detail => detail.selected === true)
-   
+       
     return (
         <div className='details-container'>
             <section className='details-list'>
@@ -45,7 +43,7 @@ function DetailsContainer(props) {
                     setShowAddForm={setShowAddForm} 
                 />
             </section>
-            <DetailEditor currentDetail={currentDetail}/>
+            <DetailEditor />
         </div>
     ) 
 }
