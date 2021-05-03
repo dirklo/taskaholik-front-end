@@ -1,36 +1,53 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import './DetailsContainer.css'
 import DetailEditor from '../components/DetailEditor'
 import { setCurrentDetail } from '../actions/detail'
+import NewDetailForm from '../components/NewDetailForm'
 
-class DetailsContainer extends Component {
+function DetailsContainer(props) {
+    const [showAddForm, setShowAddForm] = useState(false)
 
-    handleOnClick = (e) => {
-        this.props.setCurrentDetail(parseInt(e.target.dataset.id))
-    }
-
-    render() {
-        let currentDetail = this.props.details.find(detail => detail.selected === true)
-        return (
-            <div className='details-container'>
-                <section className='details-list'>
-                    <h2>Details:</h2>
-                    {this.props.details.map(detail => 
-                        <div 
-                            key={detail.id}
-                            className={detail.selected? 'detail-card selected' : 'detail-card'}
-                            data-id={detail.id}
-                            onClick={this.handleOnClick}
-                        >
-                            {detail.content}
-                        </div>
-                    )}
-                </section>
-                <DetailEditor currentDetail={currentDetail}/>
-            </div>
-        )
-    }
+    let currentDetail = props.details.find(detail => detail.selected === true)
+   
+    return (
+        <div className='details-container'>
+            <section className='details-list'>
+                <h2>Details:</h2>
+                {props.details.map(detail => 
+                    <div 
+                        key={detail.id}
+                        className={detail.selected? 'detail-card selected' : 'detail-card'}
+                        data-id={detail.id}
+                        onClick={e => props.setCurrentDetail(
+                            parseInt(e.target.dataset.id)
+                        )}
+                    >
+                        {detail.content}
+                    </div>
+                )}
+                <button 
+                    type='button'
+                    className={!showAddForm ? 'show' : 'hide'}
+                    onClick={(e) => setShowAddForm(true)}
+                >
+                    + Add New Detail
+                </button>
+                <button 
+                    type='button'
+                    className={showAddForm ? 'show' : 'hide'}
+                    onClick={(e) => setShowAddForm(false)}
+                >
+                    + Cancel
+                </button> 
+                <NewDetailForm 
+                    showAddForm={showAddForm} 
+                    setShowAddForm={setShowAddForm} 
+                />
+            </section>
+            <DetailEditor currentDetail={currentDetail}/>
+        </div>
+    ) 
 }
 
 export default connect((state) => {

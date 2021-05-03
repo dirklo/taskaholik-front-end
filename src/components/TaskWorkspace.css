@@ -6,6 +6,9 @@
     overflow-y: auto;
 }
 
+.task-workspace .task-comments {
+    width: 100%;
+}
 .task-workspace h2 {
     width: 100%;
     margin-top: 0;

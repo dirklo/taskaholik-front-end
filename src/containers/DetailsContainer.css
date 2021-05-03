@@ -1,3 +1,11 @@
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
 .details-container {
     height: 400px;
     width: 100%;

@@ -32,9 +32,12 @@ export default function populateReducer(state = initialState, action) {
                 details: [...action.payload]
             }
         case "COMPLETE_DETAIL":
-            index = state.details.findIndex(detail => detail.id === action.payload)
+            index = state.details.findIndex(detail => detail.id === action.payload.detail.id)
             detail = state.details[index]
-            detail.completed = true
+
+            action.payload.status === 'complete' ?
+            detail.completed = true : detail.completed = false
+
             return {
                 ...state,
                 details: [
@@ -42,6 +45,24 @@ export default function populateReducer(state = initialState, action) {
                     detail, 
                     ...state.details.slice(index + 1)
                 ]
+            }
+        case "ADD_DETAIL":
+            let newDetail = action.payload.detail
+            newDetail.selected = true
+            return {
+                ...state,
+                details: [
+                    ...state.details.map(detail => {
+                        detail.selected = false
+                        return detail
+                    }), 
+                    newDetail
+                ]
+            }
+        case "DELETE_DETAIL":
+            return {
+                ...state,
+                details: [...state.details.filter(detail => detail.id !== action.payload)]
             }
         default:
             return state;
