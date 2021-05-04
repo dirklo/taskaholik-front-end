@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import './DetailEditor.css'
 import { completeDetail, deleteDetail } from '../actions/detail'
 import CommentCard from '../components/CommentCard'
+import NewCommentForm from './NewCommentForm'
 
 function DetailEditor(props) {
     let currentDetail = props.details.find(detail => detail.selected === true)
@@ -39,7 +40,7 @@ function DetailEditor(props) {
                     </button>
                 }
                 {props.comments.map(comment =>
-                    <CommentCard key={comment.id} comment={comment} />
+                    <CommentCard key={comment.id} comment={comment} commentType='detail' />
                 )}
                 <button 
                     onClick={() => {
@@ -49,6 +50,7 @@ function DetailEditor(props) {
                 >
                     Delete This Detail
                 </button>
+                <NewCommentForm commentType='detail'/>
             </section>
         )
     
@@ -65,7 +67,8 @@ function DetailEditor(props) {
 export default connect((state) => {
     return {
         details: state.detail.details,
-        comments: state.detail.detailComments
+        comments: state.detail.detailComments,
+        currentUser: state.auth.currentUser
     }
 }, { completeDetail, deleteDetail })(DetailEditor)
 

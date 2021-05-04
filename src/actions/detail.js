@@ -54,6 +54,51 @@ export const addDetail = (content, currentTask, currentUser) => {
     }
 }
 
+export const addDetailComment = (detailId, content, authorId, author) => {
+    return (dispatch) => {
+        fetch('http://localhost:3001/detail_comments', {
+            method: 'POST',
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                detail_comment: {
+                    detail_id: detailId,
+                    content: content, 
+                    author_id: authorId
+                }
+            })
+        })
+        .then(res => res.json())
+        .then(
+            json => {
+                dispatch({type: "ADD_DETAIL_COMMENT", 
+                    payload: {
+                        ...json.comment,
+                        author: author,
+                    }
+                })
+            }
+        )
+    }
+}
+
+export const removeDetailComment = (commentId, currentUserId) => {
+    return (dispatch) => {
+        dispatch({type: "REMOVE_DETAIL_COMMENT", payload: commentId})
+        fetch(`http://localhost:3001/detail_comments/${commentId}`, {
+            method: 'DELETE',
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({detail_comment: {user_id: currentUserId}})
+        })
+        .then((res) => console.log(res))
+    }
+} 
+
 export const deleteDetail = (detailId) => {
     return (dispatch) => {
         fetch(`http://localhost:3001/details/${detailId}`, {

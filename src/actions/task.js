@@ -41,6 +41,27 @@ export const addTask = (title, currentProject, creator) => {
     }
 }
 
+export const deleteTask = (taskId) => {
+    return (dispatch) => {
+        fetch(`http://localhost:3001/tasks/${taskId}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(json => {
+            if (json.status === 401) {
+                throw Error
+            }
+            console.log(json)
+            dispatch({type: 'DELETE_TASK', payload: taskId})
+        })
+        .catch(err => console.log(err))
+    }
+}
+
 export const addTaskComment = (taskId, content, authorId, author) => {
     return (dispatch) => {
         fetch('http://localhost:3001/task_comments', {
@@ -82,7 +103,7 @@ export const removeTaskComment = (commentId, currentUserId) => {
             },
             body: JSON.stringify(
                 {task_comment: 
-                    {task_id: commentId, userId: currentUserId}
+                    {userId: currentUserId}
                 }
             )
         })

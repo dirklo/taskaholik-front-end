@@ -42,6 +42,12 @@ const initialState = {
                     newTask
                 ]
             }
+        case "DELETE_TASK":
+            index = state.tasks.findIndex(task => task.id === Number(action.payload))
+            return {
+                ...state,
+                tasks: [...state.tasks.filter((task, idx) => idx !== index)]
+            }
         case "ADD_TASK_COMMENT":
             return {
                 ...state,

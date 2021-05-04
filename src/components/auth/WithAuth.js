@@ -4,7 +4,7 @@ import { checkAuth } from "../../actions/auth";
 import LoadingSpinner from "../LoadingSpinner";
 import Login from "./Login";
 
-function WithAuth(WrappedComponent) {
+function withAuth(WrappedComponent) {
   class Wrapper extends React.Component {
     componentDidMount() {
       this.props.dispatchCheckAuth();
@@ -41,4 +41,4 @@ function WithAuth(WrappedComponent) {
   return connect(mapStateToProps, mapDispatchToProps)(Wrapper);
 }
 
-export default WithAuth;
+export default withAuth;

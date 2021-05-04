@@ -64,6 +64,22 @@ export default function populateReducer(state = initialState, action) {
                 ...state,
                 details: [...state.details.filter(detail => detail.id !== action.payload)]
             }
+        case "ADD_DETAIL_COMMENT":
+        return {
+            ...state,
+            detailComments: [
+                ...state.detailComments, action.payload
+            ]
+        }
+        case "REMOVE_DETAIL_COMMENT":
+        index = state.detailComments.findIndex(detail => detail.id === Number(action.payload))
+        return {
+            ...state,
+            detailComments: [
+                ...state.detailComments.slice(0, index),
+                ...state.detailComments.slice(index + 1) 
+            ]
+        }
         default:
             return state;
     }

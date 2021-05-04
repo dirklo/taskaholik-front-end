@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { removeTaskComment } from '../actions/task'
+import { removeDetailComment } from '../actions/detail'
 
 function CommentCard(props) {
 
@@ -14,7 +15,21 @@ function CommentCard(props) {
                 type='button'
                 data-id={props.comment.id}
                 onClick={(e) => {
-                    props.removeTaskComment(e.target.dataset.id)
+                    switch (props.commentType) {
+                        case 'task':
+                            props.removeTaskComment(
+                                e.target.dataset.id, 
+                                props.currentUser.id
+                            )
+                            break
+                        case 'detail':
+                            props.removeDetailComment(
+                                e.target.dataset.id, 
+                                props.currentUser.id
+                            )
+                            break
+                        default:
+                    }
                 }}
             >
                 Delete Comment
@@ -30,4 +45,4 @@ export default connect((state) => {
     return {
         currentUser: state.auth.currentUser
     }
-}, { removeTaskComment })(CommentCard)
+}, { removeTaskComment, removeDetailComment })(CommentCard)
