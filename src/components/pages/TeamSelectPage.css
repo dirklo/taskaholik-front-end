@@ -1,0 +1,19 @@
+.team-select {
+    height: 100vh;
+    width: 100vw;
+    background-color: darkslateblue;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.team-select .team-card-container {
+    width: 600px;
+    text-align: left;
+}
+
+.team-select .team-card-container .title{
+    text-align: right;
+}

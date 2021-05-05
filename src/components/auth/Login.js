@@ -21,7 +21,7 @@ class Login extends React.Component {
     event.preventDefault();
     const { email, password } = this.state;
     this.props.loginUser({ email, password })
-    .then(() => this.props.history.push('/dashboard'))
+    .then(() => this.props.history.push('/teams/select'))
     .catch(() => this.setState({ error: true }));
   };
 

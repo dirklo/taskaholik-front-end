@@ -103,7 +103,7 @@ export const removeTaskComment = (commentId, currentUserId) => {
             },
             body: JSON.stringify(
                 {task_comment: 
-                    {userId: currentUserId}
+                    {user_id: currentUserId}
                 }
             )
         })

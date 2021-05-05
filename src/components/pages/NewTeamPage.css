@@ -1,0 +1,24 @@
+.new-team-page {
+    height: 100vh;
+    width: 100vw;
+    background-color: darkslateblue;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-team-page form {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-team-page form input {
+    width: 50%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+}

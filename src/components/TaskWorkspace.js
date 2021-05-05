@@ -7,24 +7,34 @@ import CommentCard from '../components/CommentCard'
 import './TaskWorkspace.css'
 
 function TaskWorkspace(props) {
+    let currentTask = props.tasks.find(task => task.selected === true)
 
-    return (
-        <section className='task-workspace'>
-            <DetailsContainer />
-            <div className='task-comments'>
-                <h2>Comments:</h2>
-                {props.comments.map(comment =>
-                    <CommentCard key={comment.id} comment={comment} />
-                )}
-            <NewCommentForm />
+    if (currentTask) {
+        return (
+            <section className='task-workspace'>
+                <DetailsContainer />
+                <div className='task-comments'>
+                    <h2>Comments:</h2>
+                    {props.comments.map(comment =>
+                        <CommentCard key={comment.id} comment={comment} commentType="task" />
+                    )}
+                <NewCommentForm commentType='task' />
+                </div>
+            </section>
+        )
+    } else {
+        return (
+            <div className="no-task-placeholder">
+                <div className="logo">LOGO</div>
             </div>
-        </section>
-    )
+        )
+    }
 
 }
 
 export default connect((state) => {
     return {
         comments: state.task.taskComments,
+        tasks: state.task.tasks,
     }
 }, { removeTaskComment })(TaskWorkspace)

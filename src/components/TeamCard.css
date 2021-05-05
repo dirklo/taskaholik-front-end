@@ -1,0 +1,9 @@
+.team-card {
+    background-color: rgba(0, 0, 0, 0.134);
+    transition: all .3s ease;
+}
+
+.team-card:hover {
+    background-color: rgba(128, 0, 128, 0.148);
+    transform: scale(1.03);
+}

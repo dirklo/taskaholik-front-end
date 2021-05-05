@@ -1,0 +1,27 @@
+.member-card {
+    position: relative;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.148);
+    border-radius: 5px;
+    display: flex;
+    align-items: baseline;
+}
+
+.member-card .delete-member-button {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.member-card .delete-member-button:hover {
+    transform: scale(1.5)
+}
+
+.member-card .delete-member-button:focus {
+    outline: none;
+}

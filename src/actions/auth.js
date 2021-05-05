@@ -31,7 +31,7 @@ export const signupUser = (credentials) => {
             );
         } else {
           return res.json().then((errors) => {
-            dispatch({ type: 'NOT AUTHENTICATED' });
+            dispatch({ type: 'NOT_AUTHENTICATED' });
             return Promise.reject(errors);
           });
         }
@@ -60,7 +60,7 @@ export const loginUser = (credentials) => {
           } else {
             return res.json()
             .then((errors) => {
-            dispatch({ type: 'NOT AUTHENTICATED' });
+            dispatch({ type: 'NOT_AUTHENTICATED' });
             return Promise.reject(errors);
             });
           }
@@ -79,10 +79,10 @@ export const logoutUser = () => {
         },
         }).then((res) => {
         if (res.ok) {
-            return dispatch({ type: 'NOT AUTHENTICATED' });
+            return dispatch({ type: 'NOT_AUTHENTICATED' });
         } else {
             return res.json().then((errors) => {
-            dispatch({ type: 'NOT AUTHENTICATED' });
+            dispatch({ type: 'NOT_AUTHENTICATED' });
             return Promise.reject(errors);
             });
         }
@@ -102,7 +102,7 @@ export const checkAuth = () => {
         if (res.ok) {
           return res.json().then(user => dispatch({type: 'AUTHENTICATED', payload: user}))
         } else {
-          return Promise.reject(dispatch({type: 'NOT AUTHENTICATED'}))
+          return Promise.reject(dispatch({type: 'NOT_AUTHENTICATED'}))
         }
       });
     };
