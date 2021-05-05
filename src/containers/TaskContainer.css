@@ -1,11 +1,14 @@
 .task-container {
+    position: relative;
+    padding-top: 50px;
     flex: 1;
     background-color: whitesmoke;
-    height: 100%;
+    height: calc(100% - 50px);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    overflow-y: hidden;
 }
 
 .task-container .task-fields {

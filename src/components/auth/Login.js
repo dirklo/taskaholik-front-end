@@ -27,41 +27,43 @@ class Login extends React.Component {
 
   render() {
     return (
-      <form
-        onSubmit={this.handleSubmit}
-        className='login'
-      >
-        <h1>Log In</h1>
-        <p>{this.state.error && "Invalid email or password"}</p>
-        <fieldset>
-          <label htmlFor='email'>
-            Email:
-          </label>
+      <div className='login-page'>
+        <form
+          onSubmit={this.handleSubmit}
+          className='login-form'
+        >
+          <h1>Log In</h1>
+          <p>{this.state.error && "Invalid email or password"}</p>
+          <fieldset>
+            <label htmlFor='email'>
+              Email:
+            </label>
+            <input
+              type='text'
+              name='email'
+              id='email'
+              onChange={this.handleChange}
+              value={this.state.email}
+            />
+          </fieldset>
+          <fieldset>
+            <label className='block uppercase mb-2' htmlFor='password'>
+              Password:
+            </label>
+            <input
+              type='password'
+              name='password'
+              id='password'
+              onChange={this.handleChange}
+              value={this.state.password}
+            />
+          </fieldset>
           <input
-            type='text'
-            name='email'
-            id='email'
-            onChange={this.handleChange}
-            value={this.state.email}
+            type='submit'
+            value='Log In'
           />
-        </fieldset>
-        <fieldset>
-          <label className='block uppercase mb-2' htmlFor='password'>
-            Password:
-          </label>
-          <input
-            type='password'
-            name='password'
-            id='password'
-            onChange={this.handleChange}
-            value={this.state.password}
-          />
-        </fieldset>
-        <input
-          type='submit'
-          value='Log In'
-        />
-      </form>
+        </form>
+      </div>
     );
   }
 }

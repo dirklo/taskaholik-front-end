@@ -34,14 +34,18 @@
 .team-page .team-options {
     width: 600px;
     display: flex;
-    flex-direction: rox;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .team-page .team-options div {
     flex: 1;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .team-page .team-options .members {

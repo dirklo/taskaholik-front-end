@@ -13,6 +13,7 @@ function AddMemberForm({ addMember, currentTeam }) {
                 onSubmit={(e) => {
                     e.preventDefault()
                     addMember(query, currentTeam.id)
+                    setQuery('')
                 }}
             >
                 <input 

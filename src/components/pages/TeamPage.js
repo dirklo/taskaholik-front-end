@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import './TeamPage.css'
 import MemberCard from '../MemberCard'
 import AddMemberForm from '../AddMemberForm'
+import ChangeTeamNameForm from '../ChangeTeamNameForm'
 
 function TeamPage({ teams, currentUser }) {
     let currentTeam = teams.find(team => team.selected === true)
@@ -12,6 +13,7 @@ function TeamPage({ teams, currentUser }) {
             <section className="title">
                 <h1>{currentTeam? currentTeam.name : 'No Team Loaded'}</h1>
                 <Link to="/teams/select">Select Team</Link>
+                <Link to="/dashboard">Dashboard</Link>
             </section>
             <section className="team-options">
                 <div className="members">
@@ -31,7 +33,7 @@ function TeamPage({ teams, currentUser }) {
                 <AddMemberForm currentTeam={currentTeam} />
                 </div>
                 <div className="settings">
-                    SETTINGS
+                    <ChangeTeamNameForm currentTeam={currentTeam}/>
                 </div>
             </section>
 

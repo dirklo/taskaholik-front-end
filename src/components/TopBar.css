@@ -1,4 +1,6 @@
 .top-bar {
+    position: absolute;
+    top: 0;
     width: 100%;
     height: 50px; 
     background: rgb(140, 140, 140)
