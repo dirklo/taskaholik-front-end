@@ -1,5 +1,81 @@
 .toolbar-container {
     width: 300px;
     height: 100%;
-    background-color: rgb(0, 200, 255)
+    background-color: darkslateblue;
+    color: white;
+    /* border: 2px solid white; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.toolbar-container a {
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toolbar-container a:hover {
+    background-color: rgba(60, 20, 60, 0.374);
+}
+
+.toolbar-container .project-card.selected {
+    color: tomato;
+    font-size: 18px;
+}
+
+.toolbar-container .project-card {
+    width: 90%;
+    margin: 5px;
+    padding: 5px;
+    background: rgba(23, 39, 39, 0.192);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toolbar-container .project-card:hover {
+    transform: scale(1.1);
+    margin: 5px;
+    background: rgba(74, 180, 180, 0.192);
+}
+
+.toolbar-container .addProjectBtn {
+    background: transparent;
+    color: white;
+    margin-bottom: 20px;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toolbar-container .addProjectBtn:hover {
+    background-color: rgba(60, 20, 60, 0.374);
+}
+
+.toolbar-container .overlay {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.774);
+    z-index: 10;
+}
+
+.toolbar-container .show {
+    display: block;
+}
+
+.toolbar-container .hide {
+    display: none;
 }

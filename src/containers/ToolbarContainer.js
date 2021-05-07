@@ -1,29 +1,61 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import './ToolbarContainer.css'
+import AddProjectForm from '../components/AddProjectForm'
+import { setCurrentProject } from '../actions/project'
+import { populateTasks } from '../actions/task'
+import { currentTeam } from '../helpers/helpers'
 
-function ToolbarContainer({ teams, projects }) {
-    let currentTeam = teams.find(team => team.selected === true)
+function ToolbarContainer({ projects, setCurrentProject, populateTasks }) {
+
+    const [showOverlay, setShowOverlay] = useState(false)
+
     return (
         <div className='toolbar-container'>
+            <div 
+                className={showOverlay ? 'overlay show' : 'overlay hide'}
+                onClick={() => setShowOverlay(false)}
+            ></div>
+            <AddProjectForm 
+                showOverlay={showOverlay} 
+                setShowOverlay={setShowOverlay}/>
             <h1>Team:</h1>
-            <h2>{currentTeam.name}</h2>
+            <h2>{currentTeam().name}</h2>
             
             <br/>
             <Link to='/teams'>Manage Teams</Link>
+            <br/>
             <hr/>
             <h2>Projects:</h2>
-            <ul>
-                {projects.map(project => <li key={project.id}>{project.title}</li>)}
-            </ul>
+            <button 
+                type='button' 
+                className='addProjectBtn'
+                onClick={() => {
+                    setShowOverlay(true) 
+                }}
+            >
+                Start New Project
+            </button>
+            <br/>
+            {projects.map(project => 
+                <div 
+                    key={project.id}
+                    className={project.selected ? "project-card selected" : "project-card"}
+                    onClick={() => {
+                        setCurrentProject(project.id)
+                        populateTasks(project.id)
+                    }}
+                >
+                    {project.title}
+                </div>
+            )}
         </div>
     )
 }
 
 export default connect((state) => {
     return {
-        teams: state.team.teams,
         projects: state.project.projects
     }
-})(ToolbarContainer)
+}, { setCurrentProject, populateTasks })(ToolbarContainer)

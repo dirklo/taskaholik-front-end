@@ -2,17 +2,19 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import './NewTeamPage.css'
 import { addTeam } from '../../actions/team'
+import TopBar from '../TopBar'
 
 function NewTeamPage(props) {
     const [teamName, setTeamName] = useState('')
 
     return (
         <div className='new-team-page'>
+            <TopBar />
             <form 
             action=""
             onSubmit={e => {
                 e.preventDefault()
-                props.addTeam(teamName, props.currentUser.id)
+                props.addTeam(teamName, props.currentUser)
                 .then(res => props.history.push('/dashboard'))
             }}
             >

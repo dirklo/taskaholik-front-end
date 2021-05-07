@@ -7,8 +7,10 @@ export default class Landing extends Component {
         return (
             <div className="landing">
                 <h1>WELCOME TO TASKAHOLIK</h1>
-                <Link to="/login">LOGIN</Link>
-                <Link to="/signup">SIGN UP</Link>
+                <div className="links">
+                    <Link to="/login">LOGIN</Link>
+                    <Link to="/signup">SIGN UP</Link>
+                </div>
             </div>
         )
     }

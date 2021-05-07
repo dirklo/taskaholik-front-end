@@ -1,13 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import './TopBar.css'
-import { logoutUser } from '../actions/auth'
+import Logout from '../components/auth/Logout'
 
-function TopBar({ username, logoutUser }) {
+function TopBar({ username }) {
     return (
         <div className='top-bar'>
-            Welcome back, {username}
-            <button onClick={logoutUser}>LOGOUT</button>
+            <h2>
+                Welcome back, {username}
+            </h2>
+            <Logout />
         </div>
     )
 }
@@ -16,6 +18,6 @@ export default connect((state) => {
     return {
         username: state.auth.currentUser.username
     }
-}, {logoutUser})(TopBar)
+})(TopBar)
 
 

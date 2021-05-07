@@ -3,9 +3,6 @@ const initialState = {
 };
   
 export default function populateReducer(state = initialState, action) {
-    let index;
-    let project;
-
     switch (action.type) {
         case "POPULATE_PROJECTS":
             return {
@@ -13,16 +10,28 @@ export default function populateReducer(state = initialState, action) {
                 projects: [...action.payload]
             }
         case "SET_CURRENT_PROJECT":
-            index = state.projects.findIndex(project => project.id === action.payload)
-            project = state.projects[index] 
-            project.selected = true;
+            let newProjects = state.projects.map(project => {
+                if (project.id === action.payload) {
+                    project.selected = true
+                    return project
+                } else {
+                    project.selected = false
+                    return project
+                }
+            })
             return {
                 ...state,
-                projects: [
-                    ...state.projects.slice(0, index), 
-                    project, 
-                    ...state.projects.slice(index + 1)
-                ]
+                projects: newProjects
+            }
+        case "ADD_PROJECT":
+            return {
+                ...state, 
+                projects: [...state.projects, action.payload]
+            }
+        case "CLEAR_PROJECTS":
+            return {
+                ...state,
+                projects: []
             }
       default:
         return state;

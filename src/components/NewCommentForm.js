@@ -11,7 +11,7 @@ function NewCommentForm(props) {
     let currentDetail = props.details.find(detail => detail.selected === true)
 
     return (
-        <div>
+        <div className='new-comment-form'>
             <form 
                 onSubmit={(e) => {
                     e.preventDefault()
@@ -46,7 +46,6 @@ function NewCommentForm(props) {
                 </input>
                 <input type='submit' value="Post Comment"/>
                 <br/>
-                <span>Posting as {props.currentUser.username}</span>
             </form>
         </div>
     )

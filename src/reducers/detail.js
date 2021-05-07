@@ -80,6 +80,12 @@ export default function populateReducer(state = initialState, action) {
                 ...state.detailComments.slice(index + 1) 
             ]
         }
+        case "CLEAR_DETAILS":
+            return {
+                ...state,
+                details: [],
+                detailComments: []
+            }
         default:
             return state;
     }

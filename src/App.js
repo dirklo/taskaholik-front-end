@@ -8,7 +8,9 @@ import TeamSelectPage from './components/pages/TeamSelectPage'
 import NewProjectPage from './components/pages/NewProjectPage'
 import Signup from './components/auth/Signup'
 import Login from './components/auth/Login'
+import Logout from './components/auth/Logout'
 import withAuth from './components/auth/withAuth'
+import loadData from './components/auth/loadData'
 import Landing from './components/Landing'
 
 export default class App extends Component {
@@ -18,13 +20,14 @@ export default class App extends Component {
         <Router>
           <Switch>
             <Route exact path='/' component={Landing} />
-            <Route exact path='/dashboard' component={withAuth(Dashboard)} />
-            <Route exact path='/teams' component={withAuth(TeamPage)} />
+            <Route exact path='/dashboard' component={withAuth(loadData(Dashboard))} />
+            <Route exact path='/teams' component={withAuth(loadData(TeamPage))} />
             <Route exact path='/teams/new' component={withAuth(NewTeamPage)} />
-            <Route exact path='/teams/select' component={withAuth(TeamSelectPage)} />
-            <Route exact path='/projects/new' component={withAuth(NewProjectPage)} />
+            <Route exact path='/teams/select' component={withAuth(loadData(TeamSelectPage))} />
+            <Route exact path='/projects/new' component={withAuth(loadData(NewProjectPage))} />
             <Route exact path='/signup' component={Signup} />
             <Route exact path='/login' component={Login} />
+            <Route exact path='/logout' component={Logout} />
           </Switch>
         </Router>
       </div>

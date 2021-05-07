@@ -1,4 +1,14 @@
+:root {
+  --clr1: #483D8B;
+  --clr2: #D4F0F5;
+  --clr3: #118B9B;
+  --clr4: #968AB6;
+  --clr5: #FBF8FF;
+  --clr6: #FFFADE;
+}
+
 .App {
   width: 100vw;
   height: 100vh;
+  background: var(--clr1);
 }

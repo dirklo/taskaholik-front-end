@@ -1,0 +1,25 @@
+.add-project-form {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 12;
+}
+
+.add-project-form input {
+    width: 300px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.add-project-form input[type="submit"] {
+    background: darkslateblue;
+    color: white
+}
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}

@@ -7,6 +7,15 @@
 }
 
 .details-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.details-container h2 {
+    margin: 0;
+}
+
+.details-container .details-sections {
     position: relative;
     height: 400px;
     width: 100%;
@@ -14,7 +23,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background: lightseagreen;
+    overflow: hidden;
 }
 
 .details-container section {
@@ -22,7 +31,8 @@
 }
 
 .details-container .details-list {
-    background-color: lightcoral;
+    padding-top: 10px;
+    background-color:  var(--clr3);
 }
 
 .details-container .details-list {
@@ -34,7 +44,8 @@
     padding: 3px;
     margin: 1px;
     width: 90%;
-    background-color:lightyellow;
+    border-radius: 3px;;
+    background-color: var(--clr5);
     border: 1px solid black;
     text-align: left;
     cursor: pointer;
@@ -48,8 +59,4 @@
 
 .details-container .details-list .detail-card.selected {
     background-color: lightblue;
-}
-
-.details-container .detail-editor {
-    background-color: lightcyan;
 }

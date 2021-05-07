@@ -1,15 +1,15 @@
 import React from 'react'
 import './TaskCard.css'
 
-export default function TaskCard(props) {
+export default function TaskCard({ task, loadTask}) {
     return (
         <div
-            className={props.task.selected ? 'task-card selected' : 'task-card'}
-            id={props.task.id} 
-            onClick={(event) => {
-                props.loadTask(event);
+            className={task.selected ? 'task-card selected' : 'task-card'}
+            id={task.id} 
+            onClick={(e) => {
+                loadTask(e);
             }}>
-            <h2>{props.task.title}</h2>
+            <h2>{task.title}</h2>
         </div>
     )
 }

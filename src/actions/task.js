@@ -94,7 +94,6 @@ export const addTaskComment = (taskId, content, authorId, author) => {
 
 export const removeTaskComment = (commentId, currentUserId) => {
     return (dispatch) => {
-        dispatch({type: "REMOVE_TASK_COMMENT", payload: commentId})
         fetch(`http://localhost:3001/task_comments/${commentId}`, {
             method: 'DELETE',
             headers: {
@@ -105,8 +104,14 @@ export const removeTaskComment = (commentId, currentUserId) => {
                 {task_comment: 
                     {user_id: currentUserId}
                 }
-            )
-        })
-        .then((res) => console.log(res))
+                )
+            })
+            .then((res) => {
+                if (res.status === 200) {
+                    dispatch({type: "REMOVE_TASK_COMMENT", payload: commentId})
+                } else {
+                    alert('An error occurred, comment not deleted!')
+                }
+            })
     }
 } 

@@ -7,8 +7,9 @@ import TaskWorkspace from '../components/TaskWorkspace'
 import { setCurrentTask } from '../actions/task'
 import { populateDetails } from '../actions/detail'
 import NewTaskForm from '../components/NewTaskForm'
+import { currentProject } from '../helpers/helpers'
 
-function TaskContainer(props) {
+function TaskContainer({ tasks, setCurrentTask, populateDetails }) {
 
     const [showAddForm, setShowAddForm] = useState(false)
 
@@ -16,37 +17,44 @@ function TaskContainer(props) {
         <div className='task-container'>
             <TopBar />
             <div className='task-fields'>
-                <section className='tasks-select'>
-                    <h1>Project Goals:</h1>
-                    {props.tasks.map(task => 
-                        <TaskCard
-                            key={task.id}
-                            task={task}
-                            loadTask={(e) => {
-                                props.setCurrentTask(e.target.id)
-                                props.populateDetails(e.target.id)
-                            }}
+                {currentProject()? 
+                    <section className='tasks-select'>
+                        <h1>{currentProject().title}</h1>
+                        <h1>Project Goals:</h1>
+                        <button 
+                            type='button'
+                            className={!showAddForm ? '' : 'hide'}
+                            onClick={(e) => setShowAddForm(true)}
+                        >
+                            + Add New Task
+                        </button>
+                        <button 
+                            type='button'
+                            className={showAddForm ? '' : 'hide'}
+                            onClick={(e) => setShowAddForm(false)}
+                        >
+                            + Cancel
+                        </button>
+                        <br/> 
+                        <NewTaskForm 
+                            showAddForm={showAddForm} 
+                            setShowAddForm={setShowAddForm}
                         />
-                    )}
-                    <button 
-                        type='button'
-                        className={!showAddForm ? '' : 'hide'}
-                        onClick={(e) => setShowAddForm(true)}
-                    >
-                        + Add New Task
-                    </button>
-                    <button 
-                        type='button'
-                        className={showAddForm ? '' : 'hide'}
-                        onClick={(e) => setShowAddForm(false)}
-                    >
-                        + Cancel
-                    </button> 
-                <NewTaskForm 
-                    showAddForm={showAddForm} 
-                    setShowAddForm={setShowAddForm}
-                />
-                </section>
+                        {tasks.map(task => 
+                            <TaskCard
+                                key={task.id}
+                                task={task}
+                                loadTask={(e) => {
+                                    setCurrentTask(e.target.id)
+                                    populateDetails(e.target.id)
+                                }}
+                            />
+                        )}
+                    </section>
+                    :
+                    <>
+                    </>
+                }   
                 <TaskWorkspace />
             </div>
         </div>
@@ -56,9 +64,6 @@ function TaskContainer(props) {
 
 export default connect((state) => {
     return {
-        tasks: state.task.tasks,
-        taskComments: state.task.taskComments,
-        details: state.detail.details,
-        detailComments: state.detail.detailComments
+        tasks: state.task.tasks
     }
 }, { setCurrentTask, populateDetails })(TaskContainer)

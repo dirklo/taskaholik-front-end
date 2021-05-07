@@ -54,7 +54,7 @@ export const loginUser = (credentials) => {
             setToken(res.headers.get("Authorization"));
             return res.json()
             .then((userJson) => {
-              dispatch({ type: 'AUTHENTICATED', payload: userJson })
+              dispatch({ type: 'AUTHENTICATED', payload: userJson.data })
               return userJson
             })
           } else {
@@ -79,7 +79,12 @@ export const logoutUser = () => {
         },
         }).then((res) => {
         if (res.ok) {
+            dispatch({type: 'CLEAR_DETAILS'})
+            dispatch({type: 'CLEAR_TASKS'})
+            dispatch({type: 'CLEAR_PROJECTS'})
+            dispatch({type: 'CLEAR_TEAMS'})
             return dispatch({ type: 'NOT_AUTHENTICATED' });
+
         } else {
             return res.json().then((errors) => {
             dispatch({ type: 'NOT_AUTHENTICATED' });

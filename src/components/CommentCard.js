@@ -1,44 +1,54 @@
 import React from 'react'
+import './CommentCard.css'
 import { connect } from 'react-redux'
 import { removeTaskComment } from '../actions/task'
 import { removeDetailComment } from '../actions/detail'
+import { parseTimestamp } from '../helpers/helpers'
+import Delete from '@material-ui/icons/Delete'
+import ChatBubble from '@material-ui/icons/ChatBubble'
 
-function CommentCard(props) {
+function CommentCard({ comment, currentUser, commentType, removeTaskComment, removeDetailComment }) {
 
     return (
-        <fieldset key={props.comment.id}>
-        <h3>{props.comment.author} said:</h3>
-        <span>{props.comment.content}</span>
-        <p>at: {props.comment.created_at}</p>
-        {props.currentUser.id === props.comment.author_id ?
-            <button 
-                type='button'
-                data-id={props.comment.id}
-                onClick={(e) => {
-                    switch (props.commentType) {
-                        case 'task':
-                            props.removeTaskComment(
-                                e.target.dataset.id, 
-                                props.currentUser.id
-                            )
-                            break
-                        case 'detail':
-                            props.removeDetailComment(
-                                e.target.dataset.id, 
-                                props.currentUser.id
-                            )
-                            break
-                        default:
+        <div className="comment-card">
+            <div key={comment.id} className='comment-body'>
+                    {currentUser.id === comment.author_id ?
+                        <div 
+                            className='delete-btn'
+                            data-id={comment.id}
+                            onClick={(e) => {
+                                switch (commentType) {
+                                    case 'task':
+                                        removeTaskComment(
+                                            e.target.dataset.id, 
+                                            currentUser.id
+                                        )
+                                    break
+                                    case 'detail':
+                                        removeDetailComment(
+                                            e.target.dataset.id, 
+                                            currentUser.id
+                                        )
+                                    break
+                                    default:
+                                }
+                            }}
+                        >
+                            <Delete className='delete-icon'/>
+                        </div>
+                    :
+                        null
                     }
-                }}
-            >
-                Delete Comment
-            </button>
-            :
-            null
-        }
-        </fieldset>
+                <span className='comment-content'>{comment.content}</span>
+                <span className='timestamp'>{parseTimestamp(comment.created_at)}</span>
+            </div>
+            <div className="author-div">
+                <ChatBubble/>
+                <span>{comment.author}</span>
+            </div>
+        </div>
     )
+
 }
 
 export default connect((state) => {

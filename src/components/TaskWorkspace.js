@@ -15,18 +15,26 @@ function TaskWorkspace(props) {
                 <DetailsContainer />
                 <div className='task-comments'>
                     <h2>Comments:</h2>
-                    {props.comments.map(comment =>
-                        <CommentCard key={comment.id} comment={comment} commentType="task" />
-                    )}
-                <NewCommentForm commentType='task' />
+                    <NewCommentForm commentType='task' />
+                    <div className='comment-container'>
+                        {props.comments.map(comment =>
+                            <CommentCard 
+                            key={comment.id} 
+                            comment={comment} 
+                            commentType="task" 
+                            />
+                        )}
+                    </div>
                 </div>
             </section>
         )
     } else {
         return (
-            <div className="no-task-placeholder">
-                <div className="logo">LOGO</div>
-            </div>
+            <section className='task-workspace'>
+                <div className="no-task-placeholder">
+                    <div className="logo">LOGO</div>
+                </div>
+            </section>
         )
     }
 

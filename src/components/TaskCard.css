@@ -1,6 +1,8 @@
 .task-card {
     width: 90%;
-    border: 2px solid black;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px var(--clr6);
+    background: #473d8b53;
     margin-bottom: 5px;
     cursor: pointer;
 }
@@ -10,5 +12,5 @@
 }
 
 .task-card.selected {
-    background: lightblue
+    background: var(--clr3)
 }

@@ -14,6 +14,29 @@ export const populateProjects = (teamId, preSelectId) => {
 
 export const setCurrentProject = (projectId) => {
     return (dispatch) => {
+        dispatch({ type: "CLEAR_DETAILS" })
+        dispatch({ type: "CLEAR_TASKS" })
         dispatch({ type: "SET_CURRENT_PROJECT", payload: projectId })
+    }
+}
+
+export const addProject = (projectName, currentTeam, currentUser) => {
+    return (dispatch) => {
+        fetch('http://localhost:3001/projects', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({title: projectName, team_id: currentTeam.id, creator_id: currentUser.id}) 
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json)
+            dispatch({ type: "CLEAR_DETAILS" })
+            dispatch({ type: "CLEAR_TASKS" })
+            dispatch({ type: "ADD_PROJECT", payload: json.project})
+            dispatch({ type: "SET_CURRENT_PROJECT", payload: json.project.id })
+        })
     }
 }

@@ -1,9 +1,11 @@
 import React from "react";
+import './Signup.css'
 import { connect } from "react-redux";
 import { signupUser } from "../../actions/auth";
 
 class Signup extends React.Component {
   state = {
+    username: "",
     email: "",
     password: "",
     errors: {status: {message: ""}}
@@ -17,49 +19,64 @@ class Signup extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { email, password } = this.state;
+    const { username, email, password } = this.state;
     this.props
-      .dispatchSignupUser({ email, password })
+      .dispatchSignupUser({ username, email, password })
       .then(() => this.props.history.push("/"))
       .catch((errors) => this.setState({ errors }));
   };
 
   render() {
     return (
-      <form
-        onSubmit={this.handleSubmit}
-      >
-        <h1>Sign Up</h1>
-        <p>{this.state.errors.status.message}</p>
-        <fieldset>
-          <label htmlFor='email'>
-            Email:
-          </label>
+      <div className="signup-page">
+        <form
+          className="signup-form"
+          onSubmit={this.handleSubmit}
+        >
+          <h1>Sign Up</h1>
+          <p>{this.state.errors.status.message}</p>
+          <fieldset>
+            <label htmlFor='username'>
+              Username:
+            </label>
+            <input
+              type='text'
+              name='username'
+              id='username'
+              onChange={this.handleChange}
+              value={this.state.username}
+            />
+          </fieldset>
+          <fieldset>
+            <label htmlFor='email'>
+              Email:
+            </label>
+            <input
+              type='text'
+              name='email'
+              id='email'
+              onChange={this.handleChange}
+              value={this.state.email}
+            />
+          </fieldset>
+          <fieldset>
+            <label htmlFor='password'>
+              Password:
+            </label>
+            <input
+              type='password'
+              name='password'
+              id='password'
+              onChange={this.handleChange}
+              value={this.state.password}
+            />
+          </fieldset>
           <input
-            type='text'
-            name='email'
-            id='email'
-            onChange={this.handleChange}
-            value={this.state.email}
+            type='submit'
+            value='Sign Up'
           />
-        </fieldset>
-        <fieldset>
-          <label htmlFor='password'>
-            Password:
-          </label>
-          <input
-            type='password'
-            name='password'
-            id='password'
-            onChange={this.handleChange}
-            value={this.state.password}
-          />
-        </fieldset>
-        <input
-          type='submit'
-          value='Sign Up'
-        />
-      </form>
+        </form>
+      </div>
     );
   }
 }

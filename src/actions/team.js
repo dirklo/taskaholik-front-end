@@ -5,15 +5,20 @@ export const populateTeams = (userId, preSelectId) => {
         .then((teams) => {
             dispatch({ type: "POPULATE_TEAMS", payload: teams })
             dispatch({ type: "SET_CURRENT_TEAM", payload: preSelectId })
-        });
+        })
     }
 };
 
 export const setCurrentTeam = (teamId) => {
-    return { type: "SET_CURRENT_TEAM", payload: Number(teamId) }
+    return (dispatch) => {
+        dispatch({type: "CLEAR_PROJECTS"})
+        dispatch({type: "CLEAR_TASKS"})
+        dispatch({type: "CLEAR_DETAILS"})
+        dispatch({type: "SET_CURRENT_TEAM", payload: Number(teamId)})
+    }
 }
 
-export const addTeam = (teamName, currentUserId) => {
+export const addTeam = (teamName, currentUser) => {
     return (dispatch) => {
         return fetch(`http://localhost:3001/teams`, {
             method: "POST",
@@ -24,12 +29,15 @@ export const addTeam = (teamName, currentUserId) => {
             body: JSON.stringify({
                 team: {
                     name: teamName, 
-                    user_id: currentUserId
+                    user_id: currentUser.id
                 }
             })
         })
         .then(res => res.json())
         .then(json => {
+            let team = json.team
+            team.members = []
+            team.leader = currentUser.username
             dispatch({type: 'ADD_TEAM', payload: json.team})
             return json
         })

@@ -17,3 +17,20 @@
 .team-select .team-card-container .title{
     text-align: right;
 }
+
+.team-select a {
+    position: relative;
+    text-decoration: none;
+    background: transparent;
+    color: white;
+    margin-top: 20px;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.team-select a:hover {
+    background-color: rgba(60, 20, 60, 0.374);
+}

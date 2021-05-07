@@ -1,5 +1,6 @@
 const initialState = {
-    teams: []
+    teams: [],
+    populated: false 
 }
 
 export default function teamReducer(state = initialState, action) {
@@ -12,7 +13,7 @@ export default function teamReducer(state = initialState, action) {
             teams.map(team => team.selected = false)
             return {
                 ...state,
-                teams: [...action.payload]
+                teams: [...action.payload],
             }
         case "SET_CURRENT_TEAM":
             let newTeams = state.teams.map(team => {
@@ -22,10 +23,14 @@ export default function teamReducer(state = initialState, action) {
                     return {...team, selected: false}
                 }
             })
+            if (!newTeams.find(team => team.selected === true) && newTeams.length > 0) {
+                newTeams[0].selected = true
+            }
             return {
                 ...state,
-                teams: newTeams
-            }
+                teams: newTeams,
+                populated: true
+        }
         case "ADD_TEAM":
             team = action.payload
             team.selected = true
@@ -59,6 +64,12 @@ export default function teamReducer(state = initialState, action) {
                     team, 
                     ...state.teams.splice(index + 1)
                 ]
+            }
+        case "CLEAR_TEAMS":
+            return {
+                ...state,
+                teams: [],
+                populated: false
             }
         default:
             return state

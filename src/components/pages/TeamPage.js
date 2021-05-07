@@ -11,7 +11,7 @@ function TeamPage({ teams, currentUser }) {
     return (
         <div className='team-page'>
             <section className="title">
-                <h1>{currentTeam? currentTeam.name : 'No Team Loaded'}</h1>
+                <h1>{currentTeam ? currentTeam.name : 'No Team Loaded'}</h1>
                 <Link to="/teams/select">Select Team</Link>
                 <Link to="/dashboard">Dashboard</Link>
             </section>
@@ -25,9 +25,9 @@ function TeamPage({ teams, currentUser }) {
                     <h2>Members:</h2>
                     {currentTeam.members.map(member => 
                         <MemberCard 
-                        member={member} 
-                        removable={currentUser.id === currentTeam.leader.id ? 
-                            'true' : 'false'} 
+                            member={member} 
+                            removable={currentUser.id === currentTeam.leader.id ? 
+                                'true' : 'false'} 
                         />
                     )}
                 <AddMemberForm currentTeam={currentTeam} />

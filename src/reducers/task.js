@@ -64,6 +64,12 @@ const initialState = {
                 ...state.taskComments.slice(index + 1) 
             ]
         }
+        case "CLEAR_TASKS":
+            return {
+                ...state,
+                tasks: [],
+                taskComments: []
+            }
       default:
         return state;
     }
