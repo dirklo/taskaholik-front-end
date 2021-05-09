@@ -11,7 +11,7 @@ function CommentCard({ comment, currentUser, commentType, removeTaskComment, rem
 
     return (
         <div className="comment-card">
-            <div key={comment.id} className='comment-body'>
+            <div key={comment.id} className={commentType === 'task' ? 'comment-body task' : 'comment-body detail'}>
                     {currentUser.id === comment.author_id ?
                         <div 
                             className='delete-btn'
