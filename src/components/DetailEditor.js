@@ -4,53 +4,45 @@ import './DetailEditor.css'
 import { completeDetail, deleteDetail } from '../actions/detail'
 import CommentCard from '../components/CommentCard'
 import NewCommentForm from './NewCommentForm'
+import { currentDetail, parseTimestamp } from '../helpers/helpers'
+import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline'
+import CheckCircle from '@material-ui/icons/CheckCircle'
 
-function DetailEditor(props) {
-    let currentDetail = props.details.find(detail => detail.selected === true)
+function DetailEditor({ completeDetail, deleteDetail, comments }) {
 
-    if (currentDetail) {
+    if (currentDetail()) {
         return (
             <section className='detail-editor'>
-                <span>This detail is {currentDetail.completed ? 'Completed' : 'Incomplete'}</span>
-                {currentDetail.completed ? 
-                    <button 
-                        type='button'
-                        data-complete="incomplete"
-                        onClick={(e) => {
-                            props.completeDetail(
-                                currentDetail, 
-                                e.target.dataset.complete
-                            )
-                        }}
-                    >
-                        Mark Item Incomplete
-                    </button>
-                    :
-                    <button 
-                        type='button' 
-                        data-complete="complete"
-                        onClick={(e) => {
-                            props.completeDetail(
-                                currentDetail, 
-                                e.target.dataset.complete
-                            )
-                        }}
-                    >
-                        Mark Item Complete
-                    </button>
-                }
-                {props.comments.map(comment =>
-                    <CommentCard key={comment.id} comment={comment} commentType='detail' />
-                )}
+                <h2>{currentDetail().content}</h2>
                 <button 
-                    onClick={() => {
-                        props.deleteDetail(currentDetail.id)
-                    }} 
                     type='button'
+                    className={currentDetail().completed ? "complete-btn complete" : "complete-btn"}
+                    onClick={(e) => {
+                        completeDetail(currentDetail())
+                    }}
+                >
+                    {currentDetail().completed ? <CheckCircle /> : <CheckCircleOutline/>}
+                </button>
+                <span className='deadline'>Deadline: {parseTimestamp(currentDetail().deadline)}</span>
+                <NewCommentForm commentType='detail'/>
+                <div className="comments-container">
+                    {comments.map(comment =>
+                        <CommentCard 
+                            key={comment.id} 
+                            comment={comment} 
+                            commentType='detail' 
+                        />
+                    )}
+                </div>
+                <button 
+                    type='button'
+                    className='delete-btn'
+                    onClick={() => {
+                        deleteDetail(currentDetail.id)
+                    }} 
                 >
                     Delete This Detail
                 </button>
-                <NewCommentForm commentType='detail'/>
             </section>
         )
     

@@ -1,25 +1,32 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import './TaskContainer.css'
 import TopBar from '../components/TopBar'
 import TaskCard from '../components/TaskCard'
 import TaskWorkspace from '../components/TaskWorkspace'
+import NewTaskForm from '../components/NewTaskForm'
 import { setCurrentTask } from '../actions/task'
 import { populateDetails } from '../actions/detail'
-import NewTaskForm from '../components/NewTaskForm'
-import { currentProject } from '../helpers/helpers'
+import { currentProject, parseTimestamp } from '../helpers/helpers'
+import { checkAuth } from '../actions/auth'
 
-function TaskContainer({ tasks, setCurrentTask, populateDetails }) {
+function TaskContainer({ tasks, setCurrentTask, populateDetails, checkAuth }) {
 
     const [showAddForm, setShowAddForm] = useState(false)
+    const [redirect, setRedirect] = useState(false)
 
     return (
         <div className='task-container'>
+            { redirect ? (<Redirect push to='./login' />) : null}
             <TopBar />
             <div className='task-fields'>
                 {currentProject()? 
                     <section className='tasks-select'>
-                        <h1>{currentProject().title}</h1>
+                        <div className="title">
+                            <h1>{currentProject().title}</h1>
+                            <h2>Deadline: {parseTimestamp(currentProject().deadline)}</h2>
+                        </div>
                         <h1>Project Goals:</h1>
                         <button 
                             type='button'
@@ -45,8 +52,14 @@ function TaskContainer({ tasks, setCurrentTask, populateDetails }) {
                                 key={task.id}
                                 task={task}
                                 loadTask={(e) => {
-                                    setCurrentTask(e.target.id)
-                                    populateDetails(e.target.id)
+                                    checkAuth()
+                                    .then(() => {
+                                        setCurrentTask(e.target.id)
+                                        populateDetails(e.target.id)
+                                    })
+                                    .catch(() => {
+                                        setRedirect(true)
+                                    })
                                 }}
                             />
                         )}
@@ -66,4 +79,4 @@ export default connect((state) => {
     return {
         tasks: state.task.tasks
     }
-}, { setCurrentTask, populateDetails })(TaskContainer)
+}, { setCurrentTask, populateDetails, checkAuth })(TaskContainer)

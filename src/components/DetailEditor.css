@@ -1,4 +1,45 @@
 .detail-editor {
+    position: relative;
+    flex: 1;
+    align-self: stretch;
+    margin-left: 5px;
+    border-radius: 20px;
     overflow-y: auto;
     background-color: var(--clr5);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.detail-editor .comments-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+
+.detail-editor .complete-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.detail-editor .complete-btn:focus {
+    outline: none;
+}
+
+.detail-editor .complete-btn.complete {
+    color: green;
+}
+
+.detail-editor .delete-btn {
+    position: absolute; 
+    bottom: 0;
+    right: 0;
+
+    margin: 5px;
 }

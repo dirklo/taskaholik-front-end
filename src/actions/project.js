@@ -20,7 +20,7 @@ export const setCurrentProject = (projectId) => {
     }
 }
 
-export const addProject = (projectName, currentTeam, currentUser) => {
+export const addProject = (projectName, currentTeam, currentUser, deadline) => {
     return (dispatch) => {
         fetch('http://localhost:3001/projects', {
             method: 'POST',
@@ -28,7 +28,12 @@ export const addProject = (projectName, currentTeam, currentUser) => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({title: projectName, team_id: currentTeam.id, creator_id: currentUser.id}) 
+            body: JSON.stringify({project: {
+                title: projectName, 
+                team_id: currentTeam.id, 
+                creator_id: currentUser.id,
+                deadline: deadline
+            }}) 
         })
         .then(res => res.json())
         .then(json => {

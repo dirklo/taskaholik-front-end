@@ -1,0 +1,71 @@
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.details-column {
+    position: relative;
+    flex: 1;
+    align-self: stretch;
+    margin-right: 5px;
+    border-radius: 20px;
+    background: var(--clr3);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+}
+
+.details-column .details-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+
+.details-column .details-list .detail-card {
+    list-style: none;
+    padding: 3px;
+    margin: 1px;
+    width: 90%;
+    border-radius: 3px;;
+    background-color: var(--clr5);
+    border: 1px solid black;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.details-column .details-list .detail-card:hover {
+    transform: scale(1.05);
+    background-color:rgb(244, 244, 129);
+}
+
+.details-column .details-list .detail-card.selected {
+    background-color: lightblue;
+}
+
+.details-column .task-comments {
+    position: relative;
+    width: 100%;
+    overflow-y: auto;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.details-column .task-comments .comment-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: center;
+}

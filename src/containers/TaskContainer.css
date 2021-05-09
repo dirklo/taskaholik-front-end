@@ -10,8 +10,16 @@
     overflow-y: hidden;
 }
 
-.task-container h1 {
-    
+.task-container .tasks-select .title h1 {
+    margin-bottom: 0;
+    color: tomato;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.675);
+    font-size: 30px;
+}
+
+.task-container .tasks-select .title h2 {
+    font-size: 16px;
+    color: rgb(207, 207, 207)
 }
 
 .task-container .task-fields {
@@ -25,23 +33,20 @@
 }
 
 .task-container .task-fields .tasks-select {
+    flex: 1;
+    align-self: stretch;
     padding-top: 10px;
     border-radius: 20px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.483);
     margin: 10px;
     background: var(--clr4);
     color: var(--clr5);
-    flex: 1
-}
-
-.task-container .tasks-select button.hide {
-    display: none;
-}
-
-.task-container .task-fields section {
-    align-self: stretch;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+}
+
+.task-container .tasks-select button.hide {
+    display: none;
 }

@@ -20,7 +20,7 @@ export const setCurrentDetail = (detailId) => {
     }
 };
 
-export const completeDetail = (detail, status) => {
+export const completeDetail = (detail) => {
     return (dispatch) => {
         fetch(`http://localhost:3001/details/${detail.id}/complete`, {
             method: "POST",
@@ -28,16 +28,16 @@ export const completeDetail = (detail, status) => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({status: status})
+            body: JSON.stringify({status: detail.completed})
         })
         .then(res => res.json())
         .then((json) => {
-            dispatch({type: 'COMPLETE_DETAIL', payload: {detail: detail, status: status}})
+            dispatch({type: 'COMPLETE_DETAIL', payload: {detail: detail, status: detail.completed}})
         })
     }
 }
 
-export const addDetail = (content, currentTask, currentUser) => {
+export const addDetail = (content, currentTask, currentUser, deadline) => {
     return (dispatch) => {
         fetch('http://localhost:3001/details', {
             method: "POST",
@@ -45,7 +45,12 @@ export const addDetail = (content, currentTask, currentUser) => {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({content: content, task_id: currentTask.id, creator_id: currentUser.id})
+            body: JSON.stringify({
+                content: content, 
+                task_id: currentTask.id, 
+                creator_id: currentUser.id,
+                deadline: deadline
+            })
         })
         .then(res => res.json())
         .then(json => {

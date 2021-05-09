@@ -35,8 +35,7 @@ export default function populateReducer(state = initialState, action) {
             index = state.details.findIndex(detail => detail.id === action.payload.detail.id)
             detail = state.details[index]
 
-            action.payload.status === 'complete' ?
-            detail.completed = true : detail.completed = false
+            detail.completed = !action.payload.status
 
             return {
                 ...state,

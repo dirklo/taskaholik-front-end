@@ -2,19 +2,20 @@ import React, { useState } from 'react'
 import "./AddProjectForm.css"
 import { connect } from 'react-redux'
 import { addProject } from '../actions/project' 
+import { currentTeam } from '../helpers/helpers'
 
-function AddProjectForm(props) {
+function AddProjectForm({ addProject, currentUser, showOverlay, setShowOverlay }) {
     const [title, setTitle] = useState('')
-    let currentTeam = props.teams.find(team => team.selected === true)
+    const [deadline, setDeadline] = useState(Date.now())
 
     return (
-        <div className={props.showOverlay ? "add-project-form show" : "add-project-form hide"}>
+        <div className={showOverlay ? "add-project-form show" : "add-project-form hide"}>
             <form 
                 action=""
                 onSubmit={(e) => {
                     e.preventDefault()
-                    props.addProject(title, currentTeam, props.currentUser)
-                    props.setShowOverlay(false)
+                    addProject(title, currentTeam(), currentUser, deadline)
+                    setShowOverlay(false)
                 }}
             >   
                 <label htmlFor="title">Project Name:</label> 
@@ -27,6 +28,16 @@ function AddProjectForm(props) {
                 />
                 <br/>
                 <br/>
+                <label htmlFor="deadline">Deadline:</label>
+                <br/>
+                <input 
+                    type="datetime-local" 
+                    id="deadline" 
+                    value={deadline}
+                    onChange={e => setDeadline(e.target.value)}
+                />
+                <br/>
+                <br/>
                 <input type="submit" value="Create Project"/>
             </form>
         </div>
@@ -35,7 +46,6 @@ function AddProjectForm(props) {
 
 export default connect((state) => {
     return {
-        currentUser: state.auth.currentUser,
-        teams: state.team.teams
+        currentUser: state.auth.currentUser
     }
 }, { addProject })(AddProjectForm)

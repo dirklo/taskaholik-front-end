@@ -1,26 +1,37 @@
 import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
 import './NewDetailForm.css'
 import { connect } from 'react-redux'
 import { addDetail } from '../actions/detail'
+import { currentTask } from '../helpers/helpers'
+import { checkAuth } from '../actions/auth'
 
-function NewDetailForm(props) {
+function NewDetailForm({ currentUser, addDetail, checkAuth, showAddForm, setShowAddForm }) {
 
     const [content, setContent] = useState('')
+    const [deadline, setDeadline] = useState(Date.now())
+    const [redirect, setRedirect] = useState(false)
 
     return (
         <div 
-            className={props.showAddForm ? 
+            className={showAddForm ? 
                 "new-detail-form show" 
                 : 
                 "new-detail-form"
         }>
+            { redirect ? (<Redirect push to="/login" />) : null}
             <form
                 onSubmit={(e) => {
-                    let currentTask = props.tasks.find(task => task.selected === true)
                     e.preventDefault()
-                    props.addDetail(content, currentTask, props.currentUser)
-                    setContent('')
-                    props.setShowAddForm(false)
+                    checkAuth()
+                    .then(() => {
+                        addDetail(content, currentTask(), currentUser, deadline)
+                        setContent('')
+                        setShowAddForm(false)
+                    })
+                    .catch(() => {
+                        setRedirect(true)
+                    })
                 }}
                 >
             <label htmlFor="add-new-detail">
@@ -34,8 +45,18 @@ function NewDetailForm(props) {
                 onChange={(e) => setContent(e.target.value)}
                 />
             <br/>
+            <label htmlFor="deadline"> Deadline:</label>
+            <br/>
+            <input 
+                type="datetime-local"
+                id="deadline"
+                value={deadline}
+                onChange={e => setDeadline(e.target.value)}
+            />
+            <br/>
+            <br/>
             <input type="submit" value="Add Detail"/>
-            <span>User: {props.currentUser.username}</span>
+            <span>User: {currentUser.username}</span>
             </form>
         </div>
     )
@@ -43,9 +64,8 @@ function NewDetailForm(props) {
 
 export default connect((state) => {
     return {
-       currentUser: state.auth.currentUser,
-       tasks: state.task.tasks
+       currentUser: state.auth.currentUser
     }
-}, { addDetail } )(NewDetailForm)
+}, { addDetail, checkAuth } )(NewDetailForm)
 
 

@@ -34,7 +34,7 @@ function CommentCard({ comment, currentUser, commentType, removeTaskComment, rem
                                 }
                             }}
                         >
-                            <Delete className='delete-icon'/>
+                            <Delete className='delete-icon' />
                         </div>
                     :
                         null

@@ -9,7 +9,8 @@
 }
 
 .comment-card .comment-body {
-    width: 80%;
+    align-self: flex-end;
+    width: 90%;
     background-color: rgba(138, 123, 239, 0.209);
     border-radius: 15px 15px 15px 0px;
     padding: 10px;
@@ -36,6 +37,9 @@
 }
 
 .comment-card .delete-btn {
+    position: absolute;
+    top: 3px;
+    right: 3px;
     align-self: flex-end;
     cursor: pointer;
     transition: all 0.2s ease;

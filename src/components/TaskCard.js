@@ -1,7 +1,7 @@
 import React from 'react'
 import './TaskCard.css'
 
-export default function TaskCard({ task, loadTask}) {
+export default function TaskCard({ task, loadTask }) {
     return (
         <div
             className={task.selected ? 'task-card selected' : 'task-card'}
