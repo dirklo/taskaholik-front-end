@@ -8,7 +8,7 @@ import { currentDetail, parseTimestamp } from '../helpers/helpers'
 import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline'
 import CheckCircle from '@material-ui/icons/CheckCircle'
 
-function DetailEditor({ completeDetail, deleteDetail, comments }) {
+function DetailEditor({ completeDetail, deleteDetail, comments, assignees }) {
 
     if (currentDetail()) {
         return (
@@ -24,6 +24,16 @@ function DetailEditor({ completeDetail, deleteDetail, comments }) {
                     {currentDetail().completed ? <CheckCircle /> : <CheckCircleOutline/>}
                 </button>
                 <span className='deadline'>Deadline: {parseTimestamp(currentDetail().deadline)}</span>
+                <div className="assignments">
+                    <h3>Assigned team members:</h3>
+                    {assignees.map(assignee => 
+                        <div className="assignment-card">
+                            {assignee.username}
+                        </div>
+                    )}
+                </div>
+                <br/>
+                <br/>
                 <NewCommentForm commentType='detail'/>
                 <div className="comments-container">
                     {comments.map(comment =>
@@ -58,9 +68,9 @@ function DetailEditor({ completeDetail, deleteDetail, comments }) {
 
 export default connect((state) => {
     return {
-        details: state.detail.details,
         comments: state.detail.detailComments,
-        currentUser: state.auth.currentUser
+        currentUser: state.auth.currentUser,
+        assignees: state.detail.detailAssignees
     }
 }, { completeDetail, deleteDetail })(DetailEditor)
 

@@ -1,6 +1,7 @@
 const initialState = {
     details: [],
-    detailComments: []
+    detailComments: [],
+    detailAssignees: []
 };
 
   
@@ -25,6 +26,11 @@ export default function populateReducer(state = initialState, action) {
             return {
                 ...state,
                 detailComments: [...action.payload]
+            }
+        case "POPULATE_DETAIL_ASSIGNEES":
+            return {
+                ...state,
+                detailAssignees: [...action.payload]
             }
         case "POPULATE_DETAILS":
             return {

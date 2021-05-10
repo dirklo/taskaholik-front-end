@@ -14,8 +14,9 @@ export const setCurrentDetail = (detailId) => {
         return fetch(`http://localhost:3001/details/${detailId}`)
         .then((res) => res.json())
         .then((json) => {
-            dispatch({type: "POPULATE_DETAIL_COMMENTS", payload: json.comments})
             dispatch({type: "SET_CURRENT_DETAIL", payload: json.detail})
+            dispatch({type: "POPULATE_DETAIL_COMMENTS", payload: json.comments})
+            dispatch({type: "POPULATE_DETAIL_ASSIGNEES", payload: json.assignees})
         });
     }
 };
