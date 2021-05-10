@@ -31,29 +31,6 @@
 
 }
 
-.details-column .details-list .detail-card {
-    list-style: none;
-    /* padding: 3px; */
-    padding: 5px 5px 5px 30px;
-    /* margin: 1px; */
-    width: 100%;
-    border-radius: 3px;;
-    background-color: lightblue;
-    border: 1px solid black;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.details-column .details-list .detail-card:hover {
-    transform: scale(1.05);
-    background-color:rgb(240, 240, 191);
-}
-
-.details-column .details-list .detail-card.selected {
-    background-color: var(--clr5);
-}
-
 .details-column .task-comments {
     position: relative;
     width: 100%;

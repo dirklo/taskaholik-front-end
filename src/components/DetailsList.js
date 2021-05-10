@@ -2,14 +2,11 @@ import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import './DetailsList.css'
-// import DetailEditor from '../components/DetailEditor'
 import { setCurrentDetail } from '../actions/detail'
 import { deleteTask } from '../actions/task'
 import NewDetailForm from '../components/NewDetailForm'
 import { currentTask } from '../helpers/helpers'
 import { checkAuth } from '../actions/auth'
-// import NewCommentForm from '../components/NewCommentForm'
-// import CommentCard from '../components/CommentCard'
 
 
 function DetailsList(props) {
@@ -39,8 +36,7 @@ function DetailsList(props) {
                 </div>
             )}
             <button 
-                type='button'
-                className={!showAddForm ? 'show' : 'hide'}
+                className={!showAddForm ? 'show-form-btn show' : 'hide'}
                 onClick={(e) => setShowAddForm(true)}
             >
                 + Add New Detail
@@ -57,6 +53,7 @@ function DetailsList(props) {
                 setShowAddForm={setShowAddForm} 
                 />
             <button
+                className='delete-task-btn'
                 onClick={(e) => props.deleteTask(currentTask.id)}    
                 >
                 Delete This Goal

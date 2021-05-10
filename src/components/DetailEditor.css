@@ -2,8 +2,6 @@
     position: relative;
     flex: 1;
     align-self: stretch;
-    /* margin-left: 5px; */
-    /* border-radius: 20px; */
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.47);
     overflow-y: auto;
     background-color: var(--clr5);
@@ -47,4 +45,34 @@
     right: 0;
 
     margin: 5px;
+}
+
+.detail-editor .assignments {
+    width: 100%;
+}
+
+.detail-editor .assignments .assignment-card {
+    margin-bottom: 1px;
+    background: rgb(64, 42, 92);
+    color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.detail-editor .assignments .assignment-card .name { 
+    flex: 1;
+}
+
+.detail-editor .assignments .assignment-card svg { 
+    pointer-events: none;
+}
+
+.detail-editor .assignments .assignment-card .remove-assignee-btn {
+    background: transparent;
+    border: none;
+    color: rgb(252, 134, 134);
+    cursor: pointer;
 }

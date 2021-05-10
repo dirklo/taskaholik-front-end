@@ -5,3 +5,18 @@
 .new-comment-form input {
     padding: 5px;
 }
+
+.new-comment-form input[type="submit"] {
+    background: transparent;
+    padding: 5px;
+    border: 2px solid var(--clr5);
+    border-radius: 3px;
+    font-weight: bold;
+    color: var(--clr5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.new-comment-form input[type="submit"]:hover {
+    background: rgba(0, 0, 0, 0.233);
+}

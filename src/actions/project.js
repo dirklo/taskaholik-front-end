@@ -14,9 +14,9 @@ export const populateProjects = (teamId, preSelectId) => {
 
 export const setCurrentProject = (projectId) => {
     return (dispatch) => {
+        dispatch({ type: "SET_CURRENT_PROJECT", payload: projectId })
         dispatch({ type: "CLEAR_DETAILS" })
         dispatch({ type: "CLEAR_TASKS" })
-        dispatch({ type: "SET_CURRENT_PROJECT", payload: projectId })
     }
 }
 

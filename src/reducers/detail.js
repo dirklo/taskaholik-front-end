@@ -91,7 +91,24 @@ export default function populateReducer(state = initialState, action) {
                 details: [],
                 detailComments: []
             }
+        case "ADD_ASSIGNEE":
+            return {
+                ...state,
+                detailAssignees: [
+                    ...state.detailAssignees, action.payload
+                ]
+            }
+        case "REMOVE_ASSIGNEE":
+            index = state.detailAssignees.findIndex(assignee => assignee.id === Number(action.payload))
+            return {
+                ...state,
+                detailAssignees: [
+                    ...state.detailAssignees.slice(0, index),
+                    ...state.detailAssignees.slice(index + 1) 
+                ]
+            }
         default:
             return state;
+        
     }
 }

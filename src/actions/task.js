@@ -14,8 +14,8 @@ export const setCurrentTask = (taskId) => {
         fetch(`http://localhost:3001/tasks/${taskId}`)
         .then(res => res.json())
         .then(json => {
-            dispatch({type: "POPULATE_TASK_COMMENTS", payload: json.comments})
             dispatch({type: "SET_CURRENT_TASK", payload: json.task.id})
+            dispatch({type: "POPULATE_TASK_COMMENTS", payload: json.comments})
         })
     }
 }

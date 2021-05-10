@@ -112,11 +112,44 @@ export const deleteDetail = (detailId) => {
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
-            },
+            }
         })
         .then(res => res.json())
         .then(json => {
             dispatch({type: 'DELETE_DETAIL', payload: detailId})
+        })
+    }
+}
+
+export const addAssignee = (userId, detailId) => {
+    return (dispatch) => {
+        fetch(`http://localhost:3001/assignments`, {
+            method: 'POST',
+            headers: {
+                "Accept": 'application/json',
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify({assignment: {user_id: userId, detail_id: detailId}})
+        })
+        .then(res => res.json())
+        .then(json => {
+            dispatch({type: 'ADD_ASSIGNEE', payload: json.member})
+        })
+    }
+}
+
+export const removeAssignee = (userId, detailId) => {
+    return (dispatch) => {
+        fetch('http://localhost:3001/assignments', {
+            method: 'DELETE',
+            headers: {
+                "Accept": 'application/json',
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify({assignment: { user_id: userId, detail_id: detailId}})
+        })
+        .then(res => {
+            dispatch({type: 'REMOVE_ASSIGNEE', payload: userId})
         })
     }
 }

@@ -2,3 +2,65 @@
     margin: 0;
     margin-bottom: 15px;
 }
+
+.details-list .delete-task-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: transparent;
+    padding: 5px;
+    border: 2px solid var(--clr5);
+    border-radius: 3px;
+    font-weight: bold;
+    color: var(--clr5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.details-list .delete-task-btn:hover {
+    background: rgba(0, 0, 0, 0.199);
+}
+
+.details-list .detail-card {
+    list-style: none;
+    /* padding: 3px; */
+    padding: 5px 5px 5px 30px;
+    /* margin: 1px; */
+    width: 100%;
+    border-radius: 3px;;
+    background-color: lightblue;
+    border: 1px solid black;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.details-list .detail-card:hover {
+    transform: scale(1.05) translateX(20px);
+    background-color:rgb(240, 240, 191);
+}
+
+.details-list .detail-card.selected {
+    transform: scale(1.05) translateX(20px);
+    background-color: var(--clr5);
+}
+
+.details-list .show-form-btn {
+    background: transparent;
+    margin-top: 5px;
+    padding: 5px;
+    border: 2px solid var(--clr5);
+    border-radius: 3px;
+    font-weight: bold;
+    color: var(--clr5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.details-list .show-form-btn:focus {
+    outline: none;
+}
+
+.details-list .show-form-btn:hover {
+    background: rgba(0, 0, 0, 0.199);
+}
