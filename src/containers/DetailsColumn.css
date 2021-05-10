@@ -10,10 +10,11 @@
     position: relative;
     flex: 1;
     align-self: stretch;
-    margin-right: 5px;
-    border-radius: 20px;
+    /* margin-right: 5px; */
+    /* border-radius: 20px; */
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.47);
-    background: linear-gradient(45deg, var(--clr3), #16d6f0);
+    /* background: linear-gradient(45deg, var(--clr3), #16d6f0); */
+    background: var(--clr3);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -32,11 +33,12 @@
 
 .details-column .details-list .detail-card {
     list-style: none;
-    padding: 3px;
-    margin: 1px;
-    width: 90%;
+    /* padding: 3px; */
+    padding: 5px 5px 5px 30px;
+    /* margin: 1px; */
+    width: 100%;
     border-radius: 3px;;
-    background-color: var(--clr5);
+    background-color: lightblue;
     border: 1px solid black;
     text-align: left;
     cursor: pointer;
@@ -49,7 +51,7 @@
 }
 
 .details-column .details-list .detail-card.selected {
-    background-color: lightblue;
+    background-color: var(--clr5);
 }
 
 .details-column .task-comments {

@@ -65,8 +65,7 @@ function TaskContainer({ tasks, setCurrentTask, populateDetails, checkAuth }) {
                         )}
                     </section>
                     :
-                    <>
-                    </>
+                    null
                 }   
                 <TaskWorkspace />
             </div>

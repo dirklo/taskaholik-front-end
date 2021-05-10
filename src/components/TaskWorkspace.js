@@ -21,7 +21,7 @@ export default function TaskWorkspace() {
         return (
             <section className='task-workspace'>
                 <div className="no-task-placeholder">
-                    <div className="logo">LOGO</div>
+                    <div className="logo"></div>
                 </div>
             </section>
         )

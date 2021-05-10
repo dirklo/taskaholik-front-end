@@ -36,9 +36,9 @@
     flex: 1;
     align-self: stretch;
     padding-top: 10px;
-    border-radius: 20px;
+    /* border-radius: 20px; */
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.483);
-    margin: 10px;
+    /* margin: 10px; */
     background: var(--clr4);
     color: var(--clr5);
     display: flex;
