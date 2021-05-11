@@ -1,25 +1,16 @@
-.show {
-    display: block;
-}
-
-.hide {
-    display: none;
-}
-
 .details-column {
     position: relative;
     flex: 1;
     align-self: stretch;
-    /* margin-right: 5px; */
-    /* border-radius: 20px; */
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.47);
-    /* background: linear-gradient(45deg, var(--clr3), #16d6f0); */
     background: var(--clr3);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+
 }
 
 .details-column .details-list {
@@ -34,7 +25,6 @@
 .details-column .task-comments {
     position: relative;
     width: 100%;
-    overflow-y: auto;
     padding-bottom: 50px;
     display: flex;
     flex-direction: column;

@@ -1,63 +1,56 @@
-import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import React from 'react'
 import { connect } from 'react-redux'
 import './DetailsList.css'
 import { setCurrentDetail } from '../actions/detail'
 import { deleteTask } from '../actions/task'
 import NewDetailForm from '../components/NewDetailForm'
 import { currentTask } from '../helpers/helpers'
-import { checkAuth } from '../actions/auth'
+import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline'
+import CheckCircle from '@material-ui/icons/CheckCircle'
+import DeleteOutline from '@material-ui/icons/DeleteOutline'
 
 
-function DetailsList(props) {
-    const [showAddForm, setShowAddForm] = useState(false)
-    const [redirect, setRedirect] = useState(false)
-    
+function DetailsList({ details, setCurrentDetail, deleteTask }) {    
     return (
         <section className='details-list'>
-            { redirect ? (<Redirect push to='/login' />) : null }
-            <h2>{currentTask().title}</h2>
-            {props.details.map(detail => 
+            <div className="detail-header">
+                <h2>{currentTask().title}</h2>
+                <button
+                    className='delete-task-btn'
+                    onClick={(e) => deleteTask(currentTask().id)}    
+                >
+                    <DeleteOutline/>
+                </button>
+            </div>
+            <NewDetailForm />
+            {details.map(detail =>
                 <div 
-                    key={detail.id}
                     className={detail.selected? 'detail-card selected' : 'detail-card'}
+                    key={detail.id}
                     data-id={detail.id}
                     onClick={e => {
-                        props.checkAuth()
-                        .then(() => {
-                            props.setCurrentDetail(
-                                parseInt(e.target.dataset.id)
-                            )
-                        })
-                        .catch(() => setRedirect(true))
+                        setCurrentDetail(
+                            parseInt(e.target.dataset.id)
+                        )
                     }}
                 >
-                    {detail.content}
-                </div>
+                    <span 
+                        key={detail.id}
+                        className={detail.completed? 'checkmark completed' : 'checkmark'}
+                        data-id={detail.id}
+                        onClick={e => {
+                            setCurrentDetail(
+                                parseInt(e.target.dataset.id)
+                            )
+                        }}
+                    >
+                        {detail.completed ? <CheckCircle /> : <CheckCircleOutline />}
+                    </span>
+                    <span className="detail-body">
+                        {detail.content}
+                    </span>
+                </div> 
             )}
-            <button 
-                className={!showAddForm ? 'show-form-btn show' : 'hide'}
-                onClick={(e) => setShowAddForm(true)}
-            >
-                + Add New Detail
-            </button>
-            <button 
-                type='button'
-                className={showAddForm ? 'show' : 'hide'}
-                onClick={(e) => setShowAddForm(false)}
-                >
-                + Cancel
-            </button> 
-            <NewDetailForm 
-                showAddForm={showAddForm} 
-                setShowAddForm={setShowAddForm} 
-                />
-            <button
-                className='delete-task-btn'
-                onClick={(e) => props.deleteTask(currentTask.id)}    
-                >
-                Delete This Goal
-            </button>
         </section>
     ) 
 }
@@ -68,6 +61,6 @@ export default connect((state) => {
         comments: state.task.taskComments,
         details: state.detail.details,
     }
-}, { setCurrentDetail, deleteTask, checkAuth })(DetailsList)
+}, { setCurrentDetail, deleteTask })(DetailsList)
 
 

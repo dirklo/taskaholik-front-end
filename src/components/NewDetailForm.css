@@ -1,9 +1,71 @@
 .new-detail-form {
-    display: none;
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-.show {
-    display: block;
+.new-detail-form form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.new-detail-form input[type='submit'], 
+.new-detail-form .show-form-btn {
+    background: transparent;
+    padding: 5px;
+    border: 2px solid var(--clr5);
+    border-radius: 3px;
+    font-weight: bold;
+    color: var(--clr5);
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
+.new-detail-form input[type='submit']:focus,
+.new-detail-form .show-form-btn:focus {
+    outline: none;
+}
 
+.new-detail-form input[type='submit']:hover,
+.new-detail-form .show-form-btn:hover {
+    background: rgba(0, 0, 0, 0.199);
+}
+
+.new-detail-form .cancel-btn {
+    position: absolute;
+    top: -15px;
+    right: 0;
+    background: none;
+    border: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.new-detail-form .cancel-btn:focus {
+    outline: none;
+}
+
+.new-detail-form .cancel-btn:hover {
+    transform: scale(1.2);
+}
+
+.new-detail-form label {
+    align-self: flex-start;
+    font-weight: bold;
+    color: var(--clr5);
+    margin-left: 10%;
+}
+
+.new-detail-form input[type='text'], 
+.new-detail-form input[type='datetime-local'] {
+    width: 70%;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.new-detail-form input[type='text']:focus, 
+.new-detail-form input[type='datetime-local']:focus {
+   outline: none;
+}

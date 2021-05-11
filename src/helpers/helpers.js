@@ -24,4 +24,6 @@ export function parseTimestamp(timestamp) {
     const ampm = date.getUTCHours() > 12 ? 'PM' : 'AM'
     return date.toDateString() + ', ' + hours + ':' + minutes + ' ' + ampm
 }
- 
+
+export const baseUrl = 'https://taskaholik-back-end.herokuapp.com'
+// export const baseUrl = 'http://localhost:3001'

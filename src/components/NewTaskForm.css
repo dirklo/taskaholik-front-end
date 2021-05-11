@@ -1,3 +1,26 @@
-.new-task-form.hide {
-    display: none;
+.new-task {
+    margin-bottom: 15px;
+}
+
+.new-task button ,
+.new-task .new-task-form input[type='submit'] {
+    background: transparent;
+    margin-top: 5px;
+    padding: 5px;
+    border: 2px solid var(--clr5);
+    border-radius: 3px;
+    font-weight: bold;
+    color: var(--clr5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+.new-task button:focus,
+.new-task .new-task-form input[type='submit']:focus {
+    outline: none;
+}
+
+.new-task .new-task-form input[type='text'] {
+    padding: 5px;
 }

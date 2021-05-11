@@ -1,6 +1,8 @@
+import { baseUrl } from '../helpers/helpers' 
+
 export const populateDetails = (taskId) => {
     return (dispatch) => {
-        fetch(`http://localhost:3001/details?taskId=${taskId}`)
+        fetch(`${baseUrl}/details?taskId=${taskId}`)
         .then(res => res.json())
         .then(details => {
             details.map(detail => detail['selected'] = false)
@@ -11,7 +13,7 @@ export const populateDetails = (taskId) => {
 
 export const setCurrentDetail = (detailId) => {
     return (dispatch) => {
-        return fetch(`http://localhost:3001/details/${detailId}`)
+        return fetch(`${baseUrl}/details/${detailId}`)
         .then((res) => res.json())
         .then((json) => {
             dispatch({type: "SET_CURRENT_DETAIL", payload: json.detail})
@@ -23,7 +25,7 @@ export const setCurrentDetail = (detailId) => {
 
 export const completeDetail = (detail) => {
     return (dispatch) => {
-        fetch(`http://localhost:3001/details/${detail.id}/complete`, {
+        fetch(`${baseUrl}/details/${detail.id}/complete`, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
@@ -40,7 +42,7 @@ export const completeDetail = (detail) => {
 
 export const addDetail = (content, currentTask, currentUser, deadline) => {
     return (dispatch) => {
-        fetch('http://localhost:3001/details', {
+        fetch(`${baseUrl}/details`, {
             method: "POST",
             headers: {
                 "Accept": "application/json",
@@ -62,7 +64,7 @@ export const addDetail = (content, currentTask, currentUser, deadline) => {
 
 export const addDetailComment = (detailId, content, authorId, author) => {
     return (dispatch) => {
-        fetch('http://localhost:3001/detail_comments', {
+        fetch(`${baseUrl}/detail_comments`, {
             method: 'POST',
             headers: {
                 "Accept": "application/json",
@@ -93,7 +95,7 @@ export const addDetailComment = (detailId, content, authorId, author) => {
 export const removeDetailComment = (commentId, currentUserId) => {
     return (dispatch) => {
         dispatch({type: "REMOVE_DETAIL_COMMENT", payload: commentId})
-        fetch(`http://localhost:3001/detail_comments/${commentId}`, {
+        fetch(`${baseUrl}/detail_comments/${commentId}`, {
             method: 'DELETE',
             headers: {
                 "Accept": "application/json",
@@ -107,7 +109,7 @@ export const removeDetailComment = (commentId, currentUserId) => {
 
 export const deleteDetail = (detailId) => {
     return (dispatch) => {
-        fetch(`http://localhost:3001/details/${detailId}`, {
+        fetch(`${baseUrl}/details/${detailId}`, {
             method: "DELETE",
             headers: {
                 "Accept": "application/json",
@@ -123,7 +125,7 @@ export const deleteDetail = (detailId) => {
 
 export const addAssignee = (userId, detailId) => {
     return (dispatch) => {
-        fetch(`http://localhost:3001/assignments`, {
+        fetch(`${baseUrl}/assignments`, {
             method: 'POST',
             headers: {
                 "Accept": 'application/json',
@@ -140,7 +142,7 @@ export const addAssignee = (userId, detailId) => {
 
 export const removeAssignee = (userId, detailId) => {
     return (dispatch) => {
-        fetch('http://localhost:3001/assignments', {
+        fetch(`${baseUrl}/assignments`, {
             method: 'DELETE',
             headers: {
                 "Accept": 'application/json',

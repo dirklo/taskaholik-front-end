@@ -1,3 +1,5 @@
+import { baseUrl } from '../helpers/helpers' 
+
 const setToken = (token) => {
   localStorage.setItem("token", token);
   localStorage.setItem("lastLoginTime", new Date(Date.now()).getTime());
@@ -14,7 +16,7 @@ const getToken = () => {
 
 export const signupUser = (credentials) => {
     return (dispatch) => {
-      return fetch("http://127.0.0.1:3001/signup", {
+      return fetch(`${baseUrl}/signup`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -41,7 +43,7 @@ export const signupUser = (credentials) => {
 
 export const loginUser = (credentials) => {
     return async (dispatch) => {
-        fetch("http://127.0.0.1:3001/login", {
+        fetch(`${baseUrl}/login`, {
           method: "POST",
           headers: {
               "Accept": "application/json",
@@ -70,7 +72,7 @@ export const loginUser = (credentials) => {
   
 export const logoutUser = () => {
     return (dispatch) => {
-        return fetch("http://127.0.0.1:3001/logout", {
+        return fetch(`${baseUrl}/logout`, {
         method: "DELETE",
         headers: {
             Accept: "application/json",
@@ -97,7 +99,7 @@ export const logoutUser = () => {
 
 export const checkAuth = () => {
     return (dispatch) => {
-      return fetch("http://localhost:3001/current_user", {
+      return fetch(`${baseUrl}/current_user`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",

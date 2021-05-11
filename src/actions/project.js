@@ -1,6 +1,8 @@
+import { baseUrl } from '../helpers/helpers'
+
 export const populateProjects = (teamId, preSelectId) => {
     return async (dispatch) => {
-        return await fetch(`http://127.0.0.1:3001/projects?teamId=${teamId}`)
+        return await fetch(`${baseUrl}/projects?teamId=${teamId}`)
         .then((res) => res.json())
         .then((projects) => {
             projects.map(project => project['selected'] = false)
@@ -22,7 +24,7 @@ export const setCurrentProject = (projectId) => {
 
 export const addProject = (projectName, currentTeam, currentUser, deadline) => {
     return (dispatch) => {
-        fetch('http://localhost:3001/projects', {
+        fetch(`${baseUrl}/projects`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

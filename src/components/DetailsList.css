@@ -1,66 +1,77 @@
 .details-list h2 {
-    margin: 0;
-    margin-bottom: 15px;
-}
-
-.details-list .delete-task-btn {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    background: transparent;
-    padding: 5px;
-    border: 2px solid var(--clr5);
-    border-radius: 3px;
-    font-weight: bold;
-    color: var(--clr5);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.details-list .delete-task-btn:hover {
-    background: rgba(0, 0, 0, 0.199);
+    margin: 5px 0;
 }
 
 .details-list .detail-card {
     list-style: none;
-    /* padding: 3px; */
-    padding: 5px 5px 5px 30px;
-    /* margin: 1px; */
+    padding: 5px 5px 5px 20px;
     width: 100%;
     border-radius: 3px;;
     background-color: lightblue;
     border: 1px solid black;
     text-align: left;
     cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
     transition: all 0.3s ease;
 }
 
-.details-list .detail-card:hover {
-    transform: scale(1.05) translateX(20px);
-    background-color:rgb(240, 240, 191);
+.details-list .detail-card .detail-body {
+    padding-right: 30px;
+    flex: 1;
+    transition: all 0.3s ease;
+    pointer-events: none;
 }
 
-.details-list .detail-card.selected {
-    transform: scale(1.05) translateX(20px);
-    background-color: var(--clr5);
+.details-list .detail-header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    margin-top: 0;
+    background-color: rgb(53, 2, 100);
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: baseline;
+    z-index: 5;
 }
 
-.details-list .show-form-btn {
+.details-list .detail-header h2 {
+    flex: 1;
+}
+
+.details-list .detail-header .delete-task-btn {
+    position: relative;
     background: transparent;
-    margin-top: 5px;
-    padding: 5px;
-    border: 2px solid var(--clr5);
-    border-radius: 3px;
-    font-weight: bold;
+    border: none;
     color: var(--clr5);
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.details-list .show-form-btn:focus {
-    outline: none;
+.details-list .checkmark {
+    width: 27px;
+    pointer-events: none;
 }
 
-.details-list .show-form-btn:hover {
-    background: rgba(0, 0, 0, 0.199);
+.details-list .detail-card:hover {
+    background-color:rgb(240, 240, 191);
+}
+
+.details-list .detail-card.selected {
+    background-color: var(--clr5);
+}
+
+.details-list .detail-card:hover .detail-body {
+    transform: scale(1.05) translateX(20px);
+}
+
+.details-list .detail-card.selected .detail-body{
+    transform: scale(1.05) translateX(20px);
+}
+
+.details-list .detail-card .checkmark.completed {
+    color: green;
 }

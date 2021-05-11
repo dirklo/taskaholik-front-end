@@ -1,6 +1,8 @@
+import { baseUrl } from '../helpers/helpers'
+
 export const populateTeams = (userId, preSelectId) => {
     return async (dispatch) => {
-        return await fetch(`http://127.0.0.1:3001/teams?userId=${userId}`)
+        return await fetch(`${baseUrl}/teams?userId=${userId}`)
         .then((res) => res.json())
         .then((teams) => {
             dispatch({ type: "POPULATE_TEAMS", payload: teams })
@@ -20,7 +22,7 @@ export const setCurrentTeam = (teamId) => {
 
 export const addTeam = (teamName, currentUser) => {
     return (dispatch) => {
-        return fetch(`http://localhost:3001/teams`, {
+        return fetch(`${baseUrl}/teams`, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
@@ -46,7 +48,7 @@ export const addTeam = (teamName, currentUser) => {
 
 export const addMember = (query, teamId) => {
     return (dispatch) => {
-        fetch(`http://localhost:3001/memberships`, {
+        fetch(`${baseUrl}/memberships`, {
             method: 'POST',
             headers: {
                 'Accept': 'applicaiton/json',
@@ -65,7 +67,7 @@ export const addMember = (query, teamId) => {
 
 export const removeMember = (memberId, teamId) => {
     return (dispatch) => {
-        fetch(`http://localhost:3001/memberships`, {
+        fetch(`${baseUrl}/memberships`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'applicaiton/json',

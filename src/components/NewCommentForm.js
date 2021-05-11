@@ -38,13 +38,16 @@ function NewCommentForm(props) {
                 }}
             >
                 <input 
-                    type='text' 
+                    type='text'
                     name='content' 
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                 >
                 </input>
-                <input type='submit' value="Post Comment"/>
+                <input
+                    className={props.commentType=== "task" ? 'comment-submit task' : 'comment-submit detail' }
+                    type='submit' 
+                    value="Post Comment"/>
                 <br/>
             </form>
         </div>

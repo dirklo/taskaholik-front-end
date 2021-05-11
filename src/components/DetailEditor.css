@@ -21,30 +21,42 @@
     flex-direction: column-reverse;
     justify-content: flex-start;
     align-items: center;
-
 }
 
-.detail-editor .complete-btn {
+.detail-editor .detail-top {
+    width: 100%;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.detail-editor .detail-top .complete-btn {
+    margin: 0;
     border: none;
     background: none;
+    font-weight: bold;
     cursor: pointer;
     align-self: flex-end;
+    border-radius: 3px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
-.detail-editor .complete-btn:focus {
+.detail-editor .detail-top .complete-btn:focus {
     outline: none;
 }
 
-.detail-editor .complete-btn.complete {
+.detail-editor .detail-top .complete-btn.complete {
     color: green;
 }
 
-.detail-editor .delete-btn {
-    position: absolute; 
-    bottom: 0;
-    right: 0;
-
-    margin: 5px;
+.detail-editor .detail-top .delete-btn {
+    background: none;
+    border: none;
 }
 
 .detail-editor .assignments {

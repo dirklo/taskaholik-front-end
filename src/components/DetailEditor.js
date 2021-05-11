@@ -5,10 +5,11 @@ import './DetailEditor.css'
 import { completeDetail, deleteDetail, addAssignee, removeAssignee } from '../actions/detail'
 import CommentCard from '../components/CommentCard'
 import NewCommentForm from './NewCommentForm'
-import { currentTeam, parseTimestamp } from '../helpers/helpers'
+import { currentTeam, parseTimestamp, currentDetail } from '../helpers/helpers'
 import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline'
 import CheckCircle from '@material-ui/icons/CheckCircle'
 import RemoveCircle from '@material-ui/icons/RemoveCircle'
+import DeleteOutline from '@material-ui/icons/DeleteOutline'
 
 function DetailEditor({ completeDetail, deleteDetail, addAssignee, removeAssignee, comments, assignees, details }) {
 
@@ -19,22 +20,32 @@ function DetailEditor({ completeDetail, deleteDetail, addAssignee, removeAssigne
             return {value: member.id, label: member.username}
     }).filter(member => !assignees.map(assignee => assignee.id).includes(member.value))
 
-    let currentDetail = details.find(detail => detail.selected === true)
-
-    if (currentDetail) {
+    if (currentDetail()) {
         return (
             <section className='detail-editor'>
-                <h2>{currentDetail.content}</h2>
-                <button 
-                    type='button'
-                    className={currentDetail.completed ? "complete-btn complete" : "complete-btn"}
-                    onClick={(e) => {
-                        completeDetail(currentDetail)
-                    }}
-                >
-                    {currentDetail.completed ? <CheckCircle /> : <CheckCircleOutline/>}
-                </button>
-                <span className='deadline'>Deadline: {parseTimestamp(currentDetail.deadline)}</span>
+                <div className="detail-top">
+                    <button 
+                        type='button'
+                        className={currentDetail().completed ? "complete-btn complete" : "complete-btn"}
+                        onClick={(e) => {
+                            completeDetail(currentDetail())
+                        }}
+                    >
+                        {currentDetail().completed ? 'Mark Incomplete' : 'Mark Complete'}
+                        {currentDetail().completed ? <CheckCircle /> : <CheckCircleOutline />}
+                    </button>
+                    <button 
+                        type='button'
+                        className='delete-btn'
+                        onClick={() => {
+                            deleteDetail(currentDetail().id)
+                        }} 
+                    >
+                        <DeleteOutline />
+                    </button>
+                </div>
+                <h2>{currentDetail().content}</h2>
+                <span className='deadline'>Deadline: {parseTimestamp(currentDetail().deadline)}</span>
                 <div className="assignments">
                     <h3>Assigned team members:</h3>
                     {assignees.map(assignee => 
@@ -71,7 +82,7 @@ function DetailEditor({ completeDetail, deleteDetail, addAssignee, removeAssigne
                                 className='add-assignee-form'
                                 onSubmit={(e) => {
                                     e.preventDefault()
-                                    addAssignee(selectedAssignee.value, currentDetail.id)
+                                    addAssignee(selectedAssignee.value, currentDetail().id)
                                     setShowAddAssignee(false)
                                 }}
                             >
@@ -98,15 +109,6 @@ function DetailEditor({ completeDetail, deleteDetail, addAssignee, removeAssigne
                         />
                     )}
                 </div>
-                <button 
-                    type='button'
-                    className='delete-btn'
-                    onClick={() => {
-                        deleteDetail(currentDetail.id)
-                    }} 
-                >
-                    Delete This Detail
-                </button>
             </section>
         )
     

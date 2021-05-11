@@ -1,6 +1,8 @@
+import { baseUrl } from '../helpers/helpers'
+
 export const populateTasks = (projectId) => {
     return async (dispatch) => {
-        return await fetch(`http://127.0.0.1:3001/tasks?projectId=${projectId}`)
+        return await fetch(`${baseUrl}/tasks?projectId=${projectId}`)
         .then((res) => res.json())
         .then((tasks) => {
             tasks.map(task => task['selected'] = false)
@@ -11,7 +13,7 @@ export const populateTasks = (projectId) => {
 
 export const setCurrentTask = (taskId) => {
     return (dispatch) => {
-        fetch(`http://localhost:3001/tasks/${taskId}`)
+        fetch(`${baseUrl}/tasks/${taskId}`)
         .then(res => res.json())
         .then(json => {
             dispatch({type: "SET_CURRENT_TASK", payload: json.task.id})
@@ -22,7 +24,7 @@ export const setCurrentTask = (taskId) => {
 
 export const addTask = (title, currentProject, creator) => {
     return (dispatch) => {
-        fetch('http://localhost:3001/tasks', {
+        fetch(`${baseUrl}/tasks`, {
             method: "POST",
             headers: {
                 "Accept": "application/json",
@@ -43,7 +45,7 @@ export const addTask = (title, currentProject, creator) => {
 
 export const deleteTask = (taskId) => {
     return (dispatch) => {
-        fetch(`http://localhost:3001/tasks/${taskId}`, {
+        fetch(`${baseUrl}/tasks/${taskId}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
@@ -64,7 +66,7 @@ export const deleteTask = (taskId) => {
 
 export const addTaskComment = (taskId, content, authorId, author) => {
     return (dispatch) => {
-        fetch('http://localhost:3001/task_comments', {
+        fetch(`${baseUrl}/task_comments`, {
             method: 'POST',
             headers: {
                 "Accept": "application/json",
@@ -94,7 +96,7 @@ export const addTaskComment = (taskId, content, authorId, author) => {
 
 export const removeTaskComment = (commentId, currentUserId) => {
     return (dispatch) => {
-        fetch(`http://localhost:3001/task_comments/${commentId}`, {
+        fetch(`${baseUrl}/task_comments/${commentId}`, {
             method: 'DELETE',
             headers: {
                 "Accept": "application/json",
