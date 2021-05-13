@@ -1,7 +1,7 @@
 import { baseUrl, handleResponse } from '../helpers/helpers'
 import { getToken } from '../actions/auth'
 
-export const populateProjects = (teamId, preSelectId) => {
+export const populateProjects = (teamId) => {
     return async (dispatch) => {
         return await fetch(`${baseUrl}/projects?teamId=${teamId}`, {
             headers: {
@@ -14,9 +14,6 @@ export const populateProjects = (teamId, preSelectId) => {
             return handleResponse(res, (projects) => {
                 projects.map(project => project['selected'] = false)
                 dispatch({ type: "POPULATE_PROJECTS", payload: projects})
-                if (projects.length > 0) {
-                    dispatch({ type: "SET_CURRENT_PROJECT", payload: preSelectId })
-                }
             })
         })
     }

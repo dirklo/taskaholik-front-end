@@ -63,6 +63,22 @@
     width: 100%;
 }
 
+.detail-editor .assignments form input[type='submit'],
+.detail-editor .assignments button {
+    background: transparent;
+    padding: 5px;
+    border: 2px solid var(--clr3);
+    border-radius: 3px;
+    color: var(--clr3);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.detail-editor .assignments form input[type='submit']:hover,
+.detail-editor .assignments button:hover {
+    background: rgba(115, 115, 115, 0.244);
+}
+
 .detail-editor .assignments .assignment-card {
     margin-bottom: 1px;
     background: rgb(64, 42, 92);

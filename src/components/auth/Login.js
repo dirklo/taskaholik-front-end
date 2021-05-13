@@ -98,6 +98,12 @@ class Login extends React.Component {
             value='Log In'
           />
         </form>
+        <button 
+          type='button'
+          onClick={this.props.showSignup}
+        >
+          New User?
+        </button>
       </div>
     );
   }

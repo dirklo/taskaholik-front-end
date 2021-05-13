@@ -89,7 +89,8 @@ export default function populateReducer(state = initialState, action) {
             return {
                 ...state,
                 details: [],
-                detailComments: []
+                detailComments: [],
+                detailAssignees: []
             }
         case "ADD_ASSIGNEE":
             return {

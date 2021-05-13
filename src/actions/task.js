@@ -2,8 +2,8 @@ import { baseUrl, handleResponse } from '../helpers/helpers'
 import { getToken } from './auth'
 
 export const populateTasks = (projectId) => {
-    return async (dispatch) => {
-        return await fetch(`${baseUrl}/tasks?projectId=${projectId}`, {
+    return (dispatch) => {
+        return fetch(`${baseUrl}/tasks?projectId=${projectId}`, {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -11,7 +11,7 @@ export const populateTasks = (projectId) => {
             }
         })
         .then((res) => {
-            handleResponse(res, (tasks) => {
+            return handleResponse(res, (tasks) => {
                 tasks.map(task => task['selected'] = false)
                 dispatch({ type: "POPULATE_TASKS", payload: tasks})
             })
@@ -21,7 +21,7 @@ export const populateTasks = (projectId) => {
 
 export const setCurrentTask = (taskId) => {
     return (dispatch) => {
-        fetch(`${baseUrl}/tasks/${taskId}`, {
+        return fetch(`${baseUrl}/tasks/${taskId}`, {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",

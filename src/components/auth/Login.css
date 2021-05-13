@@ -54,6 +54,7 @@
     color: var(--clr5)
 }
 
+.login-window button,
 .login-window .login-form input[type="submit"] {
     padding: 5px;
     background: transparent;
@@ -64,7 +65,13 @@
     transition: all 0.3s ease;
 }
 
+.login-window button:hover,
 .login-window .login-form input[type="submit"]:hover {
     transform: scale(1.1);
     background: rgba(128, 128, 128, 0.281);
+}
+
+.login-window button {
+    margin: 20px 0 0 20px;
+    align-self: flex-end;
 }

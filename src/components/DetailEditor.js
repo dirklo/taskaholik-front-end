@@ -11,7 +11,7 @@ import CheckCircle from '@material-ui/icons/CheckCircle'
 import RemoveCircle from '@material-ui/icons/RemoveCircle'
 import DeleteOutline from '@material-ui/icons/DeleteOutline'
 
-function DetailEditor({ completeDetail, deleteDetail, addAssignee, removeAssignee, comments, assignees, details }) {
+function DetailEditor({ completeDetail, deleteDetail, addAssignee, removeAssignee, comments, assignees }) {
 
     const [showAddAssignee, setShowAddAssignee] = useState(false)
     const [selectedAssignee, setSelectedAssignee] = useState(null)
@@ -72,12 +72,6 @@ function DetailEditor({ completeDetail, deleteDetail, addAssignee, removeAssigne
                         </button>
                         :
                         <div className='add-assignee'>
-                            <button 
-                                type='button'
-                                onClick={() => setShowAddAssignee(false)}
-                            >
-                                Cancel
-                            </button>
                             <form
                                 className='add-assignee-form'
                                 onSubmit={(e) => {
@@ -92,7 +86,15 @@ function DetailEditor({ completeDetail, deleteDetail, addAssignee, removeAssigne
                                 >
                                 </Select>
                                 <br/>
-                                <input type="submit" value="Assign"/>
+                                <div className="buttons">
+                                    <input type="submit" value="Assign"/>
+                                    <button 
+                                        type='button'
+                                        onClick={() => setShowAddAssignee(false)}
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
                             </form>
                         </div>
                     }

@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import './Landing.css'
 import Login from '../auth/Login'
+import Signup from '../auth/Signup'
 
 export default class Landing extends Component {
+    constructor() {
+        super()
+        this.state = {
+            login: true
+        }
+
+    }
     redirect = (url) => {
         this.props.history.push(url)
     }
@@ -19,7 +27,17 @@ export default class Landing extends Component {
                 </div>
                 <div className="landing-content">
                     <div className="splash" alt='Splash'></div>
-                    <Login redirect={this.redirect}/>
+                    {this.state.login ?
+                        <Login 
+                            redirect={this.redirect} 
+                            showSignup={() => this.setState({login: false})}
+                        />
+                    :
+                        <Signup 
+                            redirect={this.redirect} 
+                            showLogin={() => this.setState({login: true})}
+                        />
+                    }
                     <div className="title">
                         <div className="logo"></div>
                         <span className="letters">
