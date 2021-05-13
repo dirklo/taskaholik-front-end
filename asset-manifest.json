@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/taskaholik-front-end/static/css/main.ce767d93.chunk.css",
+    "main.js": "/taskaholik-front-end/static/js/main.d887ec05.chunk.js",
+    "main.js.map": "/taskaholik-front-end/static/js/main.d887ec05.chunk.js.map",
+    "runtime-main.js": "/taskaholik-front-end/static/js/runtime-main.7e0f614e.js",
+    "runtime-main.js.map": "/taskaholik-front-end/static/js/runtime-main.7e0f614e.js.map",
+    "static/js/2.f8e28fb7.chunk.js": "/taskaholik-front-end/static/js/2.f8e28fb7.chunk.js",
+    "static/js/2.f8e28fb7.chunk.js.map": "/taskaholik-front-end/static/js/2.f8e28fb7.chunk.js.map",
+    "index.html": "/taskaholik-front-end/index.html",
+    "static/css/main.ce767d93.chunk.css.map": "/taskaholik-front-end/static/css/main.ce767d93.chunk.css.map",
+    "static/js/2.f8e28fb7.chunk.js.LICENSE.txt": "/taskaholik-front-end/static/js/2.f8e28fb7.chunk.js.LICENSE.txt",
+    "static/media/TaskWorkspace.css": "/taskaholik-front-end/static/media/TaskaholikLogo.759ea4ad.png",
+    "static/media/Landing.css": "/taskaholik-front-end/static/media/splash.cedd9c4e.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7e0f614e.js",
+    "static/js/2.f8e28fb7.chunk.js",
+    "static/css/main.ce767d93.chunk.css",
+    "static/js/main.d887ec05.chunk.js"
+  ]
+}
