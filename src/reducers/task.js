@@ -70,6 +70,11 @@ const initialState = {
                 tasks: [],
                 taskComments: []
             }
+        case "CLEAR_TASK_COMMENTS":
+            return {
+                ...state,
+                taskComments: []
+            }
       default:
         return state;
     }

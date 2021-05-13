@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import './TaskContainer.css'
 import TopBar from '../components/TopBar'
@@ -7,9 +7,14 @@ import TaskWorkspace from '../components/TaskWorkspace'
 import NewTaskForm from '../components/NewTaskForm'
 import { setCurrentTask } from '../actions/task'
 import { populateDetails } from '../actions/detail'
-import { currentProject, parseTimestamp } from '../helpers/helpers'
+import { deleteProject } from '../actions/project'
+import { currentProject, parseTimestamp, currentTeam } from '../helpers/helpers'
+import DeleteOutline from '@material-ui/icons/DeleteOutline'
+import ErrorField from '../components/ErrorField'
 
-function TaskContainer({ tasks, setCurrentTask, populateDetails }) {
+function TaskContainer({ tasks, setCurrentTask, populateDetails, currentUser, deleteProject, loggedIn }) {
+
+    const [error, setError] = useState('')
 
     return (
         <div className='task-container'>
@@ -17,10 +22,34 @@ function TaskContainer({ tasks, setCurrentTask, populateDetails }) {
             <div className='task-fields'>
                 {currentProject()? 
                     <section className='tasks-select'>
+                        {currentUser.id === currentProject().creator_id || 
+                        currentUser.id === currentTeam().leader_id ?
+                            <button 
+                                type='button' 
+                                className='delete-btn'
+                                onClick={() => {
+                                    deleteProject(currentProject().id, currentUser)
+                                    .catch(error => setError(error))
+                                }}
+                            >
+                                <DeleteOutline />
+                            </button>
+                        :
+                            null
+                        }
                         <div className="title">
                             <h1>{currentProject().title}</h1>
                             <h2>Deadline: {parseTimestamp(currentProject().deadline)}</h2>
                         </div>
+                        {error ? 
+                            <ErrorField 
+                                error={error}
+                                timeout="5000"
+                                clearError={() => setError('')}
+                            />
+                            :
+                            null
+                        }
                         <h1>Project Goals:</h1>
                         <NewTaskForm />
                         {tasks.map(task => 
@@ -41,12 +70,16 @@ function TaskContainer({ tasks, setCurrentTask, populateDetails }) {
             </div>
         </div>
     )
+    
 }
 
 
 export default connect((state) => {
     return {
         tasks: state.task.tasks,
-        projects: state.project.projects
+        projects: state.project.projects,
+        currentUser: state.auth.currentUser,
+        teams: state.team.teams,
+        loggedIn: state.auth.loggedIn
     }
-}, { setCurrentTask, populateDetails })(TaskContainer)
+}, { setCurrentTask, populateDetails, deleteProject })(TaskContainer)

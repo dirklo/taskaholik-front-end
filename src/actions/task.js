@@ -1,23 +1,39 @@
-import { baseUrl } from '../helpers/helpers'
+import { baseUrl, handleResponse } from '../helpers/helpers'
+import { getToken } from './auth'
 
 export const populateTasks = (projectId) => {
     return async (dispatch) => {
-        return await fetch(`${baseUrl}/tasks?projectId=${projectId}`)
-        .then((res) => res.json())
-        .then((tasks) => {
-            tasks.map(task => task['selected'] = false)
-            dispatch({ type: "POPULATE_TASKS", payload: tasks})
-        });
+        return await fetch(`${baseUrl}/tasks?projectId=${projectId}`, {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: getToken()
+            }
+        })
+        .then((res) => {
+            handleResponse(res, (tasks) => {
+                tasks.map(task => task['selected'] = false)
+                dispatch({ type: "POPULATE_TASKS", payload: tasks})
+            })
+        })
     }
 };         
 
 export const setCurrentTask = (taskId) => {
     return (dispatch) => {
-        fetch(`${baseUrl}/tasks/${taskId}`)
-        .then(res => res.json())
-        .then(json => {
-            dispatch({type: "SET_CURRENT_TASK", payload: json.task.id})
-            dispatch({type: "POPULATE_TASK_COMMENTS", payload: json.comments})
+        fetch(`${baseUrl}/tasks/${taskId}`, {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: getToken()
+            }
+        })
+        .then(res => {
+            return handleResponse(res, (json) => {
+                dispatch({type: "CLEAR_DETAIL_COMMENTS"})
+                dispatch({type: "SET_CURRENT_TASK", payload: json.task.id})
+                dispatch({type: "POPULATE_TASK_COMMENTS", payload: json.comments})
+            })
         })
     }
 }
@@ -28,7 +44,8 @@ export const addTask = (title, currentProject, creator) => {
             method: "POST",
             headers: {
                 "Accept": "application/json",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: getToken()
             },
             body: JSON.stringify({
                 title: title, 
@@ -36,41 +53,43 @@ export const addTask = (title, currentProject, creator) => {
                 creator_id: creator.id
             })
         })
-        .then(res => res.json())
-        .then(json => {
-            dispatch({type: 'ADD_TASK', payload: json})
+        .then(res => {
+            return handleResponse(res, (json) => {
+                dispatch({type: 'CLEAR_DETAILS'})
+                dispatch({type: 'CLEAR_DETAIL_COMMENTS'})
+                dispatch({type: 'CLEAR_TASK_COMMENTS'})
+                dispatch({type: 'ADD_TASK', payload: json})
+            })
         })
     }
 }
 
 export const deleteTask = (taskId) => {
     return (dispatch) => {
-        fetch(`${baseUrl}/tasks/${taskId}`, {
+        return fetch(`${baseUrl}/tasks/${taskId}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: getToken()
             }
         })
-        .then(res => res.json())
-        .then(json => {
-            if (json.status === 401) {
-                throw Error
-            }
-            console.log(json)
-            dispatch({type: 'DELETE_TASK', payload: taskId})
+        .then(res => {
+            return handleResponse(res, (json) => {
+                dispatch({type: 'DELETE_TASK', payload: taskId})
+            })
         })
-        .catch(err => console.log(err))
     }
 }
 
 export const addTaskComment = (taskId, content, authorId, author) => {
     return (dispatch) => {
-        fetch(`${baseUrl}/task_comments`, {
+        return fetch(`${baseUrl}/task_comments`, {
             method: 'POST',
             headers: {
                 "Accept": "application/json",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: getToken()
             },
             body: JSON.stringify({
                 task_comment: {
@@ -80,40 +99,38 @@ export const addTaskComment = (taskId, content, authorId, author) => {
                 }
             })
         })
-        .then(res => res.json())
-        .then(
-            json => {
+        .then(res => {
+            return handleResponse(res, (json) => {
                 dispatch({type: "ADD_TASK_COMMENT", 
                     payload: {
                         ...json.comment,
                         author: author,
                     }
                 })
-            }
-        )
+            })
+        })
     }
 }
 
 export const removeTaskComment = (commentId, currentUserId) => {
     return (dispatch) => {
-        fetch(`${baseUrl}/task_comments/${commentId}`, {
+        return fetch(`${baseUrl}/task_comments/${commentId}`, {
             method: 'DELETE',
             headers: {
                 "Accept": "application/json",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: getToken()
             },
             body: JSON.stringify(
                 {task_comment: 
                     {user_id: currentUserId}
                 }
-                )
+            )
+        })
+        .then((res) => {
+            return handleResponse(res, (json) => {
+                dispatch({type: "REMOVE_TASK_COMMENT", payload: commentId})
             })
-            .then((res) => {
-                if (res.status === 200) {
-                    dispatch({type: "REMOVE_TASK_COMMENT", payload: commentId})
-                } else {
-                    alert('An error occurred, comment not deleted!')
-                }
-            })
+        })
     }
 } 

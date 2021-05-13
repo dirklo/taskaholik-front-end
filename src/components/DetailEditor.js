@@ -114,8 +114,7 @@ function DetailEditor({ completeDetail, deleteDetail, addAssignee, removeAssigne
     
     } else {
         return (
-            <section className="detail-editor">
-                Select a detail to edit
+            <section className="detail-editor empty">
             </section>
         )
     }

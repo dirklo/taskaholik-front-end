@@ -38,18 +38,21 @@ function ToolbarContainer({ projects, setCurrentProject, populateTasks }) {
                 Start New Project
             </button>
             <br/>
-            {projects.map(project => 
-                <div 
+            {projects.length > 0 ?
+                projects.map(project => 
+                    <div 
                     key={project.id}
                     className={project.selected ? "project-card selected" : "project-card"}
                     onClick={() => {
                         setCurrentProject(project.id)
                         populateTasks(project.id)
                     }}
-                >
-                    {project.title}
-                </div>
-            )}
+                    >
+                        {project.title}
+                    </div>
+                )
+            : null
+            } 
         </div>
     )
 }

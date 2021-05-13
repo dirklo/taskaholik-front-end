@@ -25,5 +25,14 @@ export function parseTimestamp(timestamp) {
     return date.toDateString() + ', ' + hours + ':' + minutes + ' ' + ampm
 }
 
-export const baseUrl = 'https://taskaholik-back-end.herokuapp.com'
-// export const baseUrl = 'http://localhost:3001'
+export const handleResponse = (res, callback) => {
+    if (res.ok) {
+        res.json().then(json => callback(json))
+    } else {
+        if (res.status === 401) {window.location.href = '/'}
+        return res.json().then(json => Promise.reject(json.message))
+    }
+} 
+
+// export const baseUrl = 'https://taskaholik-back-end.herokuapp.com'
+export const baseUrl = 'http://localhost:3001'

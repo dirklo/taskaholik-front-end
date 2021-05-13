@@ -5,7 +5,7 @@ const setToken = (token) => {
   localStorage.setItem("lastLoginTime", new Date(Date.now()).getTime());
 };
 
-const getToken = () => {
+export const getToken = () => {
   const now = new Date(Date.now()).getTime();
   const thirtyMinutes = 1000 * 60 * 30;
   const timeSinceLastLogin = now - localStorage.getItem("lastLoginTime");
@@ -43,7 +43,7 @@ export const signupUser = (credentials) => {
 
 export const loginUser = (credentials) => {
     return async (dispatch) => {
-        fetch(`${baseUrl}/login`, {
+        return fetch(`${baseUrl}/login`, {
           method: "POST",
           headers: {
               "Accept": "application/json",
@@ -77,7 +77,7 @@ export const logoutUser = () => {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: getToken(),
+            Authorization: getToken()
         },
         }).then((res) => {
         if (res.ok) {

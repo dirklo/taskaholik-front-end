@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom"
 import { checkAuth } from "../../actions/auth";
 import LoadingSpinner from "../LoadingSpinner";
-import Login from "./Login";
 
 function withAuth(WrappedComponent) {
   class Wrapper extends React.Component {
@@ -16,8 +16,7 @@ function withAuth(WrappedComponent) {
       } else if (!this.props.loggedIn) {
         return (
           <>
-            <Login />
-            <p>You need to login to view this page.</p>
+            <Redirect push to="/" />
           </>
         );
       } else {

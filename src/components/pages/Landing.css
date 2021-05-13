@@ -1,0 +1,114 @@
+.landing {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(
+        45deg, 
+        rgb(95, 61, 139), 
+        darkslateblue, 
+        rgb(61, 92, 139), 
+        rgb(84, 61, 139)
+    );
+    background-size: 400% 400%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: change 10s ease-in-out infinite;
+}
+
+@keyframes change {
+    0%{
+        background-position: 0 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0 50%;
+    }
+}
+
+.landing .custom-shape-divider-top-1620756923 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.landing .custom-shape-divider-top-1620756923 svg {
+    position: relative;
+    display: block;
+    width: calc(181% + 1.3px);
+    height: 330px;
+    transform: rotateY(180deg);
+}
+
+.landing .custom-shape-divider-top-1620756923 .shape-fill {
+    fill: var(--clr3);
+}
+
+.landing .landing-content {
+    position: relative;
+    max-width: 1440px;
+    width: 100%;
+    height: 100%;
+    color: white;
+}
+
+.landing .landing-content .splash {
+    position: absolute;
+    width: 750px;
+    height: 450px;
+    background-image: url(../../img/splash.png);
+    background-size: cover;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+}
+
+.landing .landing-content .title {
+    position: absolute;
+    top: 10px;
+    left: 330px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.landing .landing-content .title .logo {
+    position: relative;
+    height: 200px;
+    width: 200px;
+    background-image: url(../../img/TaskaholikLogoSm.png);
+    background-size: cover;
+}
+
+.landing .landing-content .title .letters {
+    position: relative;
+    right: 75px;
+    top: 40px;
+    font-size: 60px;
+    letter-spacing: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.514);
+}
+
+.landing .landing-content .subtext {
+    position: absolute;
+    left: 5%;
+    top: 30%;
+    width: 400px;
+}
+
+.landing .landing-content .subtext h2 {
+    font-size: 50px;
+}
+
+.landing .landing-content .subtext p {
+    width: 90%;
+    font-size: 25px;
+    letter-spacing: 5px;
+}

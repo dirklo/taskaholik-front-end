@@ -1,27 +1,47 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import './DetailsList.css'
 import { setCurrentDetail } from '../actions/detail'
 import { deleteTask } from '../actions/task'
-import NewDetailForm from '../components/NewDetailForm'
+import ErrorField from '../components/ErrorField'
+import NewDetailForm from './NewDetailForm'
 import { currentTask } from '../helpers/helpers'
 import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline'
 import CheckCircle from '@material-ui/icons/CheckCircle'
 import DeleteOutline from '@material-ui/icons/DeleteOutline'
 
 
-function DetailsList({ details, setCurrentDetail, deleteTask }) {    
+function DetailsList({ details, setCurrentDetail, deleteTask, tasks }) { 
+    
+    const [error, setError] = useState('')
+
+    useEffect(() => {
+        setError('')
+    }, [tasks])
+
     return (
         <section className='details-list'>
             <div className="detail-header">
                 <h2>{currentTask().title}</h2>
                 <button
                     className='delete-task-btn'
-                    onClick={(e) => deleteTask(currentTask().id)}    
-                >
+                    onClick={(e) => {
+                        deleteTask(currentTask().id)
+                        .catch(error => {
+                            setError(error)
+                        })
+                    }}    
+                    >
                     <DeleteOutline/>
                 </button>
             </div>
+            {error !== '' ? 
+                <ErrorField 
+                    error={error}
+                    timeout='5000'
+                    clearError={() => setError('')} 
+                /> : null
+            }
             <NewDetailForm />
             {details.map(detail =>
                 <div 

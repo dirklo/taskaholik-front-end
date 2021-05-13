@@ -1,15 +1,16 @@
-import { baseUrl } from '../helpers/helpers'
+import { baseUrl, handleResponse } from '../helpers/helpers'
 
 export const populateTeams = (userId, preSelectId) => {
     return async (dispatch) => {
         return await fetch(`${baseUrl}/teams?userId=${userId}`)
-        .then((res) => res.json())
-        .then((teams) => {
-            dispatch({ type: "POPULATE_TEAMS", payload: teams })
-            dispatch({ type: "SET_CURRENT_TEAM", payload: preSelectId })
+        .then((res) => {
+            return handleResponse(res, (teams) => {
+                dispatch({ type: "POPULATE_TEAMS", payload: teams })
+                dispatch({ type: "SET_CURRENT_TEAM", payload: preSelectId })
+            })
         })
     }
-};
+}
 
 export const setCurrentTeam = (teamId) => {
     return (dispatch) => {
@@ -35,13 +36,14 @@ export const addTeam = (teamName, currentUser) => {
                 }
             })
         })
-        .then(res => res.json())
-        .then(json => {
-            let team = json.team
-            team.members = []
-            team.leader = currentUser.username
-            dispatch({type: 'ADD_TEAM', payload: json.team})
-            return json
+        .then(res => {
+            return handleResponse(res, (json) => {
+                let team = json.team
+                team.members = []
+                team.leader = currentUser.username
+                dispatch({type: 'ADD_TEAM', payload: json.team})
+                return json
+            })
         })
     }
 }
@@ -56,12 +58,14 @@ export const addMember = (query, teamId) => {
             },
             body: JSON.stringify({membership: {query: query, team_id: teamId}})
         })
-        .then(res => res.json())
-        .then(json => {
-            console.log(json)
-            dispatch({type: "ADD_MEMBER", payload: {member: json.member, teamId: teamId}})
+        .then(res => {
+            return handleResponse(res, (json) => {
+                dispatch({
+                    type: "ADD_MEMBER", 
+                    payload: {member: json.member, teamId: teamId}
+                })
+            })
         })
-        .catch(err => console.log(err))
     }
 }
 
@@ -75,11 +79,13 @@ export const removeMember = (memberId, teamId) => {
             },
             body: JSON.stringify({membership: {user_id: memberId, team_id: teamId}})
         })
-        .then(res => res.json())
-        .then(json => {
-            console.log(json)
-            dispatch({type: "REMOVE_MEMBER", payload: {memberId: memberId, teamId: teamId}})
+        .then(res => {
+            return handleResponse(res, (json) => {
+                dispatch({
+                    type: "REMOVE_MEMBER", 
+                    payload: {memberId: memberId, teamId: teamId}
+                })
+            })
         })
-        .catch(err => console.log(err))
     }
 }

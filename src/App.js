@@ -7,11 +7,10 @@ import NewTeamPage from './components/pages/NewTeamPage'
 import TeamSelectPage from './components/pages/TeamSelectPage'
 import NewProjectPage from './components/pages/NewProjectPage'
 import Signup from './components/auth/Signup'
-import Login from './components/auth/Login'
 import Logout from './components/auth/Logout'
 import withAuth from './components/auth/withAuth'
 import loadData from './components/auth/loadData'
-import Landing from './components/Landing'
+import Landing from './components/pages/Landing'
 
 export default class App extends Component {
   render() {
@@ -26,7 +25,6 @@ export default class App extends Component {
             <Route exact path='/teams/select' component={withAuth(loadData(TeamSelectPage))} />
             <Route exact path='/projects/new' component={withAuth(loadData(NewProjectPage))} />
             <Route exact path='/signup' component={Signup} />
-            <Route exact path='/login' component={Login} />
             <Route exact path='/logout' component={Logout} />
           </Switch>
         </Router>

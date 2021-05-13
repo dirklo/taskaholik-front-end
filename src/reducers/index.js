@@ -11,5 +11,5 @@ export default combineReducers({
   team: teamReducer,
   project: projectReducer,
   task: taskReducer,
-  detail: detailReducer
+  detail: detailReducer,
 })

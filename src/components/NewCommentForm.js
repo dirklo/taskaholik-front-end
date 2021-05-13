@@ -1,36 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import './NewCommentForm.css'
 import { addTaskComment } from '../actions/task'
 import { addDetailComment } from '../actions/detail'
+import ErrorField from '../components/ErrorField'
+import { currentTask, currentDetail } from '../helpers/helpers'
 
-function NewCommentForm(props) {
+function NewCommentForm({ currentUser, commentType, addTaskComment, addDetailComment, tasks }) {
     const [content, setContent] = useState('')
+    const [error, setError] = useState('')
 
-    let currentTask = props.tasks.find(task => task.selected === true)
-    let currentDetail = props.details.find(detail => detail.selected === true)
+    useEffect(() => setError(''), [tasks])
 
     return (
         <div className='new-comment-form'>
             <form 
                 onSubmit={(e) => {
                     e.preventDefault()
-                    switch (props.commentType) {
+                    switch (commentType) {
                         case 'task':
-                            props.addTaskComment(
-                                currentTask.id, 
+                            addTaskComment(
+                                currentTask().id, 
                                 content,  
-                                props.currentUser.id, 
-                                props.currentUser.username
-                            )
+                                currentUser.id, 
+                                currentUser.username
+                            ).catch(error => {setError(error)})
                             break
                         case 'detail':
-                            props.addDetailComment(
-                                currentDetail.id, 
+                            addDetailComment(
+                                currentDetail().id, 
                                 content,  
-                                props.currentUser.id, 
-                                props.currentUser.username
-                            )
+                                currentUser.id, 
+                                currentUser.username
+                            ).catch(error => setError(error))
                             break
                         default:
                     }
@@ -45,11 +47,18 @@ function NewCommentForm(props) {
                 >
                 </input>
                 <input
-                    className={props.commentType=== "task" ? 'comment-submit task' : 'comment-submit detail' }
+                    className={commentType=== "task" ? 'comment-submit task' : 'comment-submit detail' }
                     type='submit' 
                     value="Post Comment"/>
                 <br/>
             </form>
+            { error ?
+                <ErrorField 
+                    error={error}
+                    timeout='5000'
+                    clearError={() => setError('')}
+                /> : null
+            }
         </div>
     )
 }

@@ -88,3 +88,7 @@
     color: rgb(252, 134, 134);
     cursor: pointer;
 }
+
+.detail-editor.empty {
+    background: var(--clr1)
+}
