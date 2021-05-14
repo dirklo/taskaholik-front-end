@@ -23,6 +23,9 @@ https://github.com/dirklo/taskaholik-back-end
 ## Usage Instructions
 
 -Create a new user from the home page.
+
 -Create your first team to enter the dashboard.
+
 -Create Projects, Goals, Details, and Comments using the dashboard interface.
+
 -Use the 'Manage Teams' button to switch teams, add members, or rename teams.
