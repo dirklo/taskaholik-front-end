@@ -10,6 +10,7 @@ export default function TaskCard({ task, loadTask }) {
                 loadTask(e);
             }}>
             <h2>{task.title}</h2>
+
         </div>
     )
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 import './CommentCard.css'
 import { connect } from 'react-redux'
-import { removeTaskComment } from '../actions/task'
-import { removeDetailComment } from '../actions/detail'
-import { parseTimestamp } from '../helpers/helpers'
+import { removeTaskComment } from '../../actions/task'
+import { removeDetailComment } from '../../actions/detail'
+import { parseTimestamp } from '../../helpers/helpers'
 import Delete from '@material-ui/icons/Delete'
 import ChatBubble from '@material-ui/icons/ChatBubble'
 

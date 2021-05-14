@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import './TeamSelectPage.css'
 import { populateTeams } from '../../actions/team'
-import TeamCard from '../TeamCard'
+import TeamCard from '../cards/TeamCard'
 import TopBar from '../TopBar'
 
 function TeamSelectPage({teams, populateTeams, currentUser }) {

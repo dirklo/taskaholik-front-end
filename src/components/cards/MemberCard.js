@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import './MemberCard.css'
-import { removeMember } from '../actions/team'
+import { removeMember } from '../../actions/team'
 
 function MemberCard(props) {
     let currentTeam = props.teams.find(team => team.selected === true) 

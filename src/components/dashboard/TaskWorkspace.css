@@ -25,7 +25,7 @@
 .no-task-placeholder .logo {
     height: 200px;
     width: 200px;
-    background-image: url(../img/TaskaholikLogo.png);
+    background-image: url(../../img/TaskaholikLogo.png);
     display: flex;
     justify-content: center;
     align-items: center;

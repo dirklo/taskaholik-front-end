@@ -1,12 +1,8 @@
 import React from 'react'
-// import { connect } from 'react-redux'
-// import NewCommentForm from './NewCommentForm'
-// import { removeTaskComment } from '../actions/task'
-import DetailsColumn from '../containers/DetailsColumn'
-// import CommentCard from '../components/CommentCard'
-import DetailEditor from '../components/DetailEditor'
-import { currentTask } from '../helpers/helpers'
 import './TaskWorkspace.css'
+import DetailsColumn from './DetailsColumn'
+import DetailEditor from './DetailEditor'
+import { currentTask } from '../../helpers/helpers'
 
 export default function TaskWorkspace() {
 

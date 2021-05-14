@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import './TeamPage.css'
-import MemberCard from '../MemberCard'
-import AddMemberForm from '../AddMemberForm'
-import ChangeTeamNameForm from '../ChangeTeamNameForm'
+import MemberCard from '../cards/MemberCard'
+import AddMemberForm from '../forms/AddMemberForm'
+import ChangeTeamNameForm from '../forms/ChangeTeamNameForm'
 
 function TeamPage({ teams, currentUser }) {
     let currentTeam = teams.find(team => team.selected === true)

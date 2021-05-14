@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import './ToolbarContainer.css'
-import AddProjectForm from '../components/AddProjectForm'
-import { setCurrentProject } from '../actions/project'
-import { populateTasks } from '../actions/task'
-import { currentTeam } from '../helpers/helpers'
+import AddProjectForm from '../forms/AddProjectForm'
+import { setCurrentProject } from '../../actions/project'
+import { populateTasks } from '../../actions/task'
+import { currentTeam } from '../../helpers/helpers'
 
 function ToolbarContainer({ projects, setCurrentProject, populateTasks }) {
 

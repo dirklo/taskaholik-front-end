@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import './NewCommentForm.css'
-import { addTaskComment } from '../actions/task'
-import { addDetailComment } from '../actions/detail'
-import ErrorField from '../components/ErrorField'
-import { currentTask, currentDetail } from '../helpers/helpers'
+import { addTaskComment } from '../../actions/task'
+import { addDetailComment } from '../../actions/detail'
+import { currentTask, currentDetail } from '../../helpers/helpers'
+import ErrorField from '../ErrorField'
 
 function NewCommentForm({ currentUser, commentType, addTaskComment, addDetailComment, tasks }) {
     const [content, setContent] = useState('')

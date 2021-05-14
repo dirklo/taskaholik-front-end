@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom' 
 import './TeamCard.css'
-import { setCurrentTeam } from '../actions/team'
+import { setCurrentTeam } from '../../actions/team'
 
 function TeamCard(props) {
     

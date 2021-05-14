@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import "./AddProjectForm.css"
 import { connect } from 'react-redux'
-import { addProject } from '../actions/project' 
-import { currentTeam } from '../helpers/helpers'
+import { addProject } from '../../actions/project' 
+import { currentTeam } from '../../helpers/helpers'
 
 function AddProjectForm({ addProject, currentUser, showOverlay, setShowOverlay }) {
     const [title, setTitle] = useState('')

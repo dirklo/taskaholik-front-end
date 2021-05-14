@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './AddMemberForm.css'
 import { connect } from 'react-redux' 
-import { addMember } from '../actions/team'
+import { addMember } from '../../actions/team'
 
 function AddMemberForm({ addMember, currentTeam }) {
     

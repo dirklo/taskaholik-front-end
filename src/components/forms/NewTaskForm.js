@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import './NewTaskForm.css'
 import { connect } from 'react-redux'
-import { addTask } from '../actions/task'
-import { currentProject } from '../helpers/helpers'
+import { addTask } from '../../actions/task'
+import { currentProject } from '../../helpers/helpers'
 
 function NewTaskForm({ currentUser, addTask }) {
 

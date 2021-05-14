@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import './NewDetailForm.css'
 import { connect } from 'react-redux'
-import { addDetail } from '../actions/detail'
-import { currentTask } from '../helpers/helpers'
-import { checkAuth } from '../actions/auth'
+import { addDetail } from '../../actions/detail'
+import { currentTask } from '../../helpers/helpers'
+import { checkAuth } from '../../actions/auth'
 import Close from '@material-ui/icons/Close'
 
 function NewDetailForm({ currentUser, addDetail, checkAuth }) {

@@ -1,11 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import './DetailsColumn.css'
-import { checkAuth } from '../actions/auth'
-import NewCommentForm from '../components/NewCommentForm'
-import CommentCard from '../components/CommentCard'
-import DetailsList from '../components/DetailsList'
-
+import { checkAuth } from '../../actions/auth'
+import NewCommentForm from '../forms/NewCommentForm'
+import CommentCard from '../cards/CommentCard'
+import DetailsList from './DetailsList'
 
 function DetailsColumn({ comments }) {
     
