@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import './DetailsList.css'
 import { setCurrentDetail } from '../../actions/detail'
 import { deleteTask } from '../../actions/task'
-import { currentTask } from '../../helpers/helpers'
+import { currentTask, currentTeam } from '../../helpers/helpers'
 import ErrorField from '../ErrorField'
 import NewDetailForm from '../forms/NewDetailForm'
 import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline'
@@ -11,7 +11,7 @@ import CheckCircle from '@material-ui/icons/CheckCircle'
 import DeleteOutline from '@material-ui/icons/DeleteOutline'
 
 
-function DetailsList({ details, setCurrentDetail, deleteTask, tasks }) { 
+function DetailsList({ details, setCurrentDetail, deleteTask, tasks, currentUser }) { 
     
     const [error, setError] = useState('')
 
@@ -23,17 +23,21 @@ function DetailsList({ details, setCurrentDetail, deleteTask, tasks }) {
         <section className='details-list'>
             <div className="detail-header">
                 <h2>{currentTask().title}</h2>
-                <button
-                    className='delete-task-btn'
-                    onClick={(e) => {
-                        deleteTask(currentTask().id)
-                        .catch(error => {
-                            setError(error)
-                        })
-                    }}    
-                    >
-                    <DeleteOutline/>
-                </button>
+                {currentUser.id === currentTeam().leader_id ||
+                    currentUser === currentTask.creator ?
+                        <button
+                            className='delete-task-btn'
+                            onClick={(e) => {
+                                deleteTask(currentTask().id)
+                                .catch(error => {
+                                    setError(error)
+                                })
+                            }}    
+                            >
+                            <DeleteOutline/>
+                        </button>
+                    : null
+                }
             </div>
             {error !== '' ? 
                 <ErrorField 
@@ -80,6 +84,7 @@ export default connect((state) => {
         tasks: state.task.tasks,
         comments: state.task.taskComments,
         details: state.detail.details,
+        currentUser: state.auth.currentUser
     }
 }, { setCurrentDetail, deleteTask })(DetailsList)
 

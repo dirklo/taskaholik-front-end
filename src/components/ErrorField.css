@@ -1,7 +1,6 @@
 .error-field {
     position: relative;
     width: 100%;
-    background: ivory;
     margin: 5px;
     padding: 5px;
     border-radius: 5px;
@@ -11,6 +10,7 @@
 
 .error-field button {
     position: absolute;
+    color: black !important;
     top: 0;
     right: 0;
     background: transparent;

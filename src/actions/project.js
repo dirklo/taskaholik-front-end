@@ -13,6 +13,8 @@ export const populateProjects = (teamId) => {
         .then((res) => {
             return handleResponse(res, (projects) => {
                 projects.map(project => project['selected'] = false)
+                dispatch({ type: "CLEAR_DETAILS" })
+                dispatch({ type: "CLEAR_TASKS" })
                 dispatch({ type: "POPULATE_PROJECTS", payload: projects})
             })
         })

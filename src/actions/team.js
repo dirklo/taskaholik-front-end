@@ -1,4 +1,5 @@
 import { baseUrl, handleResponse } from '../helpers/helpers'
+import { getToken } from './auth'
 
 export const populateTeams = (userId, preSelectId) => {
     return async (dispatch) => {
@@ -54,7 +55,8 @@ export const addMember = (query, teamId) => {
             method: 'POST',
             headers: {
                 'Accept': 'applicaiton/json',
-                'Content-type': 'application/json'
+                'Content-type': 'application/json',
+                'Authorization': getToken()
             },
             body: JSON.stringify({membership: {query: query, team_id: teamId}})
         })
@@ -75,7 +77,8 @@ export const removeMember = (memberId, teamId) => {
             method: 'DELETE',
             headers: {
                 'Accept': 'applicaiton/json',
-                'Content-type': 'application/json'
+                'Content-type': 'application/json',
+                'Authorization': getToken()
             },
             body: JSON.stringify({membership: {user_id: memberId, team_id: teamId}})
         })
@@ -85,6 +88,25 @@ export const removeMember = (memberId, teamId) => {
                     type: "REMOVE_MEMBER", 
                     payload: {memberId: memberId, teamId: teamId}
                 })
+            })
+        })
+    }
+}
+
+export const updateTeam = (teamId, param) => {
+    return (dispatch) => {
+        fetch(`${baseUrl}/teams/${teamId}`, {
+            method: 'PATCH',
+            headers: {
+                'Accept': 'applicaiton/json',
+                'Content-type': 'application/json',
+                'Authorization': getToken()
+            },
+            body: JSON.stringify({team: param})
+        })
+        .then(res => {
+            return handleResponse(res, (json) => {
+                dispatch({type: "UPDATE_TEAM", payload: json.team})
             })
         })
     }

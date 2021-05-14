@@ -1,43 +1,52 @@
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
 import './NewDetailForm.css'
+import "react-datepicker/dist/react-datepicker.css"
 import { connect } from 'react-redux'
 import { addDetail } from '../../actions/detail'
 import { currentTask } from '../../helpers/helpers'
-import { checkAuth } from '../../actions/auth'
+import ErrorField from '../ErrorField'
 import Close from '@material-ui/icons/Close'
+import DatePicker from 'react-datepicker'
 
-function NewDetailForm({ currentUser, addDetail, checkAuth }) {
+function NewDetailForm({ currentUser, addDetail }) {
 
     const [content, setContent] = useState('')
-    const [deadline, setDeadline] = useState(Date.now())
-    const [redirect, setRedirect] = useState(false)
+    const [deadline, setDeadline] = useState(null)
     const [showForm, setShowForm] = useState(false)
+    const [error, setError] = useState('')
 
     return (
         <div className="new-detail-form">
-            { redirect ? (<Redirect push to="/login" />) : null }
+            { error ?
+                <ErrorField 
+                    error={error}
+                    timeout='5000'
+                    clearError={() => setError('')}
+                />
+                : null
+            }
             { showForm ? 
                 <> 
                     <button 
                         type='button'
                         className="cancel-btn"
-                        onClick={(e) => setShowForm(false)}
+                        onClick={(e) => {
+                            setShowForm(false)
+                            setContent('')
+                            setDeadline('')
+                        }}
                     >
                         <Close />
                     </button>
                     <form
                         onSubmit={(e) => {
                             e.preventDefault()
-                            checkAuth()
-                            .then(() => {
-                                addDetail(content, currentTask(), currentUser, deadline)
-                                setContent('')
+                            if (!error) {
                                 setShowForm(false)
-                            })
-                            .catch(() => {
-                                setRedirect(true)
-                            })
+                                setContent('')
+                            }
+                            addDetail(content, currentTask(), currentUser, deadline)
+                            .catch((error) => {setError(error)})
                         }}
                     >
                         <label htmlFor="add-detail">
@@ -54,11 +63,11 @@ function NewDetailForm({ currentUser, addDetail, checkAuth }) {
                         <br/>
                         <label htmlFor="deadline"> Deadline:</label>
                         <br/>
-                        <input 
-                            type="datetime-local"
-                            id="deadline"
-                            value={deadline}
-                            onChange={e => setDeadline(e.target.value)}
+                        <DatePicker 
+                            selected={deadline}
+                            onChange={date => setDeadline(date)}
+                            showTimeSelect
+                            dateFormat="Pp"
                         />
                         <br/>
                         <br/>
@@ -81,6 +90,6 @@ export default connect((state) => {
     return {
        currentUser: state.auth.currentUser
     }
-}, { addDetail, checkAuth } )(NewDetailForm)
+}, { addDetail } )(NewDetailForm)
 
 

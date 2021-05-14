@@ -64,6 +64,16 @@ export default function populateReducer(state = initialState, action) {
                     newDetail
                 ]
             }
+        case "UPDATE_DETAIL":
+            index = state.details.findIndex(detail => detail.id = action.payload.id) 
+            return {
+                ...state, 
+                details: [
+                    ...state.details.slice(0, index),
+                    action.payload,
+                    ...state.details.slice(index + 1)
+                ]
+            }
         case "DELETE_DETAIL":
             return {
                 ...state,

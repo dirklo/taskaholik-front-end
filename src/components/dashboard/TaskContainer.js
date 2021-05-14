@@ -39,7 +39,11 @@ function TaskContainer({ tasks, setCurrentTask, populateDetails, currentUser, de
                         }
                         <div className="title">
                             <h1>{currentProject().title}</h1>
-                            <h2>Deadline: {parseTimestamp(currentProject().deadline)}</h2>
+                            { currentProject().deadline ?
+                                <h2>Deadline: {parseTimestamp(currentProject().deadline)}</h2>
+                                :
+                                null
+                            }
                         </div>
                         {error ? 
                             <ErrorField 

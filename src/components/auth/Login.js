@@ -1,14 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
+import './Login.css'
 import { loginUser } from "../../actions/auth";
 import { populateTeams } from "../../actions/team";
-import './Login.css'
+import ErrorField from '../ErrorField'
 
 class Login extends React.Component {
   state = {
     email: "",
     password: "",
-    error: false,
+    error: '',
     emailFocus: false,
     passwordFocus: false
   };
@@ -53,18 +54,24 @@ class Login extends React.Component {
     .then(() => {
       this.props.redirect('/teams/select')
     })
-    .catch(() => this.setState({ error: true }));
+    .catch((error) => this.setState({ error: error }));
   };
 
   render() {
     return (
       <div className='login-window'>
+        {this.state.error ? 
+          <ErrorField 
+            error={this.state.error}
+            clearError={() => this.setState({error: ''})}
+          />
+          : null
+        }
         <form
           onSubmit={this.handleSubmit}
           className='login-form'
         >
           <h1>Log In</h1>
-          <p>{this.state.error && "Invalid email or password"}</p>
             <label htmlFor='email' className={this.state.emailFocus ? 'focus' : ''}>
               Email or Username
             </label>

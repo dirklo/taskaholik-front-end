@@ -4,7 +4,7 @@
     right: 5%;
     padding: 10px;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.685);
-    height: 600px;
+    min-height: 600px;
     width: 300px;
     border-radius: 30px;
     background: rgba(0, 0, 0, 0.13);
@@ -74,4 +74,12 @@
 .signup-window button {
     margin: 20px 0 0 20px;
     align-self: flex-end;
+}
+
+.signup-window .signup-form .match {
+    border-bottom: 3px solid green !important;
+}
+
+.signup-window .signup-form .no-match {
+    border-bottom: 3px solid red !important;
 }

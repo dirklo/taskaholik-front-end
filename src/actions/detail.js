@@ -191,4 +191,24 @@ export const removeAssignee = (userId, detailId) => {
     }
 }
 
+export const updateDetail = (detailId, param) => {
+    return (dispatch) => {
+        return fetch(`${baseUrl}/details/${detailId}`, {
+            method: "PATCH",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                Authorization: getToken()
+            },
+            body: JSON.stringify({detail: param})
+        })
+        .then(res => {
+            return handleResponse(res, (json) => {
+                dispatch({type: 'UPDATE_DETAIL', payload: json.detail})
+                dispatch({type: 'SET_CURRENT_DETAIL', payload: json.detail})
+            })
+        })
+    }
+}
+
 

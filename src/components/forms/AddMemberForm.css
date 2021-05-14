@@ -1,3 +1,23 @@
 .add-member-form {
     margin-top: 20px;
 }
+
+.add-member-form input[type='submit'] {
+    padding: 5px;
+    background: transparent;
+    font-weight: bold;
+    color: var(--clr5);
+    border: 3px solid var(--clr5);
+    border-radius: 5px;
+    transition: all 0.3s ease; 
+    cursor: pointer;
+}
+
+.add-member-form input[type='submit']:hover {
+    background: rgba(0, 0, 0, 0.285);
+}
+
+
+.add-member-form input[type='text'] {
+    padding: 5px;
+}

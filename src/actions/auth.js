@@ -34,7 +34,7 @@ export const signupUser = (credentials) => {
         } else {
           return res.json().then((errors) => {
             dispatch({ type: 'NOT_AUTHENTICATED' });
-            return Promise.reject(errors);
+            return Promise.reject(errors.status.message);
           });
         }
       });
@@ -62,8 +62,8 @@ export const loginUser = (credentials) => {
           } else {
             return res.json()
             .then((errors) => {
-            dispatch({ type: 'NOT_AUTHENTICATED' });
-            return Promise.reject(errors);
+              dispatch({ type: 'NOT_AUTHENTICATED' });
+              return Promise.reject(errors.error);
             });
           }
         });

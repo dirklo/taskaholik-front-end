@@ -4,7 +4,7 @@
     right: 5%;
     padding: 10px;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.685);
-    height: 400px;
+    min-height: 400px;
     width: 300px;
     border-radius: 30px;
     background: rgba(0, 0, 0, 0.13);
@@ -20,7 +20,16 @@
 }
 
 .login-window .login-form input {
+    color: white;
     width: 90%;
+}
+
+.login-window .login-form input:-webkit-autofill,
+.login-window .login-form input:-webkit-autofill:hover,
+.login-window .login-form input:-webkit-autofill:focus,
+.login-window .login-form input:-webkit-autofill:active {
+    -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+    -webkit-transition-delay: 9999s;
 }
 
 .login-window .login-form input:focus {

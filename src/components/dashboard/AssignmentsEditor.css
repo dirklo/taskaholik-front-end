@@ -1,0 +1,46 @@
+
+.assignments-editor {
+    width: 100%;
+}
+
+.assignments-editor form input[type='submit'],
+.assignments-editor button {
+    background: transparent;
+    padding: 5px;
+    border: 2px solid var(--clr3);
+    border-radius: 3px;
+    color: var(--clr3);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.assignments-editor form input[type='submit']:hover,
+.assignments-editor button:hover {
+    background: rgba(115, 115, 115, 0.244);
+}
+
+.assignments-editor .assignment-card {
+    margin-bottom: 1px;
+    background: rgb(64, 42, 92);
+    color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.assignments-editor .assignment-card .name { 
+    flex: 1;
+}
+
+.assignments-editor .assignment-card svg { 
+    pointer-events: none;
+}
+
+.assignments-editor .assignment-card .remove-assignee-btn {
+    background: transparent;
+    border: none;
+    color: rgb(252, 134, 134);
+    cursor: pointer;
+}

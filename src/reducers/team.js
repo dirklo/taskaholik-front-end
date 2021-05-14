@@ -39,6 +39,18 @@ export default function teamReducer(state = initialState, action) {
                 ...state,
                 teams: [...state.teams, team]
             }
+        case "UPDATE_TEAM":
+            index = state.teams.findIndex(team => team.id = action.payload.id)
+            team = state.teams[index]
+            team.name = action.payload.name
+            return {
+                ...state, 
+                teams: [
+                    ...state.teams.slice(0, index),
+                    team,
+                    ...state.teams.slice(index + 1)
+                ]
+            }
         case "REMOVE_MEMBER":
             index = state.teams.findIndex(team => team.id === action.payload.teamId)
             team = state.teams[index]

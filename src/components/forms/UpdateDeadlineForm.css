@@ -1,0 +1,41 @@
+.update-deadline-form {
+    width: 100%;
+}
+
+.update-deadline-form .no-deadline,
+.update-deadline-form .deadline {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.update-deadline-form .update-deadline {
+    width: 100%;
+}
+
+.update-deadline-form .update-deadline button, 
+.update-deadline-form .update-deadline form input[type='submit'] {
+    margin: 5px;
+    background: transparent;
+    padding: 5px;
+    border: 2px solid var(--clr3);
+    border-radius: 3px;
+    color: var(--clr3);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.update-deadline-form .update-deadline button:hover,
+.update-deadline-form .update-deadline form input[type='submit']:hover {
+    background: rgba(115, 115, 115, 0.244);
+}
+
+.update-deadline-form .update-deadline .react-datepicker-wrapper {
+    width: 100%;
+}
+
+
+.update-deadline-form .update-deadline .react-datepicker-wrapper input {
+    padding: 5px;
+    width: 70%;
+}

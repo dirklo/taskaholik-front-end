@@ -21,7 +21,7 @@ class Signup extends React.Component {
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
-    });
+    })
   };
 
   handleFocus = (e) => {
@@ -40,13 +40,32 @@ class Signup extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { email, username, password } = this.state;
-    this.props.signupUser({ email, username, password })
-    .then(() => {
-      this.props.redirect('/teams/new')
-    })
-    .catch(() => this.setState({ error: true }));
+    if (this.state.password !== this.state.passwordConfirmation) {
+      this.setState({error: 'Passwords must match'})
+    } else {
+      const { email, username, password } = this.state;
+      this.props.signupUser({ email, username, password })
+      .then(() => {
+        this.props.redirect('/teams/new')
+      })
+      .catch((error) => {
+        this.setState({ error: error })
+      });
+    }
   };
+
+  passwordMatch = () => {
+    if (this.state.password !== '' 
+      && this.state.passwordConfirmation !== '') {
+        if (this.state.password !== this.state.passwordConfirmation) {
+          return 'no-match'
+        } else {
+          return 'match'
+        }
+    } else {
+      return ''
+    } 
+  }
 
   render() {
     return (
@@ -56,10 +75,10 @@ class Signup extends React.Component {
           className='signup-form'
         >
           <h1>Sign Up</h1>
-          {this.props.errors ?
+          {this.state.error !== '' ?
             <ErrorField 
-              error={this.props.error}
-              clearError={() => this.setState({...this.state, error: ''})}
+              error={this.state.error}
+              clearError={() => this.setState({error: ''})}
             />
           :
             null
@@ -99,6 +118,7 @@ class Signup extends React.Component {
             </label>
             <input
               type='password'
+              className={this.passwordMatch()}
               name='password'
               id='password'
               data-focus='passwordFocus'
@@ -114,6 +134,7 @@ class Signup extends React.Component {
             </label>
             <input
               type='password'
+              className={this.passwordMatch()}
               name='passwordConfirmation'
               id='password-confirmation'
               data-focus='passwordConfirmationFocus'
