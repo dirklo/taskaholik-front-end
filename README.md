@@ -17,7 +17,9 @@ https://github.com/dirklo/taskaholik-back-end
 -run `npm install`
 
 -check the `baseUrl` setting in `src/helpers/helpers.js`
+
 -use 'https://taskaholik-back-end.herokuapp.com' to run the deployed back-end or
+
 -use 'http://localhost:3001' to run the back end server locally.
 
 ## Usage Instructions
