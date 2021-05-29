@@ -13,11 +13,21 @@ export const populateTeams = (userId, preSelectId) => {
     }
 }
 
+export const loadTeamData = (teamId) => {
+    return (dispatch) => {
+        return fetch(`${baseUrl}/teams/${teamId}`)
+        .then((res) => {
+            return handleResponse(res, (teamData) => {
+                dispatch({ type: "POPULATE_PROJECTS", payload: teamData.projects})
+                dispatch({ type: "POPULATE_TASKS", payload: teamData.tasks})
+                dispatch({ type: "POPULATE_DETAILS", payload: teamData.details})
+            })
+        })
+    }
+}
+
 export const setCurrentTeam = (teamId) => {
     return (dispatch) => {
-        dispatch({type: "CLEAR_PROJECTS"})
-        dispatch({type: "CLEAR_TASKS"})
-        dispatch({type: "CLEAR_DETAILS"})
         dispatch({type: "SET_CURRENT_TEAM", payload: Number(teamId)})
     }
 }
@@ -28,7 +38,8 @@ export const addTeam = (teamName, currentUser) => {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': getToken()
             },
             body: JSON.stringify({
                 team: {
@@ -109,5 +120,13 @@ export const updateTeam = (teamId, param) => {
                 dispatch({type: "UPDATE_TEAM", payload: json.team})
             })
         })
+    }
+}
+
+export const clearTeam = () => {
+    return (dispatch) => {
+        dispatch({type: "CLEAR_DETAILS"})
+        dispatch({type: "CLEAR_TASKS"})
+        dispatch({type: "CLEAR_PROJECTS"})
     }
 }

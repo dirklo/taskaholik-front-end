@@ -1,26 +1,21 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom' 
 import './TeamCard.css'
-import { setCurrentTeam } from '../../actions/team'
 
-function TeamCard(props) {
+
+function TeamCard({ team, selectTeam }) {
     
-    let history = useHistory()
-
     return (
         <fieldset 
             className='team-card'
-            onClick={() => {               
-                props.setCurrentTeam(props.team.id)
-                history.push('/dashboard')
+            onClick={() => {
+                selectTeam()
             }}
         >
             <h2>
-                {props.team.name}
+                {team.name}
             </h2>
         </fieldset>
     )
 }
 
-export default connect(null, { setCurrentTeam })(TeamCard)
+export default TeamCard

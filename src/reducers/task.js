@@ -1,6 +1,5 @@
 const initialState = {
-    tasks: [],
-    taskComments: [],
+    tasks: []
   };
   
   export default function taskReducer(state = initialState, action) {
@@ -30,7 +29,7 @@ const initialState = {
                 tasks: newTasks
             }
         case "ADD_TASK":
-            let newTask = action.payload.task
+            let newTask = action.payload
             newTask.selected = true
             return {
                 ...state,
@@ -48,32 +47,10 @@ const initialState = {
                 ...state,
                 tasks: [...state.tasks.filter((task, idx) => idx !== index)]
             }
-        case "ADD_TASK_COMMENT":
-            return {
-                ...state,
-                taskComments: [
-                    ...state.taskComments, action.payload
-                ]
-            }
-        case "REMOVE_TASK_COMMENT":
-        index = state.taskComments.findIndex(item => item.id === Number(action.payload))
-        return {
-            ...state,
-            taskComments: [
-                ...state.taskComments.slice(0, index),
-                ...state.taskComments.slice(index + 1) 
-            ]
-        }
         case "CLEAR_TASKS":
             return {
                 ...state,
-                tasks: [],
-                taskComments: []
-            }
-        case "CLEAR_TASK_COMMENTS":
-            return {
-                ...state,
-                taskComments: []
+                tasks: []
             }
       default:
         return state;

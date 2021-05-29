@@ -1,28 +1,59 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import './DetailsColumn.css'
-import { checkAuth } from '../../actions/auth'
+import { useQuery, useMutation } from 'react-query'
+import { fetchTaskComments, createTaskComment, deleteTaskComment } from '../../queries/taskComments'
 import NewCommentForm from '../forms/NewCommentForm'
 import CommentCard from '../cards/CommentCard'
 import DetailsList from './DetailsList'
 
-function DetailsColumn({ comments }) {
+function DetailsColumn({ tasks }) {
+
+    const { isLoading, error, data: comments, refetch, remove } = useQuery("taskComments", fetchTaskComments)
+
+    const { mutate: mutateAddComment } = useMutation(createTaskComment, {
+        onSuccess: () => {
+            refetch()
+        }
+    })
+
+    const { mutate: mutateDeleteComment } = useMutation(deleteTaskComment, {
+        onSuccess: () => {
+            refetch()
+        }
+    })
+
+    useEffect(() => {
+        remove()
+        refetch()
+    }, [tasks, refetch, remove])
     
+    if (error) return "An Error Occured: " + error.message
+
+    console.log(comments)
+
     return (
         <section className='details-column'>
             <DetailsList />
             <br/>
             <br/>
             <section className='task-comments'>
-                <NewCommentForm commentType='task' />
+                <NewCommentForm 
+                    commentType='task' 
+                    addComment={(comment) => mutateAddComment(comment)}
+                    />
                 <div className='comment-container'>
-                    {comments.map(comment =>
-                        <CommentCard 
-                        key={comment.id} 
-                        comment={comment} 
-                        commentType="task" 
-                        />
-                    )}
+                    {!isLoading && comments ?
+                        comments.map(comment =>
+                            <CommentCard 
+                            key={comment.id} 
+                            comment={comment} 
+                            commentType="task" 
+                            deleteComment={(comment) => mutateDeleteComment(comment)} 
+                            />
+                        )
+                        : "LOADING..."
+                    }
                 </div>
             </section>
         </section>
@@ -31,8 +62,9 @@ function DetailsColumn({ comments }) {
 
 export default connect((state) => {
     return {
-        comments: state.task.taskComments
+        comments: state.task.taskComments,
+        tasks: state.task.tasks
     }
-}, { checkAuth })(DetailsColumn)
+})(DetailsColumn)
 
 

@@ -1,13 +1,11 @@
 import React from 'react'
 import './CommentCard.css'
 import { connect } from 'react-redux'
-import { removeTaskComment } from '../../actions/task'
-import { removeDetailComment } from '../../actions/detail'
 import { parseTimestamp } from '../../helpers/helpers'
 import Delete from '@material-ui/icons/Delete'
 import ChatBubble from '@material-ui/icons/ChatBubble'
 
-function CommentCard({ comment, currentUser, commentType, removeTaskComment, removeDetailComment }) {
+function CommentCard({ comment, currentUser, commentType, deleteComment, removeDetailComment }) {
 
     return (
         <div className="comment-card">
@@ -16,23 +14,7 @@ function CommentCard({ comment, currentUser, commentType, removeTaskComment, rem
                         <div 
                             className='delete-btn'
                             data-id={comment.id}
-                            onClick={(e) => {
-                                switch (commentType) {
-                                    case 'task':
-                                        removeTaskComment(
-                                            e.target.dataset.id, 
-                                            currentUser.id
-                                        )
-                                    break
-                                    case 'detail':
-                                        removeDetailComment(
-                                            e.target.dataset.id, 
-                                            currentUser.id
-                                        )
-                                    break
-                                    default:
-                                }
-                            }}
+                            onClick={(e) => deleteComment(e.target.dataset.id)}
                         >
                             <Delete className='delete-icon' />
                         </div>
@@ -44,7 +26,7 @@ function CommentCard({ comment, currentUser, commentType, removeTaskComment, rem
             </div>
             <div className="author-div">
                 <ChatBubble/>
-                <span>{comment.author}</span>
+                <span>{comment.author.username}</span>
             </div>
         </div>
     )
@@ -55,4 +37,4 @@ export default connect((state) => {
     return {
         currentUser: state.auth.currentUser
     }
-}, { removeTaskComment, removeDetailComment })(CommentCard)
+},)(CommentCard)

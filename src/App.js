@@ -13,6 +13,10 @@ import loadData from './components/auth/loadData'
 import Landing from './components/pages/Landing'
 
 export default class App extends Component {
+  componentDidMount(){
+    document.title = "Taskaholik"
+  }
+
   render() {
     return (
       <div className="App">

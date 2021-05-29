@@ -1,16 +1,23 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import './TaskWorkspace.css'
 import DetailsColumn from './DetailsColumn'
 import DetailEditor from './DetailEditor'
-import { currentTask } from '../../helpers/helpers'
+import { currentTask, currentDetail } from '../../helpers/helpers'
 
-export default function TaskWorkspace() {
+function TaskWorkspace() {
 
     if (currentTask()) {
         return (
             <section className='task-workspace'>
-                <DetailsColumn />
-                <DetailEditor />
+                {currentTask() ?
+                    <DetailsColumn />
+                : null
+                }
+                {currentDetail() ?
+                    <DetailEditor />
+                : null
+                }
             </section>
         )
     } else {
@@ -22,7 +29,14 @@ export default function TaskWorkspace() {
             </section>
         )
     }
-
 }
+
+export default connect((state) => {
+    return {
+        details: state.detail.details,
+        tasks: state.task.tasks
+    }
+})(TaskWorkspace)
+
 
 

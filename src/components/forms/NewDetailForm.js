@@ -4,17 +4,28 @@ import "react-datepicker/dist/react-datepicker.css"
 import { connect } from 'react-redux'
 import { addDetail } from '../../actions/detail'
 import { currentTask } from '../../helpers/helpers'
+import { updateUserSelections } from '../../actions/auth'
 import ErrorField from '../ErrorField'
 import Close from '@material-ui/icons/Close'
 import DatePicker from 'react-datepicker'
 
-function NewDetailForm({ currentUser, addDetail }) {
+function NewDetailForm({ currentUser, addDetail, updateUserSelections }) {
 
     const [content, setContent] = useState('')
     const [deadline, setDeadline] = useState(null)
     const [showForm, setShowForm] = useState(false)
     const [error, setError] = useState('')
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (!error) {
+            setShowForm(false)
+            setContent('')
+        }
+        addDetail(content, currentTask(), currentUser, deadline)
+        .catch((error) => {setError(error)})
+        updateUserSelections(currentUser.id)
+    }
     return (
         <div className="new-detail-form">
             { error ?
@@ -39,15 +50,7 @@ function NewDetailForm({ currentUser, addDetail }) {
                         <Close />
                     </button>
                     <form
-                        onSubmit={(e) => {
-                            e.preventDefault()
-                            if (!error) {
-                                setShowForm(false)
-                                setContent('')
-                            }
-                            addDetail(content, currentTask(), currentUser, deadline)
-                            .catch((error) => {setError(error)})
-                        }}
+                        onSubmit={(e) => handleSubmit(e)}
                     >
                         <label htmlFor="add-detail">
                             Description:
@@ -90,6 +93,6 @@ export default connect((state) => {
     return {
        currentUser: state.auth.currentUser
     }
-}, { addDetail } )(NewDetailForm)
+}, { addDetail, updateUserSelections } )(NewDetailForm)
 
 

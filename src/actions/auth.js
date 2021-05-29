@@ -1,4 +1,4 @@
-import { baseUrl } from '../helpers/helpers' 
+import { baseUrl, currentTeam, currentProject, currentTask, currentDetail } from '../helpers/helpers' 
 
 const setToken = (token) => {
   localStorage.setItem("token", token);
@@ -114,3 +114,29 @@ export const checkAuth = () => {
       });
     };
   };
+
+export const updateUserSelections = (currentUserId) => {
+  const selectionObj = {
+    selected_team: currentTeam() ? currentTeam().id : null,
+    selected_project: currentProject() ? currentProject().id : null,
+    selected_task: currentTask() ? currentTask().id : null,
+    selected_detail: currentDetail() ? currentDetail().id : null
+  }
+  
+  return (dispatch) => {
+    dispatch({type: 'SET_USER_SELECTED', payload: selectionObj})
+    return fetch(`${baseUrl}/users/${currentUserId}/set_selected`, {
+      method: 'PATCH',
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: getToken()
+      },
+      body: JSON.stringify(
+         selectionObj
+      )
+    }).then((res) => {
+      return res
+    });
+  };
+}

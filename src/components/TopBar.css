@@ -27,7 +27,8 @@
 
 .top-bar button {
     top: 5px; 
-    right:5px;
+    right: 5px;
+    margin-right: 5px;
     background: transparent;
     color: white;
     padding: 5px;

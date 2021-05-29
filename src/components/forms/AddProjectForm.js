@@ -8,15 +8,17 @@ function AddProjectForm({ addProject, currentUser, showOverlay, setShowOverlay }
     const [title, setTitle] = useState('')
     const [deadline, setDeadline] = useState(Date.now())
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        addProject(title, currentTeam(), currentUser, deadline)
+        setShowOverlay(false)
+    }
+
     return (
         <div className={showOverlay ? "add-project-form show" : "add-project-form hide"}>
             <form 
                 action=""
-                onSubmit={(e) => {
-                    e.preventDefault()
-                    addProject(title, currentTeam(), currentUser, deadline)
-                    setShowOverlay(false)
-                }}
+                onSubmit={(e) => handleSubmit(e)}
             >   
                 <label htmlFor="title">Project Name:</label> 
                 <br/>

@@ -2,7 +2,7 @@ const initialState = {
     projects: []
 };
   
-export default function populateReducer(state = initialState, action) {
+export default function projectReducer(state = initialState, action) {
     let newProjects
 
     switch (action.type) {

@@ -34,3 +34,14 @@
 .team-select a:hover {
     background-color: rgba(60, 20, 60, 0.374);
 }
+
+@media (max-width: 480px) {
+    .team-select .team-card-container .title{
+        text-align: center;
+    }
+
+    .team-select .team-card-container {
+        width: 100%;
+        text-align: left;
+    }
+}

@@ -1,40 +1,27 @@
 import { baseUrl, handleResponse } from '../helpers/helpers' 
 import { getToken } from './auth'
 
-export const populateDetails = (taskId) => {
-    return (dispatch) => {
-        return fetch(`${baseUrl}/details?taskId=${taskId}`, {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: getToken()
-            }
-        })
-        .then(res => {
-            return handleResponse(res, (details) => {
-                details.map(detail => detail['selected'] = false)
-                dispatch({type: "POPULATE_DETAILS", payload: details})
-            })
-        })
-    }
-}
+// export const populateDetails = (taskId) => {
+//     return (dispatch) => {
+//         return fetch(`${baseUrl}/details?taskId=${taskId}`, {
+//             headers: {
+//                 Accept: 'application/json',
+//                 'Content-Type': 'application/json',
+//                 Authorization: getToken()
+//             }
+//         })
+//         .then(res => {
+//             return handleResponse(res, (details) => {
+//                 details.map(detail => detail['selected'] = false)
+//                 dispatch({type: "POPULATE_DETAILS", payload: details})
+//             })
+//         })
+//     }
+// }
 
 export const setCurrentDetail = (detailId) => {
     return (dispatch) => {
-        return fetch(`${baseUrl}/details/${detailId}`, {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: getToken()
-            }
-        })
-        .then(res => {
-            return handleResponse(res, (json) => {
-                dispatch({type: "SET_CURRENT_DETAIL", payload: json.detail})
-                dispatch({type: "POPULATE_DETAIL_COMMENTS", payload: json.comments})
-                dispatch({type: "POPULATE_DETAIL_ASSIGNEES", payload: json.assignees})
-            })
-        })
+        dispatch({type: "SET_CURRENT_DETAIL", payload: detailId})
     }
 }
 
@@ -78,7 +65,48 @@ export const addDetail = (content, currentTask, currentUser, deadline) => {
         })
         .then(res => {
             return handleResponse(res, (json) => {
-                dispatch({type: 'ADD_DETAIL', payload: json})
+                dispatch({ type: "ADD_DETAIL", payload: json.detail})
+                dispatch({ type: "SET_CURRENT_DETAIL", payload: json.detail.id })
+                dispatch({
+                    type: "SET_USER_SELECTED", 
+                    payload: {
+                        'selected_detail': json.detail.id
+                    }
+                })
+            })
+        })
+    }
+}
+
+export const populateDetailComments = (detailId) => {
+    return (dispatch) => {
+        return fetch(`${baseUrl}/detail_comments?detail_id=${detailId}`, {
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                Authorization: getToken()
+            }
+        })
+        .then(res => {
+            return handleResponse(res, (comments) => {
+                dispatch({type: "POPULATE_DETAIL_COMMENTS", payload: comments})
+            })
+        })
+    }
+}
+
+export const populateDetailAssignees = (detailId) => {
+    return (dispatch) => {
+        return fetch(`${baseUrl}/assignments?detail_id=${detailId}`, {
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                Authorization: getToken()
+            }
+        })
+        .then(res => {
+            return handleResponse(res, (assignees) => {
+                dispatch({type: "POPULATE_DETAIL_COMMENTS", payload: assignees})
             })
         })
     }
@@ -148,6 +176,7 @@ export const deleteDetail = (detailId) => {
         .then(res => {
             return handleResponse(res, (json) => {
                 dispatch({type: 'DELETE_DETAIL', payload: detailId})
+                dispatch({type: 'SET_USER_SELECTED', payload: {selected_detail: null}})
             })
         })
     }

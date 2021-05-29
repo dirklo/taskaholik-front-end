@@ -97,7 +97,6 @@ class Signup extends React.Component {
               value={this.state.username}
             />
             <br/>
-            <br/>
             <label htmlFor='email' className={this.state.emailFocus ? 'focus' : ''}>
               Email
             </label>
@@ -111,7 +110,6 @@ class Signup extends React.Component {
               onBlur={this.handleBlur}
               value={this.state.email}
             />
-            <br/>
             <br/>
             <label htmlFor='password' className={this.state.passwordFocus ? 'focus' : ''}>
               Password
@@ -128,7 +126,6 @@ class Signup extends React.Component {
               value={this.state.password}
             />
             <br/>
-            <br/>
             <label htmlFor='password-confirmation' className={this.state.passwordConfirmationFocus ? 'focus' : ''}>
               Password Confirmation
             </label>
@@ -144,7 +141,6 @@ class Signup extends React.Component {
               value={this.state.passwordConfirmation}
             />
             <br/>
-            <br/>
           <input
             type='submit'
             value='Sign Up'
@@ -152,7 +148,7 @@ class Signup extends React.Component {
         </form>
         <button 
           type='button'
-          onClick={this.props.showLogin}
+          onClick={this.props.showSignup}
         >
           Existing User?
         </button>

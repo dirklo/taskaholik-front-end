@@ -27,7 +27,7 @@ export function parseTimestamp(timestamp) {
 
 export const handleResponse = (res, callback) => {
     if (res.ok) {
-        res.json().then(json => callback(json))
+        return res.json().then(json => callback(json))
     } else {
         if (res.status === 401) {window.location.href = '/'}
         return res.json().then(json => Promise.reject(json.message))

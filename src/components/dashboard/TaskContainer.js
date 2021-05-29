@@ -7,14 +7,20 @@ import TaskWorkspace from '../dashboard/TaskWorkspace'
 import NewTaskForm from '../forms/NewTaskForm'
 import ErrorField from '../ErrorField'
 import { setCurrentTask } from '../../actions/task'
-import { populateDetails } from '../../actions/detail'
+import { setCurrentDetail } from '../../actions/detail'
 import { deleteProject } from '../../actions/project'
+import { updateUserSelections } from '../../actions/auth'
 import { currentProject, parseTimestamp, currentTeam } from '../../helpers/helpers'
 import DeleteOutline from '@material-ui/icons/DeleteOutline'
 
-function TaskContainer({ tasks, setCurrentTask, populateDetails, currentUser, deleteProject, loggedIn }) {
+function TaskContainer({ tasks, setCurrentTask, setCurrentDetail, currentUser, deleteProject, updateUserSelections }) {
 
     const [error, setError] = useState('')
+
+    let currentTasks
+    if (currentProject()) {
+        currentTasks = [...tasks.filter(task => task.project_id === currentProject().id)]
+    }
 
     return (
         <div className='task-container'>
@@ -56,13 +62,14 @@ function TaskContainer({ tasks, setCurrentTask, populateDetails, currentUser, de
                         }
                         <h1>Project Goals:</h1>
                         <NewTaskForm />
-                        {tasks.map(task => 
+                        {currentTasks.map(task => 
                             <TaskCard
                                 key={task.id}
                                 task={task}
                                 loadTask={(e) => {
-                                    setCurrentTask(e.target.id)
-                                    populateDetails(e.target.id)
+                                    setCurrentTask(Number(e.target.id))
+                                    setCurrentDetail(null)
+                                    updateUserSelections(currentUser.id)
                                 }}
                             />
                         )}
@@ -86,4 +93,4 @@ export default connect((state) => {
         teams: state.team.teams,
         loggedIn: state.auth.loggedIn
     }
-}, { setCurrentTask, populateDetails, deleteProject })(TaskContainer)
+}, { setCurrentTask, deleteProject, setCurrentDetail, updateUserSelections })(TaskContainer)

@@ -83,3 +83,18 @@
 .signup-window .signup-form .no-match {
     border-bottom: 3px solid red !important;
 }
+
+@media (max-width: 480px) {
+    .signup-window {
+        position: relative;
+        top: 0;
+        right: 0;
+        min-height: 0;
+        height: 500px;
+        background: rgba(0, 0, 0, 0.476);
+    }
+
+    .signup-window signup-form {
+        height: 100%;
+    }
+}

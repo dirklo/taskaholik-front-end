@@ -1,15 +1,29 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import './ToolbarContainer.css'
 import AddProjectForm from '../forms/AddProjectForm'
+import { updateUserSelections } from '../../actions/auth'
 import { setCurrentProject } from '../../actions/project'
-import { populateTasks } from '../../actions/task'
+import { setCurrentTask } from '../../actions/task'
+import { setCurrentDetail } from '../../actions/detail'
+// import { populateTasks } from '../../actions/task'
 import { currentTeam } from '../../helpers/helpers'
+import { clearTeam } from '../../actions/team'
 
-function ToolbarContainer({ projects, setCurrentProject, populateTasks }) {
+function ToolbarContainer({ 
+    projects, 
+    setCurrentProject, 
+    setCurrentTask, 
+    setCurrentDetail,
+    clearTeam,
+    updateUserSelections, 
+    currentUser 
+}) {
 
     const [showOverlay, setShowOverlay] = useState(false)
+
+    const history = useHistory()
 
     return (
         <div className='toolbar-container'>
@@ -24,7 +38,19 @@ function ToolbarContainer({ projects, setCurrentProject, populateTasks }) {
             <h2>{currentTeam().name}</h2>
             
             <br/>
-            <Link to='/teams'>Manage Teams</Link>
+            <button 
+                type='button'
+                onClick={() => {
+                    setCurrentProject(null)
+                    setCurrentTask(null)
+                    setCurrentDetail(null)
+                    updateUserSelections(currentUser.id)
+                    clearTeam()
+                    history.push('./teams')
+                }}
+            >
+                Manage Teams
+            </button>
             <br/>
             <hr/>
             <h2>Projects:</h2>
@@ -45,7 +71,9 @@ function ToolbarContainer({ projects, setCurrentProject, populateTasks }) {
                     className={project.selected ? "project-card selected" : "project-card"}
                     onClick={() => {
                         setCurrentProject(project.id)
-                        populateTasks(project.id)
+                        setCurrentTask(null)
+                        setCurrentDetail(null)
+                        updateUserSelections(currentUser.id)
                     }}
                     >
                         {project.title}
@@ -59,6 +87,13 @@ function ToolbarContainer({ projects, setCurrentProject, populateTasks }) {
 
 export default connect((state) => {
     return {
-        projects: state.project.projects
+        projects: state.project.projects,
+        currentUser: state.auth.currentUser
     }
-}, { setCurrentProject, populateTasks })(ToolbarContainer)
+}, { 
+    setCurrentProject, 
+    setCurrentTask, 
+    setCurrentDetail,
+    clearTeam,
+    updateUserSelections 
+})(ToolbarContainer)

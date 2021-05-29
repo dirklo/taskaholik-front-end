@@ -1,18 +1,17 @@
 const initialState = {
     details: [],
-    detailComments: [],
     detailAssignees: []
 };
 
   
-export default function populateReducer(state = initialState, action) {
+export default function detailReducer(state = initialState, action) {
     let index;
     let detail;
     
     switch (action.type) {
         case "SET_CURRENT_DETAIL":
             let newDetails = state.details.map(detail => {
-                if (detail.id === action.payload.id) {
+                if (detail.id === Number(action.payload)) {
                     return {...detail, selected: true}
                 } else {
                     return {...detail, selected: false}
@@ -21,11 +20,6 @@ export default function populateReducer(state = initialState, action) {
             return {
                 ...state,
                 details: newDetails
-            }
-        case "POPULATE_DETAIL_COMMENTS":
-            return {
-                ...state,
-                detailComments: [...action.payload]
             }
         case "POPULATE_DETAIL_ASSIGNEES":
             return {
@@ -52,7 +46,7 @@ export default function populateReducer(state = initialState, action) {
                 ]
             }
         case "ADD_DETAIL":
-            let newDetail = action.payload.detail
+            let newDetail = action.payload
             newDetail.selected = true
             return {
                 ...state,
@@ -79,27 +73,10 @@ export default function populateReducer(state = initialState, action) {
                 ...state,
                 details: [...state.details.filter(detail => detail.id !== action.payload)]
             }
-        case "ADD_DETAIL_COMMENT":
-        return {
-            ...state,
-            detailComments: [
-                ...state.detailComments, action.payload
-            ]
-        }
-        case "REMOVE_DETAIL_COMMENT":
-        index = state.detailComments.findIndex(detail => detail.id === Number(action.payload))
-        return {
-            ...state,
-            detailComments: [
-                ...state.detailComments.slice(0, index),
-                ...state.detailComments.slice(index + 1) 
-            ]
-        }
         case "CLEAR_DETAILS":
             return {
                 ...state,
                 details: [],
-                detailComments: [],
                 detailAssignees: []
             }
         case "ADD_ASSIGNEE":
@@ -118,8 +95,13 @@ export default function populateReducer(state = initialState, action) {
                     ...state.detailAssignees.slice(index + 1) 
                 ]
             }
+        case "TASK_CLEANUP":
+            let cleanDetails = state.details
+            return {
+                ...state,
+                details: [...cleanDetails.filter(detail => detail.taskId !== action.payload)]
+            }
         default:
             return state;
-        
     }
 }

@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import './NewCommentForm.css'
-import { addTaskComment } from '../../actions/task'
-import { addDetailComment } from '../../actions/detail'
-import { currentTask, currentDetail } from '../../helpers/helpers'
 import ErrorField from '../ErrorField'
 
-function NewCommentForm({ currentUser, commentType, addTaskComment, addDetailComment, tasks }) {
+function NewCommentForm({ commentType, addComment, tasks }) {
     const [content, setContent] = useState('')
     const [error, setError] = useState('')
 
@@ -17,25 +14,7 @@ function NewCommentForm({ currentUser, commentType, addTaskComment, addDetailCom
             <form 
                 onSubmit={(e) => {
                     e.preventDefault()
-                    switch (commentType) {
-                        case 'task':
-                            addTaskComment(
-                                currentTask().id, 
-                                content,  
-                                currentUser.id, 
-                                currentUser.username
-                            ).catch(error => {setError(error)})
-                            break
-                        case 'detail':
-                            addDetailComment(
-                                currentDetail().id, 
-                                content,  
-                                currentUser.id, 
-                                currentUser.username
-                            ).catch(error => setError(error))
-                            break
-                        default:
-                    }
+                    addComment(content)
                     setContent('')
                 }}
             >
@@ -69,6 +48,6 @@ export default connect((state) => {
         tasks: state.task.tasks,
         details: state.detail.details
     }
-}, { addTaskComment, addDetailComment })(NewCommentForm)
+})(NewCommentForm)
 
 

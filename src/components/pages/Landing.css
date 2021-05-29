@@ -15,6 +15,7 @@
     justify-content: center;
     align-items: center;
     animation: change 10s ease-in-out infinite;
+    overflow: hidden;
 }
 
 @keyframes change {
@@ -111,4 +112,90 @@
     width: 90%;
     font-size: 25px;
     letter-spacing: 5px;
+}
+
+@media (max-width: 480px) {
+    .landing .landing-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .landing .landing-content .title {
+        position: absolute;
+        width: 280px;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .landing .landing-content .title .logo {
+        position: relative;
+        left: 0;
+        top: 0;
+        height: 100px;
+        background-image: url(../../img/TaskaholikLogoSm.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    
+    .landing .landing-content .title .letters {
+        position: relative;
+        right: 20px;
+        top: 18px;
+        font-size: 30px;
+        letter-spacing: 5px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.514);
+    }
+
+    .landing .landing-content .subtext {
+        position: relative;
+        text-align: center;
+        left: 0;
+        top: 0;
+        height: auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .landing .landing-content .subtext h2 {
+        font-size: 35px;
+    }
+
+    .landing .landing-content .splash {
+        position: absolute;
+        width: 320px;
+        height: 190px;
+        background-image: url(../../img/splash.png);
+        background-size: contain;
+        background-repeat: no-repeat;;
+    }
+
+    .landing .login-buttons button {
+        background: transparent;
+        font-weight: bold;
+        font-size: 20px;
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+        border: 3px solid white;
+        transition: all 0.3s ease;
+    }
+
+    .landing .login-buttons button:hover {
+        transform: scale(1.1);
+        background-color: rgba(128, 128, 128, 0.456);
+    }
+
+    .landing .login-buttons button:focus {
+        outline: none;
+    }
 }

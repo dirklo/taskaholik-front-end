@@ -28,7 +28,9 @@
 .login-window .login-form input:-webkit-autofill:hover,
 .login-window .login-form input:-webkit-autofill:focus,
 .login-window .login-form input:-webkit-autofill:active {
+    transition: "color 9999s ease-out, background-color 9999s ease-out";
     -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+    transition-delay: 9999s;
     -webkit-transition-delay: 9999s;
 }
 
@@ -83,4 +85,12 @@
 .login-window button {
     margin: 20px 0 0 20px;
     align-self: flex-end;
+}
+
+@media (max-width: 480px) {
+    .login-window {
+        position: relative;
+        top: 0;
+        right: 0;
+    }
 }

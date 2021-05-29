@@ -1,31 +1,9 @@
 import { baseUrl, handleResponse } from '../helpers/helpers'
 import { getToken } from '../actions/auth'
 
-export const populateProjects = (teamId) => {
-    return async (dispatch) => {
-        return await fetch(`${baseUrl}/projects?teamId=${teamId}`, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': getToken()
-            }
-        })
-        .then((res) => {
-            return handleResponse(res, (projects) => {
-                projects.map(project => project['selected'] = false)
-                dispatch({ type: "CLEAR_DETAILS" })
-                dispatch({ type: "CLEAR_TASKS" })
-                dispatch({ type: "POPULATE_PROJECTS", payload: projects})
-            })
-        })
-    }
-};
-
-export const setCurrentProject = (projectId) => {
+export const setCurrentProject = (projectId, currentUserId) => {
     return (dispatch) => {
         dispatch({ type: "SET_CURRENT_PROJECT", payload: projectId })
-        dispatch({ type: "CLEAR_DETAILS" })
-        dispatch({ type: "CLEAR_TASKS" })
     }
 }
 
@@ -47,10 +25,16 @@ export const addProject = (projectName, currentTeam, currentUser, deadline) => {
         })
         .then(res => {
             return handleResponse(res, (json) => {
-                dispatch({ type: "CLEAR_DETAILS" })
-                dispatch({ type: "CLEAR_TASKS" })
                 dispatch({ type: "ADD_PROJECT", payload: json.project})
                 dispatch({ type: "SET_CURRENT_PROJECT", payload: json.project.id })
+                dispatch({
+                    type: "SET_USER_SELECTED", 
+                    payload: {
+                        'selected_project': json.project.id,
+                        'selected_task': null,
+                        'selected_detail': null
+                    }
+                })
             })
         })
     }
@@ -69,8 +53,6 @@ export const deleteProject = (projectId, currentUser) => {
         })
         .then(res => {
             return handleResponse(res, () => {
-                dispatch({ type: "CLEAR_DETAILS" })
-                dispatch({ type: "CLEAR_TASKS" })
                 dispatch({ type: 'DELETE_PROJECT', payload: projectId })
             }) 
         })
