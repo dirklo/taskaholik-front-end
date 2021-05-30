@@ -34,5 +34,5 @@ export const handleResponse = (res, callback) => {
     }
 } 
 
-// export const baseUrl = 'https://taskaholik-back-end.herokuapp.com'
-export const baseUrl = 'http://localhost:3001'
+export const baseUrl = 'https://taskaholik-back-end.herokuapp.com'
+// export const baseUrl = 'http://localhost:3001'

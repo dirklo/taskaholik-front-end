@@ -10,6 +10,7 @@ function AddMemberForm({ addMember }) {
 
     return (
         <div className="new-member-form">
+            <h3>Search for team members by email or username:</h3>
             <form
                 onSubmit={(e) => {
                     e.preventDefault()

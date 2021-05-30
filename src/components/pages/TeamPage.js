@@ -26,28 +26,30 @@ function TeamPage({ currentUser, setCurrentProject, setCurrentTask, setCurrentDe
                 <Link to="/dashboard">Dashboard</Link>
             </section>
             {currentTeam() ? 
-                <section className="team-options">
-                    <div className="members">
-                        <h2>Leader:</h2>
-                        <MemberCard 
-                            member={currentTeam().leader} 
-                            removable='false' 
-                        />
-                        <h2>Members:</h2>
-                        {currentTeam().members.map(member => 
-                            <MemberCard
-                                key={member.id} 
-                                member={member} 
-                                removable={currentUser.id === currentTeam().leader.id ? 
-                                    'true' : 'false'} 
+                <>
+                    <section className="team-options">
+                        <div className="members">
+                            <h2>Leader:</h2>
+                            <MemberCard 
+                                member={currentTeam().leader} 
+                                removable='false' 
                             />
-                        )}
-                    <NewMemberForm />
-                    </div>
-                    <div className="settings">
+                            <h2>Members:</h2>
+                            {currentTeam().members.map(member => 
+                                <MemberCard
+                                    key={member.id} 
+                                    member={member} 
+                                    removable={currentUser.id === currentTeam().leader.id ? 
+                                        'true' : 'false'} 
+                                />
+                            )}
+                        <NewMemberForm />
+                        </div>
+                    </section>
+                    <section className="settings">
                         <ChangeTeamNameForm />
-                    </div>
-                </section>
+                    </section>
+                </>
             : null
             }
         </div>

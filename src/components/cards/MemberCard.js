@@ -6,10 +6,14 @@ import { removeMember } from '../../actions/team'
 function MemberCard(props) {
     let currentTeam = props.teams.find(team => team.selected === true) 
     return (
-        <fieldset className='member-card'>
-            <h2>{props.member.username}</h2>
-            &nbsp;-&nbsp; 
-            <h3>{props.member.email}</h3>
+        <div className='member-card'>
+            <div className='name-div'>
+                <div className='avatar'>
+                    {props.member.username[0]}
+                </div>
+                <h2>{props.member.username}</h2>
+            </div>
+            <h3 className='email'>{props.member.email}</h3>
             {props.removable === 'true' ? 
                 <button
                     className='delete-member-button'
@@ -24,7 +28,7 @@ function MemberCard(props) {
             :
                 null
             }
-        </fieldset>
+        </div>
     )
 }
 
