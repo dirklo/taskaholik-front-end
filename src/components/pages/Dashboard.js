@@ -2,7 +2,7 @@ import React, { useEffect, useState, useLayoutEffect } from 'react'
 import { connect } from 'react-redux'
 import './Dashboard.css'
 import TaskContainer from '../dashboard/TaskContainer'
-import ToolbarContainer from '../dashboard/ToolbarContainer'
+import TeamToolbar from '../dashboard/TeamToolbar'
 import MobileDashboard from '../dashboard/MobileDashboard'
 import { loadTeamData, setCurrentTeam }  from '../../actions/team'
 import { currentTeam } from '../../helpers/helpers'
@@ -31,7 +31,7 @@ function Dashboard({ loadTeamData, currentUser, setCurrentTeam }) {
         return (
             <div className='dashboard'>
                 <TaskContainer />
-                <ToolbarContainer />
+                <TeamToolbar />
             </div>
         )
     } else {

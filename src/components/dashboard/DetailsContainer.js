@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import './DetailsColumn.css'
+import './DetailsContainer.css'
 import { useQuery, useMutation } from 'react-query'
 import { fetchTaskComments, createTaskComment, deleteTaskComment } from '../../queries/taskComments'
 import NewCommentForm from '../forms/NewCommentForm'
@@ -33,7 +33,7 @@ function DetailsColumn({ tasks }) {
     console.log(comments)
 
     return (
-        <section className='details-column'>
+        <section className='details-container'>
             <DetailsList />
             <br/>
             <br/>

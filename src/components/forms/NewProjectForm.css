@@ -1,4 +1,4 @@
-.add-project-form {
+.new-project-form {
     position: absolute; 
     top: 50%;
     left: 50%;
@@ -6,13 +6,13 @@
     z-index: 12;
 }
 
-.add-project-form input {
+.new-project-form input {
     width: 300px;
     padding: 10px;
     border-radius: 5px;
 }
 
-.add-project-form input[type="submit"] {
+.new-project-form input[type="submit"] {
     background: darkslateblue;
     color: white
 }

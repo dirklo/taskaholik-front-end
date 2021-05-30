@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './AddMemberForm.css'
+import './NewMemberForm.css'
 import { currentTeam } from '../../helpers/helpers'
 import { connect } from 'react-redux' 
 import { addMember } from '../../actions/team'
@@ -9,7 +9,7 @@ function AddMemberForm({ addMember }) {
     const [query, setQuery] = useState('')
 
     return (
-        <div className="add-member-form">
+        <div className="new-member-form">
             <form
                 onSubmit={(e) => {
                     e.preventDefault()

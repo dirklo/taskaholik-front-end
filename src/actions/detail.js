@@ -1,24 +1,6 @@
 import { baseUrl, handleResponse } from '../helpers/helpers' 
 import { getToken } from './auth'
 
-// export const populateDetails = (taskId) => {
-//     return (dispatch) => {
-//         return fetch(`${baseUrl}/details?taskId=${taskId}`, {
-//             headers: {
-//                 Accept: 'application/json',
-//                 'Content-Type': 'application/json',
-//                 Authorization: getToken()
-//             }
-//         })
-//         .then(res => {
-//             return handleResponse(res, (details) => {
-//                 details.map(detail => detail['selected'] = false)
-//                 dispatch({type: "POPULATE_DETAILS", payload: details})
-//             })
-//         })
-//     }
-// }
-
 export const setCurrentDetail = (detailId) => {
     return (dispatch) => {
         dispatch({type: "SET_CURRENT_DETAIL", payload: detailId})
@@ -78,23 +60,6 @@ export const addDetail = (content, currentTask, currentUser, deadline) => {
     }
 }
 
-export const populateDetailComments = (detailId) => {
-    return (dispatch) => {
-        return fetch(`${baseUrl}/detail_comments?detail_id=${detailId}`, {
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                Authorization: getToken()
-            }
-        })
-        .then(res => {
-            return handleResponse(res, (comments) => {
-                dispatch({type: "POPULATE_DETAIL_COMMENTS", payload: comments})
-            })
-        })
-    }
-}
-
 export const populateDetailAssignees = (detailId) => {
     return (dispatch) => {
         return fetch(`${baseUrl}/assignments?detail_id=${detailId}`, {
@@ -111,57 +76,6 @@ export const populateDetailAssignees = (detailId) => {
         })
     }
 }
-
-export const addDetailComment = (detailId, content, authorId, author) => {
-    return (dispatch) => {
-        return fetch(`${baseUrl}/detail_comments`, {
-            method: 'POST',
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                Authorization: getToken()
-            },
-            body: JSON.stringify({
-                detail_comment: {
-                    detail_id: detailId,
-                    content: content, 
-                    author_id: authorId
-                }
-            })
-        })
-        .then(res => {
-            return handleResponse(res, (json) => {
-                dispatch(
-                    {type: "ADD_DETAIL_COMMENT", 
-                        payload: {
-                            ...json.comment,
-                            author: author,
-                        }
-                    }
-                )
-            })
-        })
-    }
-}
-
-export const removeDetailComment = (commentId, currentUserId) => {
-    return (dispatch) => {
-        return fetch(`${baseUrl}/detail_comments/${commentId}`, {
-            method: 'DELETE',
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                Authorization: getToken()
-            },
-            body: JSON.stringify({detail_comment: {user_id: currentUserId}})
-        })
-        .then(res => {
-            return handleResponse(res, (json) => {
-                dispatch({type: "REMOVE_DETAIL_COMMENT", payload: commentId})
-            })
-        })
-    }
-} 
 
 export const deleteDetail = (detailId) => {
     return (dispatch) => {

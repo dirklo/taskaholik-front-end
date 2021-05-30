@@ -1,7 +1,7 @@
 import { baseUrl, handleResponse } from '../helpers/helpers'
 import { getToken } from '../actions/auth'
 
-export const setCurrentProject = (projectId, currentUserId) => {
+export const setCurrentProject = (projectId) => {
     return (dispatch) => {
         dispatch({ type: "SET_CURRENT_PROJECT", payload: projectId })
     }

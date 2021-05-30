@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import "./AddProjectForm.css"
+import "./NewProjectForm.css"
 import { connect } from 'react-redux'
 import { addProject } from '../../actions/project' 
 import { currentTeam } from '../../helpers/helpers'
@@ -15,7 +15,7 @@ function AddProjectForm({ addProject, currentUser, showOverlay, setShowOverlay }
     }
 
     return (
-        <div className={showOverlay ? "add-project-form show" : "add-project-form hide"}>
+        <div className={showOverlay ? "new-project-form show" : "new-project-form hide"}>
             <form 
                 action=""
                 onSubmit={(e) => handleSubmit(e)}

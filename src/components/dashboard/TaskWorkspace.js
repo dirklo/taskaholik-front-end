@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import './TaskWorkspace.css'
-import DetailsColumn from './DetailsColumn'
+import DetailsContainer from './DetailsContainer'
 import DetailEditor from './DetailEditor'
 import { currentTask, currentDetail } from '../../helpers/helpers'
 
@@ -11,7 +11,7 @@ function TaskWorkspace() {
         return (
             <section className='task-workspace'>
                 {currentTask() ?
-                    <DetailsColumn />
+                    <DetailsContainer />
                 : null
                 }
                 {currentDetail() ?

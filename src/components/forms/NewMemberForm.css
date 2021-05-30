@@ -1,8 +1,8 @@
-.add-member-form {
+.new-member-form {
     margin-top: 20px;
 }
 
-.add-member-form input[type='submit'] {
+.new-member-form input[type='submit'] {
     padding: 5px;
     background: transparent;
     font-weight: bold;
@@ -13,11 +13,11 @@
     cursor: pointer;
 }
 
-.add-member-form input[type='submit']:hover {
+.new-member-form input[type='submit']:hover {
     background: rgba(0, 0, 0, 0.285);
 }
 
 
-.add-member-form input[type='text'] {
+.new-member-form input[type='text'] {
     padding: 5px;
 }

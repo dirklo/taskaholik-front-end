@@ -7,15 +7,15 @@ import { setCurrentProject } from '../../actions/project'
 import { setCurrentTask } from '../../actions/task'
 import { setCurrentDetail } from '../../actions/detail'
 import MemberCard from '../cards/MemberCard'
-import AddMemberForm from '../forms/AddMemberForm'
+import NewMemberForm from '../forms/NewMemberForm'
 import ChangeTeamNameForm from '../forms/ChangeTeamNameForm'
 
 function TeamPage({ currentUser, setCurrentProject, setCurrentTask, setCurrentDetail }) {
 
     useEffect(() => {
-        setCurrentProject(null, currentUser.id)
-        setCurrentTask(null, currentUser.id)
-        setCurrentDetail(null, currentUser.id)
+        setCurrentProject(null)
+        setCurrentTask(null)
+        setCurrentDetail(null)
     }, [currentUser, setCurrentProject, setCurrentTask, setCurrentDetail])
 
     return (
@@ -42,7 +42,7 @@ function TeamPage({ currentUser, setCurrentProject, setCurrentTask, setCurrentDe
                                     'true' : 'false'} 
                             />
                         )}
-                    <AddMemberForm />
+                    <NewMemberForm />
                     </div>
                     <div className="settings">
                         <ChangeTeamNameForm />

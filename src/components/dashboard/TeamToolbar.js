@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import './ToolbarContainer.css'
-import AddProjectForm from '../forms/AddProjectForm'
+import './TeamToolbar.css'
+import NewProjectForm from '../forms/NewProjectForm'
 import { updateUserSelections } from '../../actions/auth'
 import { setCurrentProject } from '../../actions/project'
 import { setCurrentTask } from '../../actions/task'
 import { setCurrentDetail } from '../../actions/detail'
-// import { populateTasks } from '../../actions/task'
 import { currentTeam } from '../../helpers/helpers'
 import { clearTeam } from '../../actions/team'
 
@@ -26,12 +25,12 @@ function ToolbarContainer({
     const history = useHistory()
 
     return (
-        <div className='toolbar-container'>
+        <div className='team-toolbar'>
             <div 
                 className={showOverlay ? 'overlay show' : 'overlay hide'}
                 onClick={() => setShowOverlay(false)}
             ></div>
-            <AddProjectForm 
+            <NewProjectForm 
                 showOverlay={showOverlay} 
                 setShowOverlay={setShowOverlay}/>
             <h1>Team:</h1>
