@@ -5,7 +5,6 @@ import Dashboard from './components/pages/Dashboard'
 import TeamPage from './components/pages/TeamPage'
 import NewTeamPage from './components/pages/NewTeamPage'
 import TeamSelectPage from './components/pages/TeamSelectPage'
-import NewProjectPage from './components/pages/NewProjectPage'
 import Signup from './components/auth/Signup'
 import Logout from './components/auth/Logout'
 import withAuth from './components/auth/withAuth'
@@ -27,7 +26,6 @@ export default class App extends Component {
             <Route exact path='/teams' component={withAuth(loadData(TeamPage))} />
             <Route exact path='/teams/new' component={withAuth(NewTeamPage)} />
             <Route exact path='/teams/select' component={withAuth(loadData(TeamSelectPage))} />
-            <Route exact path='/projects/new' component={withAuth(loadData(NewProjectPage))} />
             <Route exact path='/signup' component={Signup} />
             <Route exact path='/logout' component={Logout} />
           </Switch>

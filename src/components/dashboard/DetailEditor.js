@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import './DetailEditor.css'
 import { useQuery, useMutation } from 'react-query'
 import { fetchDetailComments, createDetailComment, deleteDetailComment } from '../../queries/detailComments'
+import { completeDetail } from '../../actions/detail'
 import { currentTeam, currentDetail } from '../../helpers/helpers'
 import CommentCard from '../cards/CommentCard'
 import NewCommentForm from '../forms/NewCommentForm'
@@ -107,6 +108,6 @@ export default connect((state) => {
         assignees: state.detail.detailAssignees,
         details: state.detail.details
     }
-})(DetailEditor)
+}, { completeDetail })(DetailEditor)
 
 

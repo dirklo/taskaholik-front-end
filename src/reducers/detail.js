@@ -1,6 +1,5 @@
 const initialState = {
-    details: [],
-    detailAssignees: []
+    details: []
 };
 
   
@@ -20,11 +19,6 @@ export default function detailReducer(state = initialState, action) {
             return {
                 ...state,
                 details: newDetails
-            }
-        case "POPULATE_DETAIL_ASSIGNEES":
-            return {
-                ...state,
-                detailAssignees: [...action.payload]
             }
         case "POPULATE_DETAILS":
             return {
@@ -78,22 +72,6 @@ export default function detailReducer(state = initialState, action) {
                 ...state,
                 details: [],
                 detailAssignees: []
-            }
-        case "ADD_ASSIGNEE":
-            return {
-                ...state,
-                detailAssignees: [
-                    ...state.detailAssignees, action.payload
-                ]
-            }
-        case "REMOVE_ASSIGNEE":
-            index = state.detailAssignees.findIndex(assignee => assignee.id === Number(action.payload))
-            return {
-                ...state,
-                detailAssignees: [
-                    ...state.detailAssignees.slice(0, index),
-                    ...state.detailAssignees.slice(index + 1) 
-                ]
             }
         case "TASK_CLEANUP":
             let cleanDetails = state.details

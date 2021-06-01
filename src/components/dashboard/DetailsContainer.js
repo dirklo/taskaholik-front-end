@@ -30,8 +30,6 @@ function DetailsColumn({ tasks }) {
     
     if (error) return "An Error Occured: " + error.message
 
-    console.log(comments)
-
     return (
         <section className='details-container'>
             <DetailsList />

@@ -60,23 +60,6 @@ export const addDetail = (content, currentTask, currentUser, deadline) => {
     }
 }
 
-export const populateDetailAssignees = (detailId) => {
-    return (dispatch) => {
-        return fetch(`${baseUrl}/assignments?detail_id=${detailId}`, {
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                Authorization: getToken()
-            }
-        })
-        .then(res => {
-            return handleResponse(res, (assignees) => {
-                dispatch({type: "POPULATE_DETAIL_COMMENTS", payload: assignees})
-            })
-        })
-    }
-}
-
 export const deleteDetail = (detailId) => {
     return (dispatch) => {
         return fetch(`${baseUrl}/details/${detailId}`, {
@@ -96,43 +79,8 @@ export const deleteDetail = (detailId) => {
     }
 }
 
-export const addAssignee = (userId, detailId) => {
-    return (dispatch) => {
-        return fetch(`${baseUrl}/assignments`, {
-            method: 'POST',
-            headers: {
-                "Accept": 'application/json',
-                "Content-Type": 'application/json',
-                Authorization: getToken()
-            },
-            body: JSON.stringify({assignment: {user_id: userId, detail_id: detailId}})
-        })
-        .then(res => {
-            return handleResponse(res, (json) => {
-                dispatch({type: 'ADD_ASSIGNEE', payload: json.member})
-            })
-        })
-    }
-}
 
-export const removeAssignee = (userId, detailId) => {
-    return (dispatch) => {
-        return fetch(`${baseUrl}/assignments`, {
-            method: 'DELETE',
-            headers: {
-                "Accept": 'application/json',
-                "Content-Type": 'application/json',
-                Authorization: getToken()
-            },
-            body: JSON.stringify({assignment: { user_id: userId, detail_id: detailId}})
-        })
-        .then(res => {
-            return handleResponse(res, (json) => {
-                dispatch({type: 'REMOVE_ASSIGNEE', payload: userId})
-            })
-        })
-    }
-}
+
 
 export const updateDetail = (detailId, param) => {
     return (dispatch) => {

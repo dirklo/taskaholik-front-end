@@ -1,24 +1,48 @@
 import React, { useState } from 'react'
 import './AssignmentsEditor.css'
 import { connect } from 'react-redux'
+import { useQuery, useMutation } from 'react-query' 
 import Select from 'react-select'
 import { currentTeam, currentDetail } from '../../helpers/helpers'
-import { removeAssignee, addAssignee } from '../../actions/detail'
+import { fetchAssignees, removeAssignee, addAssignee } from '../../queries/detailAssignees'
 import RemoveCircle from '@material-ui/icons/RemoveCircle'
 
 
-function AssignmentsEditor({ assignees, addAssignee, removeAssignee, currentUser }) {
+function AssignmentsEditor({ currentUser }) {
 
     const [showAddAssignee, setShowAddAssignee] = useState(false)
     const [selectedAssignee, setSelectedAssignee] = useState(null)
 
-    const memberOptions = currentTeam().members.map(member => {
+    
+    const { isLoading, error, data: assignees, refetch } = useQuery("assignees", fetchAssignees)
+    
+    const { mutate: mutateAddAssignee } = useMutation(addAssignee, {
+        onSuccess: () => {
+            refetch()
+        }
+    })
+    
+    const { mutate: mutateDeleteAssignee } = useMutation(removeAssignee, {
+        onSuccess: () => {
+            refetch()
+        }
+    })
+
+    let memberOptions = []
+    if (assignees) {
+        memberOptions = currentTeam().members.map(member => {
             return {value: member.id, label: member.username}
-    }).filter(member => !assignees.map(assignee => assignee.id).includes(member.value))
+        }).filter(member => !assignees.map(assignee => assignee.id).includes(member.value))
+
+    }
+
+    if (error) return "An Error Occured.." + error.message
+
+    console.log(assignees)
 
     return (
         <div className="assignments-editor">
-            {assignees.length > 0 ?
+            {assignees && !isLoading ?
                 <>
                     <h3>Assigned team members:</h3>
                     {assignees.map(assignee => 
@@ -29,7 +53,7 @@ function AssignmentsEditor({ assignees, addAssignee, removeAssignee, currentUser
                                     className='remove-assignee-btn'
                                     data-id={assignee.id}
                                     onClick={(e) => {
-                                        removeAssignee(e.target.dataset.id, currentDetail().id)
+                                        mutateDeleteAssignee(e.target.dataset.id, currentDetail().id)
                                     }}
                                 >
                                         <RemoveCircle />
@@ -57,7 +81,7 @@ function AssignmentsEditor({ assignees, addAssignee, removeAssignee, currentUser
                                 className='add-assignee-form'
                                 onSubmit={(e) => {
                                     e.preventDefault()
-                                    addAssignee(selectedAssignee.value, currentDetail().id)
+                                    mutateAddAssignee(selectedAssignee.value)
                                     setShowAddAssignee(false)
                                 }}
                             >
@@ -91,6 +115,6 @@ export default connect((state) => {
         assignees: state.detail.detailAssignees,
         currentUser: state.auth.currentUser
     }
-}, { removeAssignee, addAssignee })(AssignmentsEditor)
+})(AssignmentsEditor)
 
 
