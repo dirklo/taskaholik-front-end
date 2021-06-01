@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/taskaholik-front-end/static/css/main.08bf4fdc.chunk.css",
-    "main.js": "/taskaholik-front-end/static/js/main.36f0dd4f.chunk.js",
-    "main.js.map": "/taskaholik-front-end/static/js/main.36f0dd4f.chunk.js.map",
+    "main.js": "/taskaholik-front-end/static/js/main.99fb76f9.chunk.js",
+    "main.js.map": "/taskaholik-front-end/static/js/main.99fb76f9.chunk.js.map",
     "runtime-main.js": "/taskaholik-front-end/static/js/runtime-main.7e0f614e.js",
     "runtime-main.js.map": "/taskaholik-front-end/static/js/runtime-main.7e0f614e.js.map",
     "static/css/2.d22f252f.chunk.css": "/taskaholik-front-end/static/css/2.d22f252f.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.d22f252f.chunk.css",
     "static/js/2.083312db.chunk.js",
     "static/css/main.08bf4fdc.chunk.css",
-    "static/js/main.36f0dd4f.chunk.js"
+    "static/js/main.99fb76f9.chunk.js"
   ]
 }
