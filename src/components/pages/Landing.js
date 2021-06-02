@@ -54,7 +54,7 @@ function Landing(props)  {
                         askaholik
                     </span>
                 </div>
-                {width < 480 && !mobileLogin ?
+                {width < 1300 && !mobileLogin ?
                     <div className="login-buttons">
                         <button
                             type='button'
@@ -63,7 +63,7 @@ function Landing(props)  {
                     </div>
                     : null
                 }
-                { !mobileLogin || width > 480 ?
+                { !mobileLogin || width > 1300 ?
                     <div className="subtext">
                         <h2>Streamline your Team's Workflow</h2>
                         <p>Communication is an integral part of any successful company.  <br/><br/>We help teams collaborate at the speed of thought. </p>

@@ -64,7 +64,7 @@ class Login extends React.Component {
   render() {
     return (
       <>
-        {this.props.mobileLogin || this.props.width > 480 ? 
+        {this.props.mobileLogin || this.props.width > 1300 ? 
         <div className='login-window'>
           {this.state.error ? 
             <ErrorField 

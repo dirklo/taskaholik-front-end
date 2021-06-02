@@ -114,7 +114,7 @@
     letter-spacing: 5px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1300px) {
     .landing .landing-content {
         display: flex;
         flex-direction: column;

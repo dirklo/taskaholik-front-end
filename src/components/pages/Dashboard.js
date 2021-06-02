@@ -27,7 +27,7 @@ function Dashboard({ loadTeamData, currentUser, setCurrentTeam }) {
         return () => window.removeEventListener('resize', updateSize);
     }, []);
 
-    if (width > 480) {
+    if (width > 1300) {
         return (
             <div className='dashboard'>
                 <TaskContainer />
