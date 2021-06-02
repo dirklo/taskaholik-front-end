@@ -27,6 +27,8 @@ export const addProject = (projectName, currentTeam, currentUser, deadline) => {
             return handleResponse(res, (json) => {
                 dispatch({ type: "ADD_PROJECT", payload: json.project})
                 dispatch({ type: "SET_CURRENT_PROJECT", payload: json.project.id })
+                dispatch({ type: "SET_CURRENT_TASK", payload: null})
+                dispatch({ type: "SET_CURRENT_DETAIL", payload: null})
                 dispatch({
                     type: "SET_USER_SELECTED", 
                     payload: {

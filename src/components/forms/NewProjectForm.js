@@ -3,14 +3,18 @@ import "./NewProjectForm.css"
 import { connect } from 'react-redux'
 import { addProject } from '../../actions/project' 
 import { currentTeam } from '../../helpers/helpers'
+import { updateUserSelections } from '../../actions/auth'
 
 function AddProjectForm({ addProject, currentUser, showOverlay, setShowOverlay }) {
     const [title, setTitle] = useState('')
-    const [deadline, setDeadline] = useState(Date.now())
+    const [deadline, setDeadline] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
         addProject(title, currentTeam(), currentUser, deadline)
+        updateUserSelections(currentUser.id)
+        setTitle('')
+        setDeadline('')
         setShowOverlay(false)
     }
 
