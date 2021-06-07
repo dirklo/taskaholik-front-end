@@ -18,6 +18,7 @@ function TaskToolbar({ currentUser, setCurrentTask, setCurrentDetail, updateUser
     if (currentProject()) {
         currentTasks = [...tasks.filter(task => task.project_id === currentProject().id)]
     }
+    
     return (
         <div>
             {currentProject() ?

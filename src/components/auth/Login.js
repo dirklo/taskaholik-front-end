@@ -90,8 +90,6 @@ class Login extends React.Component {
                 onBlur={this.handleBlur}
                 value={this.state.email}
               />
-              <br/>
-              <br/>
               <label htmlFor='password' className={this.state.passwordFocus ? 'focus' : ''}>
                 Password
               </label>
@@ -104,13 +102,15 @@ class Login extends React.Component {
                 onBlur={this.handleBlur}
                 value={this.state.password}
               />
-              <br/>
-              <br/>
             <input
               type='submit'
               value='Log In'
             />
           </form>
+          <p>Test Account:<br/>
+          email: test@email.com<br/>
+          password: test123 
+          </p>
           <button 
             type='button'
             onClick={this.props.showSignup}

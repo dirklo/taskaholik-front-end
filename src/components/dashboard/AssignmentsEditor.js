@@ -38,8 +38,6 @@ function AssignmentsEditor({ currentUser }) {
 
     if (error) return "An Error Occured.." + error.message
 
-    console.log(assignees)
-
     return (
         <div className="assignments-editor">
             {assignees && !isLoading ?

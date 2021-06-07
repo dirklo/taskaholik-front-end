@@ -135,8 +135,6 @@ export const updateUserSelections = (currentUserId) => {
       body: JSON.stringify(
          selectionObj
       )
-    }).then((res) => {
-      return res
-    });
+    }).then((res) => res);
   };
 }

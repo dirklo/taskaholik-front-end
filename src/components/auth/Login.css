@@ -40,7 +40,7 @@
 
 .login-window .login-form label {
     position: relative;
-    bottom: -30px;
+    bottom: -35px;
     right: -20px;
     align-self: flex-start;
     font-weight: bold;
@@ -48,7 +48,7 @@
 }
 
 .login-window .login-form label.focus {
-    bottom: 10px;
+    bottom: 0px;
     right: -10px;
     color: rgba(195, 199, 241, 0.905);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.446);
@@ -85,6 +85,10 @@
 .login-window button {
     margin: 20px 0 0 20px;
     align-self: flex-end;
+}
+
+.login-window .login-form > input {
+    margin-bottom: 10px;
 }
 
 @media (max-width: 480px) {
