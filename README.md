@@ -20,14 +20,14 @@ https://github.com/dirklo/taskaholik-back-end
 
 -use 'https://taskaholik-back-end.herokuapp.com' to run the deployed back-end or
 
--use 'http://localhost:3001' to run the back-end server locally.
+-use 'http://localhost:3001' to run the back-end server locally
 
 ## Usage Instructions
 
--Create a new user from the home page.
+-Create a new user from the home page
 
--Create your first team to enter the dashboard.
+-Create your first team to enter the dashboard
 
--Create Projects, Goals, Details, and Comments using the dashboard interface.
+-Create Projects, Goals, Details, and Comments using the dashboard interface
 
--Use the 'Manage Teams' button to switch teams, add members, or rename teams.
+-Use the 'Manage Teams' button to switch teams, add members, or rename teams
