@@ -23,6 +23,13 @@ The relational database (PostgreSQL) is centered around 4 main models: Team, Pro
 
 ![taskaholik-database](https://user-images.githubusercontent.com/72274257/122393607-55a60900-cf75-11eb-8309-7fe298e7ea25.jpg)
 
+## Redux Implementation 
+User login is implemented with the Devise gem on the back-end with JWT authentication on the front-end.  A current user object is stored in the redux store and aunthencated using their JTI on every database call.  The currently selected team, project, task, and details is also stored in Redux as well as the database.  This allows the application to reload to where the user left off upon logging in.  The redux store also maintains the teams, projects, tasks, and details in local state so they are accessable across all React components.  
+
+![taskaholik-redux](https://user-images.githubusercontent.com/72274257/122397855-a15ab180-cf79-11eb-9be6-fe7dbdf2587f.jpg)
+
+Outside of the Redux store, comments are loaded by their respective components using React-Query.  This allows for quick memoization, and not pulling all the comments for an entire project when it's loaded.
+
 ## Create A new Team
 First-time users will first be asked to create a team if they are not a member of one already.
 ![taskaholik-create-team](https://user-images.githubusercontent.com/72274257/122394435-44a9c780-cf76-11eb-9edf-1d1a8873d798.jpg)
@@ -37,5 +44,15 @@ Users can add over-arching goals for the project.
 
 ![taskaholik-add-goals](https://user-images.githubusercontent.com/72274257/122395031-e03b3800-cf76-11eb-8993-8d48ed5065cf.gif)
 
+## Add Details
+Finally, users can add details to dig into the specific actions to complete the goals.  From this screen, users can adjust deadlines, assign or remove team members from tasks, and post comments on the task or the goal.
 
+![taskaholik-full-demo](https://user-images.githubusercontent.com/72274257/122398531-42e20300-cf7a-11eb-84bc-9532884f07ae.jpg)
 
+## Manage Teams
+By clicking "Manage Teams" from the dashboard, the team leader can edit the team members, change the name of the team, or create a new team.
+
+![taskaholik-team-page](https://user-images.githubusercontent.com/72274257/122398941-a9ffb780-cf7a-11eb-9040-ab1ea5eabd80.jpg)
+
+## What's Next?
+The next feature I'd like to implement would be a notifications page, and a customized "My Tasks" list for users to keep track of their assignments.  Email notifications and refactoring to the main dashboard interface to be more streamlined are on the future project list.  I also intend to add drag and drop re-arrangement to the goal and detail lists, and fully implement the prerequisite system.
