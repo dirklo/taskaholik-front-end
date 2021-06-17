@@ -1,6 +1,6 @@
 # TASKAHOLIK
 
-## A React web application built with Create-React-App and Ruby on Rails on the back end.
+## A bug-tracker and team delegation tool built with Create-React-App and Ruby on Rails on the back end.
 
 ### Built with React 17.0.2
 
