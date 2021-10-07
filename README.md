@@ -8,7 +8,7 @@ Use the deployed app from Github Pages here:
 https://rick-moore.github.io/taskaholik-front-end/
 
 View the back end repository here:
-https://rick-moore.com/dirklo/taskaholik-back-end
+https://github.com/rick-moore/taskaholik-back-end
 
 ## Installation instructions
 * Clone this repo and run `npm install`
