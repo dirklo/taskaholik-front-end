@@ -5,10 +5,10 @@
 ### Built with React 17.0.2
 
 Use the deployed app from Github Pages here:
-https://dirklo.github.io/taskaholik-front-end/
+https://rick-moore.github.io/taskaholik-front-end/
 
 View the back end repository here:
-https://github.com/dirklo/taskaholik-back-end
+https://rick-moore.com/dirklo/taskaholik-back-end
 
 ## Installation instructions
 * Clone this repo and run `npm install`
